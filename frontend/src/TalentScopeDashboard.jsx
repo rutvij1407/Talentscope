@@ -391,6 +391,7 @@ function MetricCard({ label, value, prefix, suffix, subtext, color, delay }) {
 }
 
 function SkillsTrackedCard({ id, activeCard, setActiveCard, delay }) {
+  const [hover, setHover] = useState(false);
   const accentColor = MUTED_1;
   const isTabMode = activeCard !== null;
   const isSelected = activeCard === id;
@@ -423,12 +424,13 @@ function SkillsTrackedCard({ id, activeCard, setActiveCard, delay }) {
         position: "relative",
         minWidth: 0,
         transition: "transform 0.25s ease, box-shadow 0.25s ease",
-        transform: "scale(1)",
+        transform: hover ? "scale(1.02)" : "scale(1)",
         willChange: "transform",
         cursor: "pointer",
+        zIndex: hover ? 20 : 1,
       }}
-      onMouseEnter={(e) => { e.currentTarget.style.transform = "scale(1.02)"; }}
-      onMouseLeave={(e) => { e.currentTarget.style.transform = "scale(1)"; }}
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
       onClick={() => setActiveCard(id)}
       role="button"
       tabIndex={0}
@@ -444,11 +446,39 @@ function SkillsTrackedCard({ id, activeCard, setActiveCard, delay }) {
           Click to open
         </div>
       </GlowCard>
+      {hover && (
+        <div
+          style={{
+            position: "absolute",
+            left: 0,
+            right: 0,
+            top: "100%",
+            marginTop: 8,
+            padding: "10px 14px",
+            background: "rgba(15,23,42,0.97)",
+            border: `1px solid ${accentColor}`,
+            borderRadius: 12,
+            boxShadow: "0 12px 28px rgba(0,0,0,0.4)",
+            animation: "hoverPreviewIn 0.2s ease-out",
+            fontSize: 11,
+            color: "#94a3b8",
+          }}
+        >
+          <div style={{ marginBottom: 6, color: accentColor, fontWeight: 600 }}>Preview</div>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "4px 8px" }}>
+            {skillsTrackedSample.slice(0, 6).map((name) => (
+              <span key={name} style={{ background: "rgba(148,163,184,0.2)", padding: "2px 6px", borderRadius: 4 }}>{name}</span>
+            ))}
+          </div>
+          <div style={{ marginTop: 6, fontSize: 10, color: "#64748b" }}>+841 more · click for full list</div>
+        </div>
+      )}
     </div>
   );
 }
 
 function TotalPostingsCard({ id, activeCard, setActiveCard, delay }) {
+  const [hover, setHover] = useState(false);
   const accentColor = PRIMARY;
   const isTabMode = activeCard !== null;
   const isSelected = activeCard === id;
@@ -462,18 +492,32 @@ function TotalPostingsCard({ id, activeCard, setActiveCard, delay }) {
     );
   }
 
+  const previewRows = totalPostingsByMonth.slice(0, 3);
   return (
-    <div style={{ position: "relative", minWidth: 0, transition: "transform 0.25s ease", willChange: "transform", cursor: "pointer" }} onMouseEnter={(e) => { e.currentTarget.style.transform = "scale(1.02)"; }} onMouseLeave={(e) => { e.currentTarget.style.transform = "scale(1)"; }} onClick={() => setActiveCard(id)} role="button" tabIndex={0} onKeyDown={(e) => e.key === "Enter" && setActiveCard(id)}>
+    <div style={{ position: "relative", minWidth: 0, transition: "transform 0.25s ease", willChange: "transform", cursor: "pointer", zIndex: hover ? 20 : 1 }} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)} onClick={() => setActiveCard(id)} role="button" tabIndex={0} onKeyDown={(e) => e.key === "Enter" && setActiveCard(id)}>
       <GlowCard delay={delay} glowColor={PRIMARY}>
         <div style={{ fontSize: 12, color: "#64748b", textTransform: "uppercase", letterSpacing: 1.5, marginBottom: 8 }}>Total Postings</div>
         <div style={{ fontSize: "clamp(1.25rem, 4vw, 2.25rem)", fontWeight: 700, color: PRIMARY, fontFamily: "'Inter', system-ui, sans-serif", marginBottom: 4, minWidth: 0, overflow: "hidden" }}><AnimatedCounter target={1} prefix="" suffix=".3M+" /></div>
         <div style={{ fontSize: 12, color: "#22c55e", display: "flex", alignItems: "center", gap: 4 }}><PulsingDot color="#22c55e" /> Click to open</div>
       </GlowCard>
+      {hover && (
+        <div style={{ position: "absolute", left: 0, right: 0, top: "100%", marginTop: 8, padding: "10px 14px", background: "rgba(15,23,42,0.97)", border: `1px solid ${accentColor}`, borderRadius: 12, boxShadow: "0 12px 28px rgba(0,0,0,0.4)", animation: "hoverPreviewIn 0.2s ease-out", fontSize: 11, color: "#94a3b8" }}>
+          <div style={{ marginBottom: 6, color: accentColor, fontWeight: 600 }}>Preview</div>
+          {previewRows.map(({ month, postings }) => (
+            <div key={month} style={{ display: "flex", justifyContent: "space-between", padding: "4px 0", fontSize: 12 }}>
+              <span>{month}</span>
+              <span style={{ color: accentColor, fontWeight: 600 }}>{(postings / 1000).toFixed(0)}K</span>
+            </div>
+          ))}
+          <div style={{ marginTop: 4, fontSize: 10, color: "#64748b" }}>6 months · click for full trend</div>
+        </div>
+      )}
     </div>
   );
 }
 
 function AvgSalaryCard({ id, activeCard, setActiveCard, delay }) {
+  const [hover, setHover] = useState(false);
   const accentColor = ACCENT;
   const isTabMode = activeCard !== null;
   const isSelected = activeCard === id;
@@ -487,18 +531,32 @@ function AvgSalaryCard({ id, activeCard, setActiveCard, delay }) {
     );
   }
 
+  const previewRows = avgSalaryByRole.slice(0, 3);
   return (
-    <div style={{ position: "relative", minWidth: 0, transition: "transform 0.25s ease", willChange: "transform", cursor: "pointer" }} onMouseEnter={(e) => { e.currentTarget.style.transform = "scale(1.02)"; }} onMouseLeave={(e) => { e.currentTarget.style.transform = "scale(1)"; }} onClick={() => setActiveCard(id)} role="button" tabIndex={0} onKeyDown={(e) => e.key === "Enter" && setActiveCard(id)}>
+    <div style={{ position: "relative", minWidth: 0, transition: "transform 0.25s ease", willChange: "transform", cursor: "pointer", zIndex: hover ? 20 : 1 }} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)} onClick={() => setActiveCard(id)} role="button" tabIndex={0} onKeyDown={(e) => e.key === "Enter" && setActiveCard(id)}>
       <GlowCard delay={delay} glowColor={ACCENT}>
         <div style={{ fontSize: 12, color: "#64748b", textTransform: "uppercase", letterSpacing: 1.5, marginBottom: 8 }}>Avg Salary</div>
         <div style={{ fontSize: "clamp(1.25rem, 4vw, 2.25rem)", fontWeight: 700, color: ACCENT, fontFamily: "'Inter', system-ui, sans-serif", marginBottom: 4, minWidth: 0, overflow: "hidden" }}><AnimatedCounter target={118} prefix="$" suffix="K" /></div>
         <div style={{ fontSize: 12, color: "#22c55e", display: "flex", alignItems: "center", gap: 4 }}><PulsingDot color="#22c55e" /> Click to open</div>
       </GlowCard>
+      {hover && (
+        <div style={{ position: "absolute", left: 0, right: 0, top: "100%", marginTop: 8, padding: "10px 14px", background: "rgba(15,23,42,0.97)", border: `1px solid ${accentColor}`, borderRadius: 12, boxShadow: "0 12px 28px rgba(0,0,0,0.4)", animation: "hoverPreviewIn 0.2s ease-out", fontSize: 11, color: "#94a3b8" }}>
+          <div style={{ marginBottom: 6, color: accentColor, fontWeight: 600 }}>Preview</div>
+          {previewRows.map(({ role, salary }) => (
+            <div key={role} style={{ display: "flex", justifyContent: "space-between", padding: "4px 0", fontSize: 12 }}>
+              <span>{role}</span>
+              <span style={{ color: accentColor, fontWeight: 600 }}>${salary}K</span>
+            </div>
+          ))}
+          <div style={{ marginTop: 4, fontSize: 10, color: "#64748b" }}>By role · click for full list</div>
+        </div>
+      )}
     </div>
   );
 }
 
 function CompaniesCard({ id, activeCard, setActiveCard, delay }) {
+  const [hover, setHover] = useState(false);
   const accentColor = MUTED_2;
   const isTabMode = activeCard !== null;
   const isSelected = activeCard === id;
@@ -512,13 +570,27 @@ function CompaniesCard({ id, activeCard, setActiveCard, delay }) {
     );
   }
 
+  const previewRows = companiesRanked.slice(0, 3);
   return (
-    <div style={{ position: "relative", minWidth: 0, transition: "transform 0.25s ease", willChange: "transform", cursor: "pointer" }} onMouseEnter={(e) => { e.currentTarget.style.transform = "scale(1.02)"; }} onMouseLeave={(e) => { e.currentTarget.style.transform = "scale(1)"; }} onClick={() => setActiveCard(id)} role="button" tabIndex={0} onKeyDown={(e) => e.key === "Enter" && setActiveCard(id)}>
+    <div style={{ position: "relative", minWidth: 0, transition: "transform 0.25s ease", willChange: "transform", cursor: "pointer", zIndex: hover ? 20 : 1 }} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)} onClick={() => setActiveCard(id)} role="button" tabIndex={0} onKeyDown={(e) => e.key === "Enter" && setActiveCard(id)}>
       <GlowCard delay={delay} glowColor={MUTED_2}>
         <div style={{ fontSize: 12, color: "#64748b", textTransform: "uppercase", letterSpacing: 1.5, marginBottom: 8 }}>Companies</div>
         <div style={{ fontSize: "clamp(1.25rem, 4vw, 2.25rem)", fontWeight: 700, color: MUTED_2, fontFamily: "'Inter', system-ui, sans-serif", marginBottom: 4, minWidth: 0, overflow: "hidden" }}><AnimatedCounter target={48500} suffix="+" /></div>
         <div style={{ fontSize: 12, color: "#22c55e", display: "flex", alignItems: "center", gap: 4 }}><PulsingDot color="#22c55e" /> Click to open</div>
       </GlowCard>
+      {hover && (
+        <div style={{ position: "absolute", left: 0, right: 0, top: "100%", marginTop: 8, padding: "10px 14px", background: "rgba(15,23,42,0.97)", border: `1px solid ${accentColor}`, borderRadius: 12, boxShadow: "0 12px 28px rgba(0,0,0,0.4)", animation: "hoverPreviewIn 0.2s ease-out", fontSize: 11, color: "#94a3b8" }}>
+          <div style={{ marginBottom: 6, color: accentColor, fontWeight: 600 }}>Preview</div>
+          {previewRows.map(({ rank, name, jobs }) => (
+            <div key={name} style={{ display: "flex", alignItems: "center", gap: 8, padding: "4px 0", fontSize: 12 }}>
+              <span style={{ color: "#64748b", minWidth: 20 }}>#{rank}</span>
+              <span style={{ flex: 1, minWidth: 0 }}>{name}</span>
+              <span style={{ color: accentColor, fontWeight: 600 }}>{jobs.toLocaleString()}</span>
+            </div>
+          ))}
+          <div style={{ marginTop: 4, fontSize: 10, color: "#64748b" }}>Top 15 · click for full list</div>
+        </div>
+      )}
     </div>
   );
 }
@@ -1344,6 +1416,10 @@ export default function TalentScopeDashboard() {
         @keyframes cardEnlarge {
           from { opacity: 0; transform: scale(0.92); }
           to { opacity: 1; transform: scale(1); }
+        }
+        @keyframes hoverPreviewIn {
+          from { opacity: 0; transform: translateY(6px); }
+          to { opacity: 1; transform: translateY(0); }
         }
 
         select option { background: #020617; color: #e5e7eb; }
