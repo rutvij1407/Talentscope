@@ -392,387 +392,274 @@ function MetricCard({ label, value, prefix, suffix, subtext, color, delay }) {
 
 function SkillsTrackedCard({ delay }) {
   const [hover, setHover] = useState(false);
+  const [overlayOpen, setOverlayOpen] = useState(false);
   return (
-    <div
-      style={{
-        position: "relative",
-        minWidth: 0,
-        transition: "transform 0.25s ease, box-shadow 0.25s ease",
-        transform: hover ? "scale(1.02)" : "scale(1)",
-        zIndex: hover ? 40 : 1,
-        willChange: "transform",
-        cursor: "pointer",
-      }}
-      onMouseEnter={() => setHover(true)}
-      onMouseLeave={() => setHover(false)}
-      onClick={() => setHover((h) => !h)}
-      role="button"
-      tabIndex={0}
-      onKeyDown={(e) => e.key === "Enter" && setHover((h) => !h)}
-    >
-      <GlowCard delay={delay} glowColor={MUTED_1}>
-        <div
-          style={{
-            fontSize: 12,
-            color: "#64748b",
-            textTransform: "uppercase",
-            letterSpacing: 1.5,
-            marginBottom: 8,
-            fontFamily: "'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif",
-          }}
-        >
-          Skills Tracked
-        </div>
-        <div
-          style={{
-            fontSize: 36,
-            fontWeight: 700,
-            color: MUTED_1,
-            fontFamily: "'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif",
-            marginBottom: 4,
-          }}
-        >
-          <AnimatedCounter target={847} suffix="" />
-        </div>
-        <div
-          style={{
-            fontSize: 12,
-            color: "#22c55e",
-            display: "flex",
-            alignItems: "center",
-            gap: 4,
-          }}
-        >
-          <PulsingDot color="#22c55e" />
-          Updated weekly · Hover for list
-        </div>
-      </GlowCard>
-      {hover && (
-        <div
-          style={{
-            position: "absolute",
-            top: "100%",
-            left: 0,
-            right: 0,
-            marginTop: 10,
-            background: "rgba(15,23,42,0.98)",
-            border: `1px solid ${BORDER_SUBTLE}`,
-            borderRadius: 14,
-            padding: "14px 16px",
-            minWidth: 280,
-            maxWidth: "100%",
-            maxHeight: 380,
-            boxShadow: "0 24px 56px rgba(0,0,0,0.5)",
-            zIndex: 50,
-            animation: "popoverReveal 0.25s ease-out",
-            display: "flex",
-            flexDirection: "column",
-          }}
-        >
-          <div style={{ fontSize: 11, color: "#64748b", textTransform: "uppercase", letterSpacing: 1, marginBottom: 10, flexShrink: 0 }}>
-            Sample of tracked skills (847 total)
+    <>
+      <div
+        style={{
+          position: "relative",
+          minWidth: 0,
+          transition: "transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease",
+          transform: hover ? "scale(1.05)" : "scale(1)",
+          zIndex: hover ? 40 : 1,
+          willChange: "transform",
+          cursor: "pointer",
+        }}
+        onMouseEnter={() => { setHover(true); setOverlayOpen(true); }}
+        onMouseLeave={() => setHover(false)}
+        onClick={() => setOverlayOpen(true)}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => e.key === "Enter" && setOverlayOpen(true)}
+      >
+        <GlowCard delay={delay} glowColor={MUTED_1}>
+          <div style={{ fontSize: 12, color: "#64748b", textTransform: "uppercase", letterSpacing: 1.5, marginBottom: 8 }}>Skills Tracked</div>
+          <div style={{ fontSize: "clamp(1.25rem, 4vw, 2.25rem)", fontWeight: 700, color: MUTED_1, fontFamily: "'Inter', system-ui, sans-serif", marginBottom: 4 }}>
+            <AnimatedCounter target={847} suffix="" />
           </div>
-          <div className="metric-popover-scroll" style={{ maxHeight: 300, paddingRight: 4 }}>
-            <div style={{ display: "flex", flexWrap: "wrap", gap: "8px 10px" }}>
-              {skillsTrackedSample.map((name) => (
-                <span
-                  key={name}
-                  style={{
-                    fontSize: 12,
-                    color: "#94a3b8",
-                    background: "rgba(148,163,184,0.12)",
-                    padding: "5px 10px",
-                    borderRadius: 6,
-                  }}
-                >
-                  {name}
-                </span>
-              ))}
-            </div>
+          <div style={{ fontSize: 12, color: "#22c55e", display: "flex", alignItems: "center", gap: 4 }}>
+            <PulsingDot color="#22c55e" />
+            Hover or click → full view
           </div>
-          <div style={{ fontSize: 10, color: "#64748b", marginTop: 8, flexShrink: 0 }}>Scroll to see all skills</div>
+        </GlowCard>
+      </div>
+      <MetricOverlay open={overlayOpen} onClose={() => setOverlayOpen(false)} title="Skills tracked (847)" subtitle="Sample of skills we track across job postings" accentColor={MUTED_1}>
+        <div style={{ display: "flex", flexWrap: "wrap", gap: "10px 12px" }}>
+          {skillsTrackedSample.map((name) => (
+            <span key={name} style={{ fontSize: 14, color: "#94a3b8", background: "rgba(148,163,184,0.15)", padding: "8px 14px", borderRadius: 8 }}>
+              {name}
+            </span>
+          ))}
         </div>
-      )}
-    </div>
+      </MetricOverlay>
+    </>
   );
 }
 
 function TotalPostingsCard({ delay }) {
   const [hover, setHover] = useState(false);
+  const [overlayOpen, setOverlayOpen] = useState(false);
   return (
-    <div
-      style={{
-        position: "relative",
-        minWidth: 0,
-        transition: "transform 0.25s ease, box-shadow 0.25s ease",
-        transform: hover ? "scale(1.02)" : "scale(1)",
-        zIndex: hover ? 40 : 1,
-        willChange: "transform",
-        cursor: "pointer",
-      }}
-      onMouseEnter={() => setHover(true)}
-      onMouseLeave={() => setHover(false)}
-      onClick={() => setHover((h) => !h)}
-      role="button"
-      tabIndex={0}
-      onKeyDown={(e) => e.key === "Enter" && setHover((h) => !h)}
-    >
-      <GlowCard delay={delay} glowColor={PRIMARY}>
-        <div style={{ fontSize: 12, color: "#64748b", textTransform: "uppercase", letterSpacing: 1.5, marginBottom: 8 }}>
-          Total Postings
-        </div>
-        <div
-          style={{
-            fontSize: "clamp(1.25rem, 4vw, 2.25rem)",
-            fontWeight: 700,
-            color: PRIMARY,
-            fontFamily: "'Inter', system-ui, sans-serif",
-            marginBottom: 4,
-            minWidth: 0,
-            overflow: "hidden",
-          }}
-        >
-          <AnimatedCounter target={1} prefix="" suffix=".3M+" />
-        </div>
-        <div style={{ fontSize: 12, color: "#22c55e", display: "flex", alignItems: "center", gap: 4 }}>
-          <PulsingDot color="#22c55e" />
-          +12.4% this month · Hover for trend
-        </div>
-      </GlowCard>
-      {hover && (
-        <div
-          style={{
-            position: "absolute",
-            top: "100%",
-            left: 0,
-            right: 0,
-            marginTop: 10,
-            background: "rgba(15,23,42,0.98)",
-            border: `1px solid ${BORDER_SUBTLE}`,
-            borderRadius: 14,
-            padding: "14px 16px",
-            minWidth: 260,
-            maxWidth: "100%",
-            maxHeight: 340,
-            boxShadow: "0 24px 56px rgba(0,0,0,0.5)",
-            zIndex: 50,
-            animation: "popoverReveal 0.25s ease-out",
-            display: "flex",
-            flexDirection: "column",
-          }}
-        >
-          <div style={{ fontSize: 11, color: "#64748b", textTransform: "uppercase", letterSpacing: 1, marginBottom: 10, flexShrink: 0 }}>
-            Monthly posting trend (last 6 months)
+    <>
+      <div
+        style={{
+          position: "relative",
+          minWidth: 0,
+          transition: "transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease",
+          transform: hover ? "scale(1.05)" : "scale(1)",
+          zIndex: hover ? 40 : 1,
+          willChange: "transform",
+          cursor: "pointer",
+        }}
+        onMouseEnter={() => { setHover(true); setOverlayOpen(true); }}
+        onMouseLeave={() => setHover(false)}
+        onClick={() => setOverlayOpen(true)}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => e.key === "Enter" && setOverlayOpen(true)}
+      >
+        <GlowCard delay={delay} glowColor={PRIMARY}>
+          <div style={{ fontSize: 12, color: "#64748b", textTransform: "uppercase", letterSpacing: 1.5, marginBottom: 8 }}>
+            Total Postings
           </div>
-          <div className="metric-popover-scroll" style={{ maxHeight: 260, paddingRight: 4 }}>
-            {totalPostingsByMonth.map(({ month, postings }) => (
-              <div
-                key={month}
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  padding: "8px 0",
-                  borderBottom: "1px solid rgba(30,41,59,0.6)",
-                  fontSize: 13,
-                  color: "#e2e8f0",
-                }}
-              >
-                <span>{month}</span>
-                <span style={{ fontWeight: 600, color: PRIMARY }}>{(postings / 1000).toFixed(0)}K</span>
-              </div>
-            ))}
+          <div style={{ fontSize: "clamp(1.25rem, 4vw, 2.25rem)", fontWeight: 700, color: PRIMARY, fontFamily: "'Inter', system-ui, sans-serif", marginBottom: 4, minWidth: 0, overflow: "hidden" }}>
+            <AnimatedCounter target={1} prefix="" suffix=".3M+" />
           </div>
-          <div style={{ fontSize: 10, color: "#64748b", marginTop: 8, flexShrink: 0 }}>Scroll for more insights</div>
-        </div>
-      )}
-    </div>
+          <div style={{ fontSize: 12, color: "#22c55e", display: "flex", alignItems: "center", gap: 4 }}>
+            <PulsingDot color="#22c55e" />
+            Hover or click → full view
+          </div>
+        </GlowCard>
+      </div>
+      <MetricOverlay open={overlayOpen} onClose={() => setOverlayOpen(false)} title="Total Postings" subtitle="Monthly trend (last 6 months)" accentColor={PRIMARY}>
+        {totalPostingsByMonth.map(({ month, postings }) => (
+          <div key={month} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "12px 0", borderBottom: "1px solid rgba(30,41,59,0.6)", fontSize: 15, color: "#e2e8f0" }}>
+            <span>{month}</span>
+            <span style={{ fontWeight: 600, color: PRIMARY }}>{(postings / 1000).toFixed(0)}K postings</span>
+          </div>
+        ))}
+      </MetricOverlay>
+    </>
   );
 }
 
 function AvgSalaryCard({ delay }) {
   const [hover, setHover] = useState(false);
+  const [overlayOpen, setOverlayOpen] = useState(false);
   return (
-    <div
-      style={{
-        position: "relative",
-        minWidth: 0,
-        transition: "transform 0.25s ease, box-shadow 0.25s ease",
-        transform: hover ? "scale(1.02)" : "scale(1)",
-        zIndex: hover ? 40 : 1,
-        willChange: "transform",
-        cursor: "pointer",
-      }}
-      onMouseEnter={() => setHover(true)}
-      onMouseLeave={() => setHover(false)}
-      onClick={() => setHover((h) => !h)}
-      role="button"
-      tabIndex={0}
-      onKeyDown={(e) => e.key === "Enter" && setHover((h) => !h)}
-    >
-      <GlowCard delay={delay} glowColor={ACCENT}>
-        <div style={{ fontSize: 12, color: "#64748b", textTransform: "uppercase", letterSpacing: 1.5, marginBottom: 8 }}>
-          Avg Salary
-        </div>
-        <div
-          style={{
-            fontSize: "clamp(1.25rem, 4vw, 2.25rem)",
-            fontWeight: 700,
-            color: ACCENT,
-            fontFamily: "'Inter', system-ui, sans-serif",
-            marginBottom: 4,
-            minWidth: 0,
-            overflow: "hidden",
-          }}
-        >
-          <AnimatedCounter target={118} prefix="$" suffix="K" />
-        </div>
-        <div style={{ fontSize: 12, color: "#22c55e", display: "flex", alignItems: "center", gap: 4 }}>
-          <PulsingDot color="#22c55e" />
-          +5.2% YoY · Hover by role
-        </div>
-      </GlowCard>
-      {hover && (
-        <div
-          style={{
-            position: "absolute",
-            top: "100%",
-            left: 0,
-            right: 0,
-            marginTop: 10,
-            background: "rgba(15,23,42,0.98)",
-            border: `1px solid ${BORDER_SUBTLE}`,
-            borderRadius: 14,
-            padding: "14px 16px",
-            minWidth: 260,
-            maxWidth: "100%",
-            maxHeight: 340,
-            boxShadow: "0 24px 56px rgba(0,0,0,0.5)",
-            zIndex: 50,
-            animation: "popoverReveal 0.25s ease-out",
-            display: "flex",
-            flexDirection: "column",
-          }}
-        >
-          <div style={{ fontSize: 11, color: "#64748b", textTransform: "uppercase", letterSpacing: 1, marginBottom: 10, flexShrink: 0 }}>
-            Average salary by role ($K)
+    <>
+      <div
+        style={{
+          position: "relative",
+          minWidth: 0,
+          transition: "transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease",
+          transform: hover ? "scale(1.05)" : "scale(1)",
+          zIndex: hover ? 40 : 1,
+          willChange: "transform",
+          cursor: "pointer",
+        }}
+        onMouseEnter={() => { setHover(true); setOverlayOpen(true); }}
+        onMouseLeave={() => setHover(false)}
+        onClick={() => setOverlayOpen(true)}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => e.key === "Enter" && setOverlayOpen(true)}
+      >
+        <GlowCard delay={delay} glowColor={ACCENT}>
+          <div style={{ fontSize: 12, color: "#64748b", textTransform: "uppercase", letterSpacing: 1.5, marginBottom: 8 }}>Avg Salary</div>
+          <div style={{ fontSize: "clamp(1.25rem, 4vw, 2.25rem)", fontWeight: 700, color: ACCENT, fontFamily: "'Inter', system-ui, sans-serif", marginBottom: 4, minWidth: 0, overflow: "hidden" }}>
+            <AnimatedCounter target={118} prefix="$" suffix="K" />
           </div>
-          <div className="metric-popover-scroll" style={{ maxHeight: 260, paddingRight: 4 }}>
-            {avgSalaryByRole.map(({ role, salary }) => (
-              <div
-                key={role}
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  padding: "8px 0",
-                  borderBottom: "1px solid rgba(30,41,59,0.6)",
-                  fontSize: 13,
-                  color: "#e2e8f0",
-                }}
-              >
-                <span>{role}</span>
-                <span style={{ fontWeight: 600, color: ACCENT }}>${salary}K</span>
-              </div>
-            ))}
+          <div style={{ fontSize: 12, color: "#22c55e", display: "flex", alignItems: "center", gap: 4 }}>
+            <PulsingDot color="#22c55e" />
+            Hover or click → full view
           </div>
-          <div style={{ fontSize: 10, color: "#64748b", marginTop: 8, flexShrink: 0 }}>Scroll for more insights</div>
-        </div>
-      )}
-    </div>
+        </GlowCard>
+      </div>
+      <MetricOverlay open={overlayOpen} onClose={() => setOverlayOpen(false)} title="Average salary by role" subtitle="Base mid-level salary ($K)" accentColor={ACCENT}>
+        {avgSalaryByRole.map(({ role, salary }) => (
+          <div key={role} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "12px 0", borderBottom: "1px solid rgba(30,41,59,0.6)", fontSize: 15, color: "#e2e8f0" }}>
+            <span>{role}</span>
+            <span style={{ fontWeight: 600, color: ACCENT }}>${salary}K</span>
+          </div>
+        ))}
+      </MetricOverlay>
+    </>
   );
 }
 
 function CompaniesCard({ delay }) {
   const [hover, setHover] = useState(false);
+  const [overlayOpen, setOverlayOpen] = useState(false);
+  return (
+    <>
+      <div
+        style={{
+          position: "relative",
+          minWidth: 0,
+          transition: "transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease",
+          transform: hover ? "scale(1.05)" : "scale(1)",
+          zIndex: hover ? 40 : 1,
+          willChange: "transform",
+          cursor: "pointer",
+        }}
+        onMouseEnter={() => { setHover(true); setOverlayOpen(true); }}
+        onMouseLeave={() => setHover(false)}
+        onClick={() => setOverlayOpen(true)}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => e.key === "Enter" && setOverlayOpen(true)}
+      >
+        <GlowCard delay={delay} glowColor={MUTED_2}>
+          <div style={{ fontSize: 12, color: "#64748b", textTransform: "uppercase", letterSpacing: 1.5, marginBottom: 8 }}>Companies</div>
+          <div style={{ fontSize: "clamp(1.25rem, 4vw, 2.25rem)", fontWeight: 700, color: MUTED_2, fontFamily: "'Inter', system-ui, sans-serif", marginBottom: 4, minWidth: 0, overflow: "hidden" }}>
+            <AnimatedCounter target={48500} suffix="+" />
+          </div>
+          <div style={{ fontSize: 12, color: "#22c55e", display: "flex", alignItems: "center", gap: 4 }}>
+            <PulsingDot color="#22c55e" />
+            Hover or click → full view
+          </div>
+        </GlowCard>
+      </div>
+      <MetricOverlay open={overlayOpen} onClose={() => setOverlayOpen(false)} title="Top hiring companies" subtitle="By job count across data roles" accentColor={MUTED_2}>
+        {companiesRanked.map(({ rank, name, jobs }) => (
+          <div key={name} style={{ display: "flex", alignItems: "center", gap: 16, padding: "12px 0", borderBottom: "1px solid rgba(30,41,59,0.6)", fontSize: 15, color: "#e2e8f0" }}>
+            <span style={{ fontWeight: 700, color: "#64748b", minWidth: 32 }}>#{rank}</span>
+            <span style={{ flex: 1, minWidth: 0 }}>{name}</span>
+            <span style={{ fontWeight: 600, color: MUTED_2, flexShrink: 0 }}>{jobs.toLocaleString()} jobs</span>
+          </div>
+        ))}
+      </MetricOverlay>
+    </>
+  );
+}
+
+function MetricOverlay({ open, onClose, title, subtitle, accentColor, children }) {
+  useEffect(() => {
+    if (!open) return;
+    const handle = (e) => { if (e.key === "Escape") onClose(); };
+    document.addEventListener("keydown", handle);
+    return () => document.removeEventListener("keydown", handle);
+  }, [open, onClose]);
+  if (!open) return null;
   return (
     <div
+      role="dialog"
+      aria-modal="true"
+      aria-label={title}
       style={{
-        position: "relative",
-        minWidth: 0,
-        transition: "transform 0.25s ease, box-shadow 0.25s ease",
-        transform: hover ? "scale(1.02)" : "scale(1)",
-        zIndex: hover ? 40 : 1,
-        willChange: "transform",
-        cursor: "pointer",
+        position: "fixed",
+        inset: 0,
+        zIndex: 100,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        padding: 24,
+        boxSizing: "border-box",
       }}
-      onMouseEnter={() => setHover(true)}
-      onMouseLeave={() => setHover(false)}
-      onClick={() => setHover((h) => !h)}
-      role="button"
-      tabIndex={0}
-      onKeyDown={(e) => e.key === "Enter" && setHover((h) => !h)}
     >
-      <GlowCard delay={delay} glowColor={MUTED_2}>
-        <div style={{ fontSize: 12, color: "#64748b", textTransform: "uppercase", letterSpacing: 1.5, marginBottom: 8 }}>
-          Companies
-        </div>
-        <div
-          style={{
-            fontSize: "clamp(1.25rem, 4vw, 2.25rem)",
-            fontWeight: 700,
-            color: MUTED_2,
-            fontFamily: "'Inter', system-ui, sans-serif",
-            marginBottom: 4,
-            minWidth: 0,
-            overflow: "hidden",
-          }}
-        >
-          <AnimatedCounter target={48500} suffix="+" />
-        </div>
-        <div style={{ fontSize: 12, color: "#22c55e", display: "flex", alignItems: "center", gap: 4 }}>
-          <PulsingDot color="#22c55e" />
-          Across 12 industries · Hover for list
-        </div>
-      </GlowCard>
-      {hover && (
-        <div
-          style={{
-            position: "absolute",
-            top: "100%",
-            left: 0,
-            right: 0,
-            marginTop: 10,
-            background: "rgba(15,23,42,0.98)",
-            border: `1px solid ${BORDER_SUBTLE}`,
-            borderRadius: 14,
-            padding: "14px 16px",
-            minWidth: 280,
-            maxWidth: "100%",
-            maxHeight: 380,
-            boxShadow: "0 24px 56px rgba(0,0,0,0.5)",
-            zIndex: 50,
-            animation: "popoverReveal 0.25s ease-out",
-            display: "flex",
-            flexDirection: "column",
-          }}
-        >
-          <div style={{ fontSize: 11, color: "#64748b", textTransform: "uppercase", letterSpacing: 1, marginBottom: 10, flexShrink: 0 }}>
-            Top hiring companies (by job count)
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          background: "rgba(0,0,0,0.75)",
+          animation: "overlayBackdropIn 0.3s ease-out",
+        }}
+        onClick={onClose}
+        onKeyDown={(e) => e.key === "Enter" && onClose()}
+        role="button"
+        tabIndex={0}
+        aria-label="Close overlay"
+      />
+      <div
+        style={{
+          position: "relative",
+          width: "min(92vw, 720px)",
+          maxHeight: "88vh",
+          background: "rgba(15,23,42,0.98)",
+          border: `2px solid ${accentColor}`,
+          borderRadius: 20,
+          boxShadow: `0 32px 80px rgba(0,0,0,0.6), 0 0 0 1px ${BORDER_SUBTLE}`,
+          display: "flex",
+          flexDirection: "column",
+          animation: "overlayPanelIn 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
+          overflow: "hidden",
+        }}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", padding: "20px 24px", borderBottom: `1px solid ${BORDER_SUBTLE}`, flexShrink: 0 }}>
+          <div>
+            <h2 style={{ margin: 0, fontSize: 20, fontWeight: 700, color: accentColor, fontFamily: "'Inter', sans-serif" }}>{title}</h2>
+            {subtitle && <p style={{ margin: "6px 0 0", fontSize: 12, color: "#64748b" }}>{subtitle}</p>}
           </div>
-          <div className="metric-popover-scroll" style={{ maxHeight: 300, paddingRight: 4 }}>
-            {companiesRanked.map(({ rank, name, jobs }) => (
-              <div
-                key={name}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 12,
-                  padding: "8px 0",
-                  borderBottom: "1px solid rgba(30,41,59,0.6)",
-                  fontSize: 13,
-                  color: "#e2e8f0",
-                }}
-              >
-                <span style={{ fontWeight: 700, color: "#64748b", minWidth: 24 }}>#{rank}</span>
-                <span style={{ flex: 1, minWidth: 0 }}>{name}</span>
-                <span style={{ fontWeight: 600, color: MUTED_2, flexShrink: 0 }}>{jobs.toLocaleString()} jobs</span>
-              </div>
-            ))}
-          </div>
-          <div style={{ fontSize: 10, color: "#64748b", marginTop: 8, flexShrink: 0 }}>Scroll to see all companies</div>
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="Close"
+            style={{
+              width: 40,
+              height: 40,
+              borderRadius: 12,
+              border: `1px solid ${BORDER_SUBTLE}`,
+              background: "rgba(30,41,59,0.8)",
+              color: "#e2e8f0",
+              fontSize: 18,
+              cursor: "pointer",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              transition: "background 0.2s, transform 0.2s",
+            }}
+            onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(51,65,85,0.9)"; e.currentTarget.style.transform = "scale(1.05)"; }}
+            onMouseLeave={(e) => { e.currentTarget.style.background = "rgba(30,41,59,0.8)"; e.currentTarget.style.transform = "scale(1)"; }}
+          >
+            ×
+          </button>
         </div>
-      )}
+        <div className="metric-popover-scroll" style={{ flex: 1, padding: "20px 24px 24px", minHeight: 0 }}>
+          {children}
+        </div>
+      </div>
     </div>
   );
 }
@@ -1359,6 +1246,15 @@ export default function TalentScopeDashboard() {
         @keyframes locationCardIn {
           from { opacity: 0; transform: translateY(16px) scale(0.95); }
           to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        @keyframes overlayBackdropIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+        @keyframes overlayPanelIn {
+          from { opacity: 0; transform: scale(0.88) translateY(20px); }
+          to { opacity: 1; transform: scale(1) translateY(0); }
         }
 
         select option { background: #020617; color: #e5e7eb; }
