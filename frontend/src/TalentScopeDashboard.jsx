@@ -390,187 +390,272 @@ function MetricCard({ label, value, prefix, suffix, subtext, color, delay }) {
   );
 }
 
-function SkillsTrackedCard({ delay }) {
-  const [hover, setHover] = useState(false);
-  const [overlayOpen, setOverlayOpen] = useState(false);
-  return (
-    <>
+function SkillsTrackedCard({ id, activeCard, setActiveCard, delay }) {
+  const accentColor = MUTED_1;
+  const isTabMode = activeCard !== null;
+  const isSelected = activeCard === id;
+
+  if (isTabMode) {
+    return (
       <div
-        style={{
-          position: "relative",
-          minWidth: 0,
-          transition: "transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease",
-          transform: hover ? "scale(1.05)" : "scale(1)",
-          zIndex: hover ? 40 : 1,
-          willChange: "transform",
-          cursor: "pointer",
-        }}
-        onMouseEnter={() => { setHover(true); setOverlayOpen(true); }}
-        onMouseLeave={() => setHover(false)}
-        onClick={() => setOverlayOpen(true)}
         role="button"
         tabIndex={0}
-        onKeyDown={(e) => e.key === "Enter" && setOverlayOpen(true)}
+        onClick={() => setActiveCard(id)}
+        onKeyDown={(e) => e.key === "Enter" && setActiveCard(id)}
+        style={{
+          padding: "12px 16px",
+          borderRadius: 12,
+          border: `2px solid ${isSelected ? accentColor : BORDER_SUBTLE}`,
+          background: isSelected ? "rgba(249,115,22,0.12)" : "rgba(30,41,59,0.5)",
+          cursor: "pointer",
+          transition: "border 0.2s, background 0.2s, transform 0.2s",
+        }}
       >
-        <GlowCard delay={delay} glowColor={MUTED_1}>
-          <div style={{ fontSize: 12, color: "#64748b", textTransform: "uppercase", letterSpacing: 1.5, marginBottom: 8 }}>Skills Tracked</div>
-          <div style={{ fontSize: "clamp(1.25rem, 4vw, 2.25rem)", fontWeight: 700, color: MUTED_1, fontFamily: "'Inter', system-ui, sans-serif", marginBottom: 4 }}>
-            <AnimatedCounter target={847} suffix="" />
-          </div>
-          <div style={{ fontSize: 12, color: "#22c55e", display: "flex", alignItems: "center", gap: 4 }}>
-            <PulsingDot color="#22c55e" />
-            Hover or click → full view
-          </div>
-        </GlowCard>
+        <div style={{ fontSize: 10, color: "#64748b", textTransform: "uppercase", letterSpacing: 1, marginBottom: 4 }}>Skills Tracked</div>
+        <div style={{ fontSize: 18, fontWeight: 700, color: accentColor }}><AnimatedCounter target={847} suffix="" /></div>
       </div>
-      <MetricOverlay open={overlayOpen} onClose={() => setOverlayOpen(false)} title="Skills tracked (847)" subtitle="Sample of skills we track across job postings" accentColor={MUTED_1}>
-        <div style={{ display: "flex", flexWrap: "wrap", gap: "10px 12px" }}>
-          {skillsTrackedSample.map((name) => (
-            <span key={name} style={{ fontSize: 14, color: "#94a3b8", background: "rgba(148,163,184,0.15)", padding: "8px 14px", borderRadius: 8 }}>
-              {name}
-            </span>
+    );
+  }
+
+  return (
+    <div
+      style={{
+        position: "relative",
+        minWidth: 0,
+        transition: "transform 0.25s ease, box-shadow 0.25s ease",
+        transform: "scale(1)",
+        willChange: "transform",
+        cursor: "pointer",
+      }}
+      onMouseEnter={(e) => { e.currentTarget.style.transform = "scale(1.02)"; }}
+      onMouseLeave={(e) => { e.currentTarget.style.transform = "scale(1)"; }}
+      onClick={() => setActiveCard(id)}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => e.key === "Enter" && setActiveCard(id)}
+    >
+      <GlowCard delay={delay} glowColor={MUTED_1}>
+        <div style={{ fontSize: 12, color: "#64748b", textTransform: "uppercase", letterSpacing: 1.5, marginBottom: 8 }}>Skills Tracked</div>
+        <div style={{ fontSize: "clamp(1.25rem, 4vw, 2.25rem)", fontWeight: 700, color: MUTED_1, fontFamily: "'Inter', system-ui, sans-serif", marginBottom: 4 }}>
+          <AnimatedCounter target={847} suffix="" />
+        </div>
+        <div style={{ fontSize: 12, color: "#22c55e", display: "flex", alignItems: "center", gap: 4 }}>
+          <PulsingDot color="#22c55e" />
+          Click to open
+        </div>
+      </GlowCard>
+    </div>
+  );
+}
+
+function TotalPostingsCard({ id, activeCard, setActiveCard, delay }) {
+  const accentColor = PRIMARY;
+  const isTabMode = activeCard !== null;
+  const isSelected = activeCard === id;
+
+  if (isTabMode) {
+    return (
+      <div role="button" tabIndex={0} onClick={() => setActiveCard(id)} onKeyDown={(e) => e.key === "Enter" && setActiveCard(id)} style={{ padding: "12px 16px", borderRadius: 12, border: `2px solid ${isSelected ? accentColor : BORDER_SUBTLE}`, background: isSelected ? "rgba(59,130,246,0.12)" : "rgba(30,41,59,0.5)", cursor: "pointer", transition: "border 0.2s, background 0.2s" }}>
+        <div style={{ fontSize: 10, color: "#64748b", textTransform: "uppercase", letterSpacing: 1, marginBottom: 4 }}>Total Postings</div>
+        <div style={{ fontSize: 18, fontWeight: 700, color: accentColor }}><AnimatedCounter target={1} prefix="" suffix=".3M+" /></div>
+      </div>
+    );
+  }
+
+  return (
+    <div style={{ position: "relative", minWidth: 0, transition: "transform 0.25s ease", willChange: "transform", cursor: "pointer" }} onMouseEnter={(e) => { e.currentTarget.style.transform = "scale(1.02)"; }} onMouseLeave={(e) => { e.currentTarget.style.transform = "scale(1)"; }} onClick={() => setActiveCard(id)} role="button" tabIndex={0} onKeyDown={(e) => e.key === "Enter" && setActiveCard(id)}>
+      <GlowCard delay={delay} glowColor={PRIMARY}>
+        <div style={{ fontSize: 12, color: "#64748b", textTransform: "uppercase", letterSpacing: 1.5, marginBottom: 8 }}>Total Postings</div>
+        <div style={{ fontSize: "clamp(1.25rem, 4vw, 2.25rem)", fontWeight: 700, color: PRIMARY, fontFamily: "'Inter', system-ui, sans-serif", marginBottom: 4, minWidth: 0, overflow: "hidden" }}><AnimatedCounter target={1} prefix="" suffix=".3M+" /></div>
+        <div style={{ fontSize: 12, color: "#22c55e", display: "flex", alignItems: "center", gap: 4 }}><PulsingDot color="#22c55e" /> Click to open</div>
+      </GlowCard>
+    </div>
+  );
+}
+
+function AvgSalaryCard({ id, activeCard, setActiveCard, delay }) {
+  const accentColor = ACCENT;
+  const isTabMode = activeCard !== null;
+  const isSelected = activeCard === id;
+
+  if (isTabMode) {
+    return (
+      <div role="button" tabIndex={0} onClick={() => setActiveCard(id)} onKeyDown={(e) => e.key === "Enter" && setActiveCard(id)} style={{ padding: "12px 16px", borderRadius: 12, border: `2px solid ${isSelected ? accentColor : BORDER_SUBTLE}`, background: isSelected ? "rgba(34,197,94,0.12)" : "rgba(30,41,59,0.5)", cursor: "pointer", transition: "border 0.2s, background 0.2s" }}>
+        <div style={{ fontSize: 10, color: "#64748b", textTransform: "uppercase", letterSpacing: 1, marginBottom: 4 }}>Avg Salary</div>
+        <div style={{ fontSize: 18, fontWeight: 700, color: accentColor }}><AnimatedCounter target={118} prefix="$" suffix="K" /></div>
+      </div>
+    );
+  }
+
+  return (
+    <div style={{ position: "relative", minWidth: 0, transition: "transform 0.25s ease", willChange: "transform", cursor: "pointer" }} onMouseEnter={(e) => { e.currentTarget.style.transform = "scale(1.02)"; }} onMouseLeave={(e) => { e.currentTarget.style.transform = "scale(1)"; }} onClick={() => setActiveCard(id)} role="button" tabIndex={0} onKeyDown={(e) => e.key === "Enter" && setActiveCard(id)}>
+      <GlowCard delay={delay} glowColor={ACCENT}>
+        <div style={{ fontSize: 12, color: "#64748b", textTransform: "uppercase", letterSpacing: 1.5, marginBottom: 8 }}>Avg Salary</div>
+        <div style={{ fontSize: "clamp(1.25rem, 4vw, 2.25rem)", fontWeight: 700, color: ACCENT, fontFamily: "'Inter', system-ui, sans-serif", marginBottom: 4, minWidth: 0, overflow: "hidden" }}><AnimatedCounter target={118} prefix="$" suffix="K" /></div>
+        <div style={{ fontSize: 12, color: "#22c55e", display: "flex", alignItems: "center", gap: 4 }}><PulsingDot color="#22c55e" /> Click to open</div>
+      </GlowCard>
+    </div>
+  );
+}
+
+function CompaniesCard({ id, activeCard, setActiveCard, delay }) {
+  const accentColor = MUTED_2;
+  const isTabMode = activeCard !== null;
+  const isSelected = activeCard === id;
+
+  if (isTabMode) {
+    return (
+      <div role="button" tabIndex={0} onClick={() => setActiveCard(id)} onKeyDown={(e) => e.key === "Enter" && setActiveCard(id)} style={{ padding: "12px 16px", borderRadius: 12, border: `2px solid ${isSelected ? accentColor : BORDER_SUBTLE}`, background: isSelected ? "rgba(168,85,247,0.12)" : "rgba(30,41,59,0.5)", cursor: "pointer", transition: "border 0.2s, background 0.2s" }}>
+        <div style={{ fontSize: 10, color: "#64748b", textTransform: "uppercase", letterSpacing: 1, marginBottom: 4 }}>Companies</div>
+        <div style={{ fontSize: 18, fontWeight: 700, color: accentColor }}><AnimatedCounter target={48500} suffix="+" /></div>
+      </div>
+    );
+  }
+
+  return (
+    <div style={{ position: "relative", minWidth: 0, transition: "transform 0.25s ease", willChange: "transform", cursor: "pointer" }} onMouseEnter={(e) => { e.currentTarget.style.transform = "scale(1.02)"; }} onMouseLeave={(e) => { e.currentTarget.style.transform = "scale(1)"; }} onClick={() => setActiveCard(id)} role="button" tabIndex={0} onKeyDown={(e) => e.key === "Enter" && setActiveCard(id)}>
+      <GlowCard delay={delay} glowColor={MUTED_2}>
+        <div style={{ fontSize: 12, color: "#64748b", textTransform: "uppercase", letterSpacing: 1.5, marginBottom: 8 }}>Companies</div>
+        <div style={{ fontSize: "clamp(1.25rem, 4vw, 2.25rem)", fontWeight: 700, color: MUTED_2, fontFamily: "'Inter', system-ui, sans-serif", marginBottom: 4, minWidth: 0, overflow: "hidden" }}><AnimatedCounter target={48500} suffix="+" /></div>
+        <div style={{ fontSize: 12, color: "#22c55e", display: "flex", alignItems: "center", gap: 4 }}><PulsingDot color="#22c55e" /> Click to open</div>
+      </GlowCard>
+    </div>
+  );
+}
+
+function ActiveCardContent({ activeCard, setActiveCard }) {
+  if (!activeCard) return null;
+  const closeBtn = (
+    <button type="button" onClick={() => setActiveCard(null)} aria-label="Close" style={{ width: 40, height: 40, borderRadius: 12, border: `1px solid ${BORDER_SUBTLE}`, background: "rgba(30,41,59,0.8)", color: "#e2e8f0", fontSize: 18, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center" }}>×</button>
+  );
+  const panelStyle = { flex: 1, background: "rgba(15,23,42,0.98)", border: "2px solid", borderRadius: 20, boxShadow: `0 24px 56px rgba(0,0,0,0.5), 0 0 0 1px ${BORDER_SUBTLE}`, display: "flex", flexDirection: "column", overflow: "hidden", animation: "cardEnlarge 0.35s cubic-bezier(0.16, 1, 0.3, 1)", minHeight: 280 };
+  const headerStyle = { display: "flex", alignItems: "flex-start", justifyContent: "space-between", padding: "20px 24px", borderBottom: `1px solid ${BORDER_SUBTLE}`, flexShrink: 0 };
+  const bodyStyle = { flex: 1, padding: "20px 24px 24px", minHeight: 0 };
+  if (activeCard === "total") {
+    return (
+      <div style={{ ...panelStyle, borderColor: PRIMARY }} onClick={(e) => e.stopPropagation()}>
+        <div style={headerStyle}>
+          <div><h2 style={{ margin: 0, fontSize: 20, fontWeight: 700, color: PRIMARY }}>Total Postings</h2><p style={{ margin: "6px 0 0", fontSize: 12, color: "#64748b" }}>Monthly trend (last 6 months)</p></div>
+          {closeBtn}
+        </div>
+        <div className="metric-popover-scroll" style={bodyStyle}>
+          {totalPostingsByMonth.map(({ month, postings }) => (
+            <div key={month} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "12px 0", borderBottom: "1px solid rgba(30,41,59,0.6)", fontSize: 15, color: "#e2e8f0" }}>
+              <span>{month}</span>
+              <span style={{ fontWeight: 600, color: PRIMARY }}>{(postings / 1000).toFixed(0)}K postings</span>
+            </div>
           ))}
         </div>
-      </MetricOverlay>
-    </>
-  );
+      </div>
+    );
+  }
+  if (activeCard === "avg") {
+    return (
+      <div style={{ ...panelStyle, borderColor: ACCENT }} onClick={(e) => e.stopPropagation()}>
+        <div style={headerStyle}>
+          <div><h2 style={{ margin: 0, fontSize: 20, fontWeight: 700, color: ACCENT }}>Average salary by role</h2><p style={{ margin: "6px 0 0", fontSize: 12, color: "#64748b" }}>Base mid-level salary ($K)</p></div>
+          {closeBtn}
+        </div>
+        <div className="metric-popover-scroll" style={bodyStyle}>
+          {avgSalaryByRole.map(({ role, salary }) => (
+            <div key={role} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "12px 0", borderBottom: "1px solid rgba(30,41,59,0.6)", fontSize: 15, color: "#e2e8f0" }}>
+              <span>{role}</span>
+              <span style={{ fontWeight: 600, color: ACCENT }}>${salary}K</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+  if (activeCard === "companies") {
+    return (
+      <div style={{ ...panelStyle, borderColor: MUTED_2 }} onClick={(e) => e.stopPropagation()}>
+        <div style={headerStyle}>
+          <div><h2 style={{ margin: 0, fontSize: 20, fontWeight: 700, color: MUTED_2 }}>Top hiring companies</h2><p style={{ margin: "6px 0 0", fontSize: 12, color: "#64748b" }}>By job count across data roles</p></div>
+          {closeBtn}
+        </div>
+        <div className="metric-popover-scroll" style={bodyStyle}>
+          {companiesRanked.map(({ rank, name, jobs }) => (
+            <div key={name} style={{ display: "flex", alignItems: "center", gap: 16, padding: "12px 0", borderBottom: "1px solid rgba(30,41,59,0.6)", fontSize: 15, color: "#e2e8f0" }}>
+              <span style={{ fontWeight: 700, color: "#64748b", minWidth: 32 }}>#{rank}</span>
+              <span style={{ flex: 1, minWidth: 0 }}>{name}</span>
+              <span style={{ fontWeight: 600, color: MUTED_2, flexShrink: 0 }}>{jobs.toLocaleString()} jobs</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+  if (activeCard === "skills") {
+    return (
+      <div style={{ ...panelStyle, borderColor: MUTED_1 }} onClick={(e) => e.stopPropagation()}>
+        <div style={headerStyle}>
+          <div><h2 style={{ margin: 0, fontSize: 20, fontWeight: 700, color: MUTED_1 }}>Skills tracked (847)</h2><p style={{ margin: "6px 0 0", fontSize: 12, color: "#64748b" }}>Sample of skills we track across job postings</p></div>
+          {closeBtn}
+        </div>
+        <div className="metric-popover-scroll" style={bodyStyle}>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "10px 12px" }}>
+            {skillsTrackedSample.map((name) => (
+              <span key={name} style={{ fontSize: 14, color: "#94a3b8", background: "rgba(148,163,184,0.15)", padding: "8px 14px", borderRadius: 8 }}>{name}</span>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
+  return null;
 }
 
-function TotalPostingsCard({ delay }) {
-  const [hover, setHover] = useState(false);
-  const [overlayOpen, setOverlayOpen] = useState(false);
-  return (
-    <>
+function MetricCardsSection({ isMobile }) {
+  const [activeCard, setActiveCard] = useState(null);
+  useEffect(() => {
+    if (!activeCard) return;
+    const handle = (e) => { if (e.key === "Escape") setActiveCard(null); };
+    document.addEventListener("keydown", handle);
+    return () => document.removeEventListener("keydown", handle);
+  }, [activeCard]);
+
+  const hasActive = activeCard !== null;
+
+  if (!hasActive) {
+    return (
       <div
         style={{
           position: "relative",
-          minWidth: 0,
-          transition: "transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease",
-          transform: hover ? "scale(1.05)" : "scale(1)",
-          zIndex: hover ? 40 : 1,
-          willChange: "transform",
-          cursor: "pointer",
+          display: "grid",
+          gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
+          gridTemplateRows: isMobile ? "auto auto auto auto" : "auto auto",
+          gap: 16,
+          marginBottom: 24,
         }}
-        onMouseEnter={() => { setHover(true); setOverlayOpen(true); }}
-        onMouseLeave={() => setHover(false)}
-        onClick={() => setOverlayOpen(true)}
-        role="button"
-        tabIndex={0}
-        onKeyDown={(e) => e.key === "Enter" && setOverlayOpen(true)}
       >
-        <GlowCard delay={delay} glowColor={PRIMARY}>
-          <div style={{ fontSize: 12, color: "#64748b", textTransform: "uppercase", letterSpacing: 1.5, marginBottom: 8 }}>
-            Total Postings
-          </div>
-          <div style={{ fontSize: "clamp(1.25rem, 4vw, 2.25rem)", fontWeight: 700, color: PRIMARY, fontFamily: "'Inter', system-ui, sans-serif", marginBottom: 4, minWidth: 0, overflow: "hidden" }}>
-            <AnimatedCounter target={1} prefix="" suffix=".3M+" />
-          </div>
-          <div style={{ fontSize: 12, color: "#22c55e", display: "flex", alignItems: "center", gap: 4 }}>
-            <PulsingDot color="#22c55e" />
-            Hover or click → full view
-          </div>
-        </GlowCard>
+        <TotalPostingsCard id="total" activeCard={null} setActiveCard={setActiveCard} delay={100} />
+        <AvgSalaryCard id="avg" activeCard={null} setActiveCard={setActiveCard} delay={200} />
+        <CompaniesCard id="companies" activeCard={null} setActiveCard={setActiveCard} delay={300} />
+        <SkillsTrackedCard id="skills" activeCard={null} setActiveCard={setActiveCard} delay={400} />
       </div>
-      <MetricOverlay open={overlayOpen} onClose={() => setOverlayOpen(false)} title="Total Postings" subtitle="Monthly trend (last 6 months)" accentColor={PRIMARY}>
-        {totalPostingsByMonth.map(({ month, postings }) => (
-          <div key={month} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "12px 0", borderBottom: "1px solid rgba(30,41,59,0.6)", fontSize: 15, color: "#e2e8f0" }}>
-            <span>{month}</span>
-            <span style={{ fontWeight: 600, color: PRIMARY }}>{(postings / 1000).toFixed(0)}K postings</span>
-          </div>
-        ))}
-      </MetricOverlay>
-    </>
-  );
-}
+    );
+  }
 
-function AvgSalaryCard({ delay }) {
-  const [hover, setHover] = useState(false);
-  const [overlayOpen, setOverlayOpen] = useState(false);
   return (
-    <>
-      <div
-        style={{
-          position: "relative",
-          minWidth: 0,
-          transition: "transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease",
-          transform: hover ? "scale(1.05)" : "scale(1)",
-          zIndex: hover ? 40 : 1,
-          willChange: "transform",
-          cursor: "pointer",
-        }}
-        onMouseEnter={() => { setHover(true); setOverlayOpen(true); }}
-        onMouseLeave={() => setHover(false)}
-        onClick={() => setOverlayOpen(true)}
-        role="button"
-        tabIndex={0}
-        onKeyDown={(e) => e.key === "Enter" && setOverlayOpen(true)}
-      >
-        <GlowCard delay={delay} glowColor={ACCENT}>
-          <div style={{ fontSize: 12, color: "#64748b", textTransform: "uppercase", letterSpacing: 1.5, marginBottom: 8 }}>Avg Salary</div>
-          <div style={{ fontSize: "clamp(1.25rem, 4vw, 2.25rem)", fontWeight: 700, color: ACCENT, fontFamily: "'Inter', system-ui, sans-serif", marginBottom: 4, minWidth: 0, overflow: "hidden" }}>
-            <AnimatedCounter target={118} prefix="$" suffix="K" />
-          </div>
-          <div style={{ fontSize: 12, color: "#22c55e", display: "flex", alignItems: "center", gap: 4 }}>
-            <PulsingDot color="#22c55e" />
-            Hover or click → full view
-          </div>
-        </GlowCard>
+    <div
+      style={{
+        display: "grid",
+        gridTemplateColumns: isMobile ? "repeat(2, 1fr)" : "repeat(4, 1fr)",
+        gridTemplateRows: isMobile ? "auto auto 1fr" : "auto 1fr",
+        gap: 12,
+        marginBottom: 24,
+        minHeight: 320,
+      }}
+    >
+      <TotalPostingsCard id="total" activeCard={activeCard} setActiveCard={setActiveCard} delay={100} />
+      <AvgSalaryCard id="avg" activeCard={activeCard} setActiveCard={setActiveCard} delay={200} />
+      <CompaniesCard id="companies" activeCard={activeCard} setActiveCard={setActiveCard} delay={300} />
+      <SkillsTrackedCard id="skills" activeCard={activeCard} setActiveCard={setActiveCard} delay={400} />
+      <div style={{ gridColumn: "1 / -1" }}>
+        <ActiveCardContent activeCard={activeCard} setActiveCard={setActiveCard} />
       </div>
-      <MetricOverlay open={overlayOpen} onClose={() => setOverlayOpen(false)} title="Average salary by role" subtitle="Base mid-level salary ($K)" accentColor={ACCENT}>
-        {avgSalaryByRole.map(({ role, salary }) => (
-          <div key={role} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "12px 0", borderBottom: "1px solid rgba(30,41,59,0.6)", fontSize: 15, color: "#e2e8f0" }}>
-            <span>{role}</span>
-            <span style={{ fontWeight: 600, color: ACCENT }}>${salary}K</span>
-          </div>
-        ))}
-      </MetricOverlay>
-    </>
-  );
-}
-
-function CompaniesCard({ delay }) {
-  const [hover, setHover] = useState(false);
-  const [overlayOpen, setOverlayOpen] = useState(false);
-  return (
-    <>
-      <div
-        style={{
-          position: "relative",
-          minWidth: 0,
-          transition: "transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease",
-          transform: hover ? "scale(1.05)" : "scale(1)",
-          zIndex: hover ? 40 : 1,
-          willChange: "transform",
-          cursor: "pointer",
-        }}
-        onMouseEnter={() => { setHover(true); setOverlayOpen(true); }}
-        onMouseLeave={() => setHover(false)}
-        onClick={() => setOverlayOpen(true)}
-        role="button"
-        tabIndex={0}
-        onKeyDown={(e) => e.key === "Enter" && setOverlayOpen(true)}
-      >
-        <GlowCard delay={delay} glowColor={MUTED_2}>
-          <div style={{ fontSize: 12, color: "#64748b", textTransform: "uppercase", letterSpacing: 1.5, marginBottom: 8 }}>Companies</div>
-          <div style={{ fontSize: "clamp(1.25rem, 4vw, 2.25rem)", fontWeight: 700, color: MUTED_2, fontFamily: "'Inter', system-ui, sans-serif", marginBottom: 4, minWidth: 0, overflow: "hidden" }}>
-            <AnimatedCounter target={48500} suffix="+" />
-          </div>
-          <div style={{ fontSize: 12, color: "#22c55e", display: "flex", alignItems: "center", gap: 4 }}>
-            <PulsingDot color="#22c55e" />
-            Hover or click → full view
-          </div>
-        </GlowCard>
-      </div>
-      <MetricOverlay open={overlayOpen} onClose={() => setOverlayOpen(false)} title="Top hiring companies" subtitle="By job count across data roles" accentColor={MUTED_2}>
-        {companiesRanked.map(({ rank, name, jobs }) => (
-          <div key={name} style={{ display: "flex", alignItems: "center", gap: 16, padding: "12px 0", borderBottom: "1px solid rgba(30,41,59,0.6)", fontSize: 15, color: "#e2e8f0" }}>
-            <span style={{ fontWeight: 700, color: "#64748b", minWidth: 32 }}>#{rank}</span>
-            <span style={{ flex: 1, minWidth: 0 }}>{name}</span>
-            <span style={{ fontWeight: 600, color: MUTED_2, flexShrink: 0 }}>{jobs.toLocaleString()} jobs</span>
-          </div>
-        ))}
-      </MetricOverlay>
-    </>
+    </div>
   );
 }
 
@@ -1256,6 +1341,10 @@ export default function TalentScopeDashboard() {
           from { opacity: 0; transform: scale(0.88) translateY(20px); }
           to { opacity: 1; transform: scale(1) translateY(0); }
         }
+        @keyframes cardEnlarge {
+          from { opacity: 0; transform: scale(0.92); }
+          to { opacity: 1; transform: scale(1); }
+        }
 
         select option { background: #020617; color: #e5e7eb; }
       `}
@@ -1505,21 +1594,8 @@ export default function TalentScopeDashboard() {
           </div>
         </div>
 
-        {/* Metric Cards — 2x2 on tablet/laptop; 1 col on phone; hover reveals scrollable insight panel */}
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
-            gridTemplateRows: isMobile ? "auto auto auto auto" : "auto auto",
-            gap: 16,
-            marginBottom: 24,
-          }}
-        >
-          <TotalPostingsCard delay={100} />
-          <AvgSalaryCard delay={200} />
-          <CompaniesCard delay={300} />
-          <SkillsTrackedCard delay={400} />
-        </div>
+        {/* Metric Cards — 2x2 on tablet/laptop; hover/click enlarges one card with backdrop, others hidden */}
+        <MetricCardsSection isMobile={isMobile} />
 
         {/* OVERVIEW PAGE */}
         {activePage === "overview" && (
