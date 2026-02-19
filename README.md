@@ -85,6 +85,22 @@ How this helps your job search
 - **Directly relevant to data roles**: talks about real business questions (skills, salaries, market trends).
 - **Shows multiple skills at once**: Python, ML, data viz, API design, and React UI.
 
+Deploy on Vercel (same as your portfolio)
+----------------------------------------
+1. Push your TalentScope repo to GitHub (if you haven’t already).
+2. Go to [vercel.com](https://vercel.com) and sign in (same account you use for your portfolio).
+3. Click **Add New…** → **Project** and import your **TalentScope** repository.
+4. Configure the project:
+   - **Root Directory**: click **Edit**, set to `frontend`, then **Continue**.
+   - **Framework Preset**: Vite (should be auto-detected).
+   - **Build Command**: `npm run build` (default).
+   - **Output Directory**: `dist` (default).
+   - **Install Command**: `npm install` (default).
+5. Click **Deploy**. Vercel will build and host the dashboard.
+6. Your live site will be at `https://your-project-name.vercel.app` (or your custom domain if you add one).
+
+The `frontend/vercel.json` file is already set up so all routes serve the React app (SPA routing works).
+
 Next steps
 ----------
 - Set up the **Python backend** in the `backend/` folder (see `requirements.txt` and `app.py`).

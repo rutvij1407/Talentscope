@@ -29,6 +29,60 @@ const BG_DARK = "#020617"; // slate-950
 const BG_CARD = "#020617"; // subtle cards, rely on borders/shadows
 const BORDER_SUBTLE = "#1e293b";
 
+// Skill metadata: what it is, time to go beginner→intermediate, intermediate→coder level
+const skillMeta = {
+  Python: {
+    description: "A general-purpose programming language used for data analysis, ML, automation, and scripting. Dominant in data roles.",
+    beginnerToIntermediate: "2–4 months",
+    intermediateToCoder: "6–12 months",
+  },
+  SQL: {
+    description: "Structured Query Language for querying and managing relational databases. Essential for analysts and engineers.",
+    beginnerToIntermediate: "1–2 months",
+    intermediateToCoder: "3–6 months",
+  },
+  Tableau: {
+    description: "Visual analytics and BI tool for building interactive dashboards and reports from data.",
+    beginnerToIntermediate: "1–2 months",
+    intermediateToCoder: "3–5 months",
+  },
+  R: {
+    description: "Statistical programming language for data analysis, visualization, and research. Strong in academia and biostats.",
+    beginnerToIntermediate: "2–3 months",
+    intermediateToCoder: "5–9 months",
+  },
+  "Power BI": {
+    description: "Microsoft’s business intelligence platform for dashboards, reports, and data modeling.",
+    beginnerToIntermediate: "1–2 months",
+    intermediateToCoder: "3–6 months",
+  },
+  Spark: {
+    description: "Distributed computing framework for large-scale data processing. Core for data engineering.",
+    beginnerToIntermediate: "2–4 months",
+    intermediateToCoder: "6–12 months",
+  },
+  AWS: {
+    description: "Amazon Web Services: cloud platform for storage, compute, and data services (S3, Redshift, EMR, etc.).",
+    beginnerToIntermediate: "2–4 months",
+    intermediateToCoder: "6–18 months",
+  },
+  TensorFlow: {
+    description: "Google’s ML/deep learning framework for building and deploying models.",
+    beginnerToIntermediate: "3–5 months",
+    intermediateToCoder: "9–18 months",
+  },
+  Excel: {
+    description: "Spreadsheet tool for analysis, pivot tables, and reporting. Ubiquitous in business and finance.",
+    beginnerToIntermediate: "2–4 weeks",
+    intermediateToCoder: "2–4 months",
+  },
+  Java: {
+    description: "Object-oriented language used in big-data stacks (Hadoop, Spark, Kafka) and backend systems.",
+    beginnerToIntermediate: "3–6 months",
+    intermediateToCoder: "12–24 months",
+  },
+};
+
 const skillsData = [
   { skill: "Python", demand: 78, salary: 125 },
   { skill: "SQL", demand: 72, salary: 115 },
@@ -40,6 +94,53 @@ const skillsData = [
   { skill: "TensorFlow", demand: 32, salary: 145 },
   { skill: "Excel", demand: 65, salary: 95 },
   { skill: "Java", demand: 35, salary: 130 },
+];
+
+// Sample of skills we "track" (847 total) — shown in Skills Tracked hover list
+const skillsTrackedSample = [
+  "Python", "SQL", "R", "Excel", "Tableau", "Power BI", "Spark", "AWS", "TensorFlow", "Java",
+  "Machine Learning", "Statistics", "ETL", "Data Modeling", "A/B Testing", "Git", "Docker", "Kafka",
+  "Snowflake", "dbt", "Airflow", "Pandas", "Scikit-learn", "PyTorch", "NoSQL", "MongoDB", "Redshift",
+  "BigQuery", "Looker", "SAS", "SPSS", "Jupyter", "Databricks", "Azure", "GCP", "CI/CD", "API design",
+];
+
+// Companies ranked by hiring volume (top to low) — for Companies card hover
+const companiesRanked = [
+  { rank: 1, name: "Amazon", jobs: 12400 },
+  { rank: 2, name: "Google", jobs: 9820 },
+  { rank: 3, name: "Microsoft", jobs: 8750 },
+  { rank: 4, name: "Meta", jobs: 6120 },
+  { rank: 5, name: "Apple", jobs: 5890 },
+  { rank: 6, name: "JPMorgan Chase", jobs: 4520 },
+  { rank: 7, name: "Deloitte", jobs: 4180 },
+  { rank: 8, name: "Accenture", jobs: 3950 },
+  { rank: 9, name: "IBM", jobs: 3620 },
+  { rank: 10, name: "Netflix", jobs: 2180 },
+  { rank: 11, name: "Salesforce", jobs: 1950 },
+  { rank: 12, name: "Adobe", jobs: 1720 },
+  { rank: 13, name: "Uber", jobs: 1580 },
+  { rank: 14, name: "Spotify", jobs: 920 },
+  { rank: 15, name: "Stripe", jobs: 780 },
+];
+
+// Monthly posting trend — for Total Postings card hover
+const totalPostingsByMonth = [
+  { month: "Mar", postings: 1120000 },
+  { month: "Apr", postings: 1150000 },
+  { month: "May", postings: 1190000 },
+  { month: "Jun", postings: 1220000 },
+  { month: "Jul", postings: 1260000 },
+  { month: "Aug", postings: 1300000 },
+];
+
+// Avg salary by role — for Avg Salary card hover
+const avgSalaryByRole = [
+  { role: "Data Analyst", salary: 85 },
+  { role: "Data Scientist", salary: 115 },
+  { role: "Data Engineer", salary: 125 },
+  { role: "ML Engineer", salary: 140 },
+  { role: "Business Analyst", salary: 82 },
+  { role: "BI Analyst", salary: 90 },
 ];
 
 const salaryTrend = [
@@ -154,20 +255,20 @@ function GlowCard({ children, delay = 0, glowColor = PRIMARY, style = {} }) {
     <div
       ref={ref}
       style={{
-        background: BG_CARD,
-        borderRadius: "16px",
+        background: "rgba(15,23,42,0.6)",
+        borderRadius: "14px",
         border: `1px solid ${BORDER_SUBTLE}`,
-        padding: "24px",
-        transition: "all 0.35s ease-out",
+        padding: "20px",
+        transition: "all 0.3s ease",
         opacity: visible ? 1 : 0,
-        transform: visible ? "translateY(0)" : "translateY(30px)",
+        transform: visible ? "translateY(0)" : "translateY(20px)",
         position: "relative",
-        overflow: "hidden",
+        overflow: "visible",
         ...style,
       }}
       onMouseEnter={(e) => {
         e.currentTarget.style.borderColor = glowColor;
-        e.currentTarget.style.boxShadow = `0 18px 40px rgba(15,23,42,0.85)`;
+        e.currentTarget.style.boxShadow = `0 12px 32px rgba(0,0,0,0.35)`;
         e.currentTarget.style.transform = "translateY(-2px)";
       }}
       onMouseLeave={(e) => {
@@ -261,11 +362,14 @@ function MetricCard({ label, value, prefix, suffix, subtext, color, delay }) {
       </div>
       <div
         style={{
-          fontSize: 36,
+          fontSize: "clamp(1.25rem, 4vw, 2.25rem)",
           fontWeight: 700,
           color,
           fontFamily: "'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif",
           marginBottom: 4,
+          minWidth: 0,
+          overflow: "hidden",
+          textOverflow: "ellipsis",
         }}
       >
         <AnimatedCounter target={parseInt(value, 10)} prefix={prefix || ""} suffix={suffix || ""} />
@@ -283,6 +387,385 @@ function MetricCard({ label, value, prefix, suffix, subtext, color, delay }) {
         {subtext}
       </div>
     </GlowCard>
+  );
+}
+
+function SkillsTrackedCard({ delay }) {
+  const [hover, setHover] = useState(false);
+  return (
+    <div
+      style={{
+        position: "relative",
+        minWidth: 0,
+        transition: "transform 0.25s ease, box-shadow 0.25s ease",
+        transform: hover ? "scale(1.02)" : "scale(1)",
+        zIndex: hover ? 40 : 1,
+      }}
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
+      onClick={() => setHover((h) => !h)}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => e.key === "Enter" && setHover((h) => !h)}
+    >
+      <GlowCard delay={delay} glowColor={MUTED_1}>
+        <div
+          style={{
+            fontSize: 12,
+            color: "#64748b",
+            textTransform: "uppercase",
+            letterSpacing: 1.5,
+            marginBottom: 8,
+            fontFamily: "'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif",
+          }}
+        >
+          Skills Tracked
+        </div>
+        <div
+          style={{
+            fontSize: 36,
+            fontWeight: 700,
+            color: MUTED_1,
+            fontFamily: "'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif",
+            marginBottom: 4,
+          }}
+        >
+          <AnimatedCounter target={847} suffix="" />
+        </div>
+        <div
+          style={{
+            fontSize: 12,
+            color: "#22c55e",
+            display: "flex",
+            alignItems: "center",
+            gap: 4,
+          }}
+        >
+          <PulsingDot color="#22c55e" />
+          Updated weekly · Hover for list
+        </div>
+      </GlowCard>
+      {hover && (
+        <div
+          style={{
+            position: "absolute",
+            top: "100%",
+            left: 0,
+            right: 0,
+            marginTop: 10,
+            background: "rgba(15,23,42,0.98)",
+            border: `1px solid ${BORDER_SUBTLE}`,
+            borderRadius: 14,
+            padding: "14px 16px",
+            minWidth: 280,
+            maxWidth: "100%",
+            maxHeight: 380,
+            boxShadow: "0 24px 56px rgba(0,0,0,0.5)",
+            zIndex: 50,
+            animation: "popoverReveal 0.25s ease-out",
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
+          <div style={{ fontSize: 11, color: "#64748b", textTransform: "uppercase", letterSpacing: 1, marginBottom: 10, flexShrink: 0 }}>
+            Sample of tracked skills (847 total)
+          </div>
+          <div className="metric-popover-scroll" style={{ maxHeight: 300, paddingRight: 4 }}>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "8px 10px" }}>
+              {skillsTrackedSample.map((name) => (
+                <span
+                  key={name}
+                  style={{
+                    fontSize: 12,
+                    color: "#94a3b8",
+                    background: "rgba(148,163,184,0.12)",
+                    padding: "5px 10px",
+                    borderRadius: 6,
+                  }}
+                >
+                  {name}
+                </span>
+              ))}
+            </div>
+          </div>
+          <div style={{ fontSize: 10, color: "#64748b", marginTop: 8, flexShrink: 0 }}>Scroll to see all skills</div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function TotalPostingsCard({ delay }) {
+  const [hover, setHover] = useState(false);
+  return (
+    <div
+      style={{
+        position: "relative",
+        minWidth: 0,
+        transition: "transform 0.25s ease, box-shadow 0.25s ease",
+        transform: hover ? "scale(1.02)" : "scale(1)",
+        zIndex: hover ? 40 : 1,
+      }}
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
+      onClick={() => setHover((h) => !h)}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => e.key === "Enter" && setHover((h) => !h)}
+    >
+      <GlowCard delay={delay} glowColor={PRIMARY}>
+        <div style={{ fontSize: 12, color: "#64748b", textTransform: "uppercase", letterSpacing: 1.5, marginBottom: 8 }}>
+          Total Postings
+        </div>
+        <div
+          style={{
+            fontSize: "clamp(1.25rem, 4vw, 2.25rem)",
+            fontWeight: 700,
+            color: PRIMARY,
+            fontFamily: "'Inter', system-ui, sans-serif",
+            marginBottom: 4,
+            minWidth: 0,
+            overflow: "hidden",
+          }}
+        >
+          <AnimatedCounter target={1} prefix="" suffix=".3M+" />
+        </div>
+        <div style={{ fontSize: 12, color: "#22c55e", display: "flex", alignItems: "center", gap: 4 }}>
+          <PulsingDot color="#22c55e" />
+          +12.4% this month · Hover for trend
+        </div>
+      </GlowCard>
+      {hover && (
+        <div
+          style={{
+            position: "absolute",
+            top: "100%",
+            left: 0,
+            right: 0,
+            marginTop: 10,
+            background: "rgba(15,23,42,0.98)",
+            border: `1px solid ${BORDER_SUBTLE}`,
+            borderRadius: 14,
+            padding: "14px 16px",
+            minWidth: 260,
+            maxWidth: "100%",
+            maxHeight: 340,
+            boxShadow: "0 24px 56px rgba(0,0,0,0.5)",
+            zIndex: 50,
+            animation: "popoverReveal 0.25s ease-out",
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
+          <div style={{ fontSize: 11, color: "#64748b", textTransform: "uppercase", letterSpacing: 1, marginBottom: 10, flexShrink: 0 }}>
+            Monthly posting trend (last 6 months)
+          </div>
+          <div className="metric-popover-scroll" style={{ maxHeight: 260, paddingRight: 4 }}>
+            {totalPostingsByMonth.map(({ month, postings }) => (
+              <div
+                key={month}
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  padding: "8px 0",
+                  borderBottom: "1px solid rgba(30,41,59,0.6)",
+                  fontSize: 13,
+                  color: "#e2e8f0",
+                }}
+              >
+                <span>{month}</span>
+                <span style={{ fontWeight: 600, color: PRIMARY }}>{(postings / 1000).toFixed(0)}K</span>
+              </div>
+            ))}
+          </div>
+          <div style={{ fontSize: 10, color: "#64748b", marginTop: 8, flexShrink: 0 }}>Scroll for more insights</div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function AvgSalaryCard({ delay }) {
+  const [hover, setHover] = useState(false);
+  return (
+    <div
+      style={{
+        position: "relative",
+        minWidth: 0,
+        transition: "transform 0.25s ease, box-shadow 0.25s ease",
+        transform: hover ? "scale(1.02)" : "scale(1)",
+        zIndex: hover ? 40 : 1,
+      }}
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
+      onClick={() => setHover((h) => !h)}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => e.key === "Enter" && setHover((h) => !h)}
+    >
+      <GlowCard delay={delay} glowColor={ACCENT}>
+        <div style={{ fontSize: 12, color: "#64748b", textTransform: "uppercase", letterSpacing: 1.5, marginBottom: 8 }}>
+          Avg Salary
+        </div>
+        <div
+          style={{
+            fontSize: "clamp(1.25rem, 4vw, 2.25rem)",
+            fontWeight: 700,
+            color: ACCENT,
+            fontFamily: "'Inter', system-ui, sans-serif",
+            marginBottom: 4,
+            minWidth: 0,
+            overflow: "hidden",
+          }}
+        >
+          <AnimatedCounter target={118} prefix="$" suffix="K" />
+        </div>
+        <div style={{ fontSize: 12, color: "#22c55e", display: "flex", alignItems: "center", gap: 4 }}>
+          <PulsingDot color="#22c55e" />
+          +5.2% YoY · Hover by role
+        </div>
+      </GlowCard>
+      {hover && (
+        <div
+          style={{
+            position: "absolute",
+            top: "100%",
+            left: 0,
+            right: 0,
+            marginTop: 10,
+            background: "rgba(15,23,42,0.98)",
+            border: `1px solid ${BORDER_SUBTLE}`,
+            borderRadius: 14,
+            padding: "14px 16px",
+            minWidth: 260,
+            maxWidth: "100%",
+            maxHeight: 340,
+            boxShadow: "0 24px 56px rgba(0,0,0,0.5)",
+            zIndex: 50,
+            animation: "popoverReveal 0.25s ease-out",
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
+          <div style={{ fontSize: 11, color: "#64748b", textTransform: "uppercase", letterSpacing: 1, marginBottom: 10, flexShrink: 0 }}>
+            Average salary by role ($K)
+          </div>
+          <div className="metric-popover-scroll" style={{ maxHeight: 260, paddingRight: 4 }}>
+            {avgSalaryByRole.map(({ role, salary }) => (
+              <div
+                key={role}
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  padding: "8px 0",
+                  borderBottom: "1px solid rgba(30,41,59,0.6)",
+                  fontSize: 13,
+                  color: "#e2e8f0",
+                }}
+              >
+                <span>{role}</span>
+                <span style={{ fontWeight: 600, color: ACCENT }}>${salary}K</span>
+              </div>
+            ))}
+          </div>
+          <div style={{ fontSize: 10, color: "#64748b", marginTop: 8, flexShrink: 0 }}>Scroll for more insights</div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function CompaniesCard({ delay }) {
+  const [hover, setHover] = useState(false);
+  return (
+    <div
+      style={{
+        position: "relative",
+        minWidth: 0,
+        transition: "transform 0.25s ease, box-shadow 0.25s ease",
+        transform: hover ? "scale(1.02)" : "scale(1)",
+        zIndex: hover ? 40 : 1,
+      }}
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
+      onClick={() => setHover((h) => !h)}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => e.key === "Enter" && setHover((h) => !h)}
+    >
+      <GlowCard delay={delay} glowColor={MUTED_2}>
+        <div style={{ fontSize: 12, color: "#64748b", textTransform: "uppercase", letterSpacing: 1.5, marginBottom: 8 }}>
+          Companies
+        </div>
+        <div
+          style={{
+            fontSize: "clamp(1.25rem, 4vw, 2.25rem)",
+            fontWeight: 700,
+            color: MUTED_2,
+            fontFamily: "'Inter', system-ui, sans-serif",
+            marginBottom: 4,
+            minWidth: 0,
+            overflow: "hidden",
+          }}
+        >
+          <AnimatedCounter target={48500} suffix="+" />
+        </div>
+        <div style={{ fontSize: 12, color: "#22c55e", display: "flex", alignItems: "center", gap: 4 }}>
+          <PulsingDot color="#22c55e" />
+          Across 12 industries · Hover for list
+        </div>
+      </GlowCard>
+      {hover && (
+        <div
+          style={{
+            position: "absolute",
+            top: "100%",
+            left: 0,
+            right: 0,
+            marginTop: 10,
+            background: "rgba(15,23,42,0.98)",
+            border: `1px solid ${BORDER_SUBTLE}`,
+            borderRadius: 14,
+            padding: "14px 16px",
+            minWidth: 280,
+            maxWidth: "100%",
+            maxHeight: 380,
+            boxShadow: "0 24px 56px rgba(0,0,0,0.5)",
+            zIndex: 50,
+            animation: "popoverReveal 0.25s ease-out",
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
+          <div style={{ fontSize: 11, color: "#64748b", textTransform: "uppercase", letterSpacing: 1, marginBottom: 10, flexShrink: 0 }}>
+            Top hiring companies (by job count)
+          </div>
+          <div className="metric-popover-scroll" style={{ maxHeight: 300, paddingRight: 4 }}>
+            {companiesRanked.map(({ rank, name, jobs }) => (
+              <div
+                key={name}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 12,
+                  padding: "8px 0",
+                  borderBottom: "1px solid rgba(30,41,59,0.6)",
+                  fontSize: 13,
+                  color: "#e2e8f0",
+                }}
+              >
+                <span style={{ fontWeight: 700, color: "#64748b", minWidth: 24 }}>#{rank}</span>
+                <span style={{ flex: 1, minWidth: 0 }}>{name}</span>
+                <span style={{ fontWeight: 600, color: MUTED_2, flexShrink: 0 }}>{jobs.toLocaleString()} jobs</span>
+              </div>
+            ))}
+          </div>
+          <div style={{ fontSize: 10, color: "#64748b", marginTop: 8, flexShrink: 0 }}>Scroll to see all companies</div>
+        </div>
+      )}
+    </div>
   );
 }
 
@@ -328,6 +811,51 @@ function CustomTooltip({ active, payload, label }) {
   );
 }
 
+// All job roles supported by the predictor (base salary in $K, mid-level)
+const PREDICTOR_ROLES = [
+  { label: "Data Analyst", base: 85 },
+  { label: "Business Analyst", base: 82 },
+  { label: "Financial Analyst", base: 88 },
+  { label: "Product Analyst", base: 95 },
+  { label: "Marketing Analyst", base: 78 },
+  { label: "Data Scientist", base: 115 },
+  { label: "Research Scientist", base: 130 },
+  { label: "Applied Scientist", base: 125 },
+  { label: "Analytics Engineer", base: 105 },
+  { label: "Data Engineer", base: 125 },
+  { label: "ML Engineer", base: 140 },
+  { label: "BI Analyst", base: 90 },
+  { label: "BI Developer", base: 98 },
+  { label: "Data Architect", base: 145 },
+  { label: "Software Engineer", base: 120 },
+  { label: "Backend Engineer", base: 118 },
+  { label: "DevOps Engineer", base: 115 },
+  { label: "Solutions Architect", base: 135 },
+  { label: "Statistician", base: 95 },
+  { label: "Quantitative Analyst", base: 110 },
+  { label: "Machine Learning Engineer", base: 142 },
+  { label: "AI Engineer", base: 138 },
+  { label: "ETL Developer", base: 102 },
+  { label: "Database Administrator", base: 100 },
+];
+
+const PREDICTOR_LOCATIONS = [
+  "Remote",
+  "San Francisco",
+  "New York",
+  "Seattle",
+  "Austin",
+  "Boston",
+  "Chicago",
+  "Denver",
+  "Los Angeles",
+  "Washington DC",
+  "Atlanta",
+  "Miami",
+  "Dallas",
+  "Philadelphia",
+];
+
 function SalaryPredictor() {
   const [role, setRole] = useState("Data Analyst");
   const [exp, setExp] = useState("Mid");
@@ -338,13 +866,9 @@ function SalaryPredictor() {
   const predict = () => {
     setAnimating(true);
     setPredicted(null);
+    const roleEntry = PREDICTOR_ROLES.find((r) => r.label === role);
+    const base = roleEntry ? roleEntry.base : 95;
     setTimeout(() => {
-      const base = {
-        "Data Analyst": 85,
-        "Data Scientist": 115,
-        "Data Engineer": 125,
-        "ML Engineer": 140,
-      };
       const expMult = { Junior: 0.75, Mid: 1, Senior: 1.35 };
       const locMult = {
         "San Francisco": 1.3,
@@ -352,11 +876,20 @@ function SalaryPredictor() {
         Seattle: 1.2,
         Remote: 1.05,
         Austin: 1.0,
+        Boston: 1.15,
+        Chicago: 1.0,
+        Denver: 1.0,
+        "Los Angeles": 1.15,
+        "Washington DC": 1.2,
+        Atlanta: 0.95,
+        Miami: 0.95,
+        Dallas: 1.0,
+        Philadelphia: 1.05,
       };
-      const val = Math.round(base[role] * expMult[exp] * (locMult[loc] || 1));
+      const val = Math.round(base * expMult[exp] * (locMult[loc] || 1));
       setPredicted(val);
       setAnimating(false);
-    }, 1500);
+    }, 1200);
   };
 
   const selectStyle = {
@@ -399,7 +932,7 @@ function SalaryPredictor() {
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "1fr 1fr 1fr auto",
+          gridTemplateColumns: "repeat(auto-fill, minmax(160px, 1fr))",
           gap: 16,
           alignItems: "end",
         }}
@@ -418,8 +951,8 @@ function SalaryPredictor() {
             Role
           </label>
           <select value={role} onChange={(e) => setRole(e.target.value)} style={selectStyle}>
-            {["Data Analyst", "Data Scientist", "Data Engineer", "ML Engineer"].map((r) => (
-              <option key={r}>{r}</option>
+            {PREDICTOR_ROLES.map((r) => (
+              <option key={r.label} value={r.label}>{r.label}</option>
             ))}
           </select>
         </div>
@@ -456,8 +989,8 @@ function SalaryPredictor() {
             Location
           </label>
           <select value={loc} onChange={(e) => setLoc(e.target.value)} style={selectStyle}>
-            {["San Francisco", "New York", "Seattle", "Remote", "Austin"].map((l) => (
-              <option key={l}>{l}</option>
+            {PREDICTOR_LOCATIONS.map((l) => (
+              <option key={l} value={l}>{l}</option>
             ))}
           </select>
         </div>
@@ -536,6 +1069,8 @@ function SalaryPredictor() {
 
 function SkillBar({ skill, demand, maxDemand, delay, color }) {
   const [width, setWidth] = useState(0);
+  const [hover, setHover] = useState(false);
+  const meta = skillMeta[skill];
   useEffect(() => {
     const timer = setTimeout(() => setWidth((demand / maxDemand) * 100), delay);
     return () => clearTimeout(timer);
@@ -548,7 +1083,11 @@ function SkillBar({ skill, demand, maxDemand, delay, color }) {
         alignItems: "center",
         gap: 12,
         marginBottom: 10,
+        position: "relative",
+        cursor: meta ? "help" : "default",
       }}
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
     >
       <div
         style={{
@@ -606,24 +1145,152 @@ function SkillBar({ skill, demand, maxDemand, delay, color }) {
       >
         {demand}%
       </div>
+      {hover && meta && (
+        <div
+          style={{
+            position: "absolute",
+            left: 92,
+            right: 48,
+            top: "100%",
+            marginTop: 8,
+            background: "rgba(15,23,42,0.98)",
+            border: `1px solid ${BORDER_SUBTLE}`,
+            borderRadius: 12,
+            padding: "14px 16px",
+            boxShadow: "0 20px 50px rgba(0,0,0,0.5)",
+            zIndex: 50,
+            animation: "fadeSlideUp 0.2s ease-out",
+          }}
+        >
+          <div
+            style={{
+              fontSize: 13,
+              fontWeight: 600,
+              color: color,
+              marginBottom: 6,
+              fontFamily: "'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif",
+            }}
+          >
+            {skill} — What it is
+          </div>
+          <div
+            style={{
+              fontSize: 12,
+              color: "#94a3b8",
+              lineHeight: 1.5,
+              marginBottom: 12,
+            }}
+          >
+            {meta.description}
+          </div>
+          <div
+            style={{
+              fontSize: 11,
+              color: "#64748b",
+              display: "flex",
+              flexDirection: "column",
+              gap: 4,
+            }}
+          >
+            <span>
+              <strong style={{ color: "#e2e8f0" }}>Beginner → Intermediate:</strong> {meta.beginnerToIntermediate}
+            </span>
+            <span>
+              <strong style={{ color: "#e2e8f0" }}>Intermediate → Coder level:</strong> {meta.intermediateToCoder}
+            </span>
+          </div>
+        </div>
+      )}
     </div>
   );
+}
+
+function LocationCard({ city, jobs, avgSalary, rank, delay }) {
+  const [hover, setHover] = useState(false);
+  const accentColor = rank === 1 ? PRIMARY : rank <= 3 ? ACCENT : MUTED_2;
+  const rankBg = rank === 1 ? "rgba(59,130,246,0.2)" : rank === 2 ? "rgba(34,197,94,0.2)" : rank === 3 ? "rgba(168,85,247,0.2)" : "rgba(148,163,184,0.18)";
+  return (
+    <div
+      role="presentation"
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
+      style={{
+        background: hover ? "rgba(30,41,59,0.8)" : "rgba(15,23,42,0.6)",
+        borderRadius: 14,
+        padding: "16px 18px",
+        border: `1px solid ${hover ? accentColor : BORDER_SUBTLE}`,
+        transition: "all 0.3s ease",
+        transform: hover ? "scale(1.03) translateY(-4px)" : "scale(1)",
+        boxShadow: hover ? "0 12px 32px rgba(0,0,0,0.4)" : "none",
+        animation: `locationCardIn 0.5s ease-out ${delay}ms both`,
+      }}
+    >
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10 }}>
+        <span style={{ fontSize: 14, fontWeight: 700, color: hover ? accentColor : "#e2e8f0", transition: "color 0.2s" }}>
+          {city}
+        </span>
+        <span
+          style={{
+            fontSize: 11,
+            fontWeight: 700,
+            color: "#475569",
+            background: rankBg,
+            padding: "4px 10px",
+            borderRadius: 8,
+            border: `1px solid ${rank <= 3 ? accentColor + "44" : BORDER_SUBTLE}`,
+          }}
+        >
+          #{rank}
+        </span>
+      </div>
+      <div style={{ fontSize: 22, fontWeight: 800, color: accentColor, fontFamily: "'Inter', sans-serif", letterSpacing: "-0.02em" }}>
+        {jobs.toLocaleString()}
+      </div>
+      <div style={{ fontSize: 11, color: "#64748b", marginTop: 4 }}>
+        Avg salary: <strong style={{ color: ACCENT }}>${avgSalary}K</strong>
+      </div>
+    </div>
+  );
+}
+
+function useMediaQuery(query) {
+  const [matches, setMatches] = useState(() =>
+    typeof window !== "undefined" ? window.matchMedia(query).matches : false,
+  );
+  useEffect(() => {
+    const m = window.matchMedia(query);
+    const handler = (e) => setMatches(e.matches);
+    m.addEventListener("change", handler);
+    setMatches(m.matches);
+    return () => m.removeEventListener("change", handler);
+  }, [query]);
+  return matches;
 }
 
 export default function TalentScopeDashboard() {
   const [activePage, setActivePage] = useState("overview");
   const [loaded, setLoaded] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const isMobile = useMediaQuery("(max-width: 768px)");
+  const isTablet = useMediaQuery("(max-width: 1024px)");
 
   useEffect(() => {
     setTimeout(() => setLoaded(true), 100);
   }, []);
 
+  useEffect(() => {
+    if (!isMobile) setSidebarOpen(false);
+  }, [isMobile]);
+
   const pages = [
     { id: "overview", icon: "◈", label: "Market Overview" },
     { id: "skills", icon: "⬡", label: "Skills Intel" },
     { id: "salary", icon: "◉", label: "Salary Insights" },
+    { id: "locations", icon: "📍", label: "Locations" },
+    { id: "roles", icon: "👤", label: "Roles" },
     { id: "predict", icon: "△", label: "ML Predictor" },
     { id: "explore", icon: "☰", label: "Data Explorer" },
+    { id: "about", icon: "ℹ", label: "About" },
   ];
 
   return (
@@ -634,6 +1301,8 @@ export default function TalentScopeDashboard() {
         color: "#e2e8f0",
         fontFamily: "'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif",
         display: "flex",
+        overflowX: "hidden",
+        width: "100%",
       }}
     >
       <style>
@@ -662,6 +1331,28 @@ export default function TalentScopeDashboard() {
         ::-webkit-scrollbar-thumb { background: #1f2937; border-radius: 3px; }
         ::-webkit-scrollbar-thumb:hover { background: #4b5563; }
 
+        .metric-popover-scroll {
+          overflow-y: scroll;
+          overflow-x: auto;
+          -webkit-overflow-scrolling: touch;
+          scrollbar-width: auto;
+          scrollbar-color: #64748b #1e293b;
+        }
+        .metric-popover-scroll::-webkit-scrollbar { width: 12px; height: 10px; }
+        .metric-popover-scroll::-webkit-scrollbar-thumb { background: #64748b; border-radius: 6px; border: 2px solid rgba(15,23,42,0.8); }
+        .metric-popover-scroll::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        .metric-popover-scroll::-webkit-scrollbar-track { background: #1e293b; border-radius: 6px; }
+
+        @keyframes popoverReveal {
+          from { opacity: 0; transform: translateY(-8px) scale(0.97); }
+          to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        @keyframes locationCardIn {
+          from { opacity: 0; transform: translateY(16px) scale(0.95); }
+          to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
         select option { background: #020617; color: #e5e7eb; }
       `}
       </style>
@@ -685,70 +1376,129 @@ export default function TalentScopeDashboard() {
         }}
       />
 
-      {/* Sidebar */}
-      <div
-        style={{
-          width: 220,
-          background: "#020617",
-          borderRight: `1px solid ${BORDER_SUBTLE}`,
-          padding: "24px 12px",
-          display: "flex",
-          flexDirection: "column",
-          gap: 4,
-          position: "relative",
-          zIndex: 10,
-          opacity: loaded ? 1 : 0,
-          transform: loaded ? "translateX(0)" : "translateX(-30px)",
-          transition: "all 0.8s cubic-bezier(0.16, 1, 0.3, 1)",
-        }}
-      >
-        {/* Logo */}
-        <div
+      {/* Mobile menu button */}
+      {isMobile && (
+        <button
+          type="button"
+          onClick={() => setSidebarOpen((o) => !o)}
+          aria-label="Toggle menu"
           style={{
-            padding: "8px 16px",
-            marginBottom: 24,
+            position: "fixed",
+            top: 16,
+            left: 16,
+            zIndex: 100,
+            width: 44,
+            height: 44,
+            borderRadius: 12,
+            border: `1px solid ${BORDER_SUBTLE}`,
+            background: "rgba(15,23,42,0.95)",
+            color: "#e2e8f0",
+            fontSize: 20,
+            cursor: "pointer",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            boxShadow: "0 4px 12px rgba(0,0,0,0.3)",
           }}
         >
-          <div
-            style={{
-              fontSize: 20,
-              fontWeight: 700,
-              fontFamily: "'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif",
-              color: "#e5e7eb",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundImage: "linear-gradient(135deg, #e5e7eb, #9ca3af)",
-            }}
-          >
-            TALENT
-          </div>
-          <div
-            style={{
-              fontSize: 20,
-              fontWeight: 600,
-              fontFamily: "'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif",
-              color: "#9ca3af",
-              letterSpacing: 2,
-            }}
-          >
-            SCOPE
-          </div>
-          <div
-            style={{
-              fontSize: 9,
-              color: "#475569",
-              marginTop: 4,
-              letterSpacing: 2,
-              textTransform: "uppercase",
-            }}
-          >
-            Job Market Intelligence
-          </div>
-        </div>
+          ☰
+        </button>
+      )}
 
-        {pages.map((p) => (
-          <NavItem key={p.id} icon={p.icon} label={p.label} active={activePage === p.id} onClick={() => setActivePage(p.id)} />
-        ))}
+      {/* Sidebar — drawer on mobile, fixed on tablet/desktop */}
+      {(!isMobile || sidebarOpen) && (
+        <>
+          {isMobile && (
+            <div
+              role="button"
+              tabIndex={0}
+              aria-label="Close menu"
+              style={{
+                position: "fixed",
+                inset: 0,
+                background: "rgba(0,0,0,0.5)",
+                zIndex: 19,
+              }}
+              onClick={() => setSidebarOpen(false)}
+              onKeyDown={(e) => e.key === "Escape" && setSidebarOpen(false)}
+            />
+          )}
+          <div
+            style={{
+              width: isMobile ? 260 : isTablet ? 200 : 220,
+              background: "#020617",
+              borderRight: `1px solid ${BORDER_SUBTLE}`,
+              padding: isMobile ? "60px 16px 24px" : "24px 12px",
+              display: "flex",
+              flexDirection: "column",
+              gap: 4,
+              position: isMobile ? "fixed" : "relative",
+              top: 0,
+              left: 0,
+              bottom: 0,
+              zIndex: 20,
+              opacity: loaded ? 1 : 0,
+              transform: loaded ? "translateX(0)" : isMobile && sidebarOpen ? "translateX(0)" : "translateX(-30px)",
+              transition: "all 0.3s ease",
+              boxShadow: isMobile ? "4px 0 24px rgba(0,0,0,0.4)" : "none",
+            }}
+          >
+            {/* Logo */}
+            <div
+              style={{
+                padding: "8px 16px",
+                marginBottom: 24,
+              }}
+            >
+              <div
+                style={{
+                  fontSize: isMobile ? 18 : 20,
+                  fontWeight: 700,
+                  fontFamily: "'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif",
+                  color: "#e5e7eb",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundImage: "linear-gradient(135deg, #e5e7eb, #9ca3af)",
+                }}
+              >
+                TALENT
+              </div>
+              <div
+                style={{
+                  fontSize: isMobile ? 18 : 20,
+                  fontWeight: 600,
+                  fontFamily: "'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif",
+                  color: "#9ca3af",
+                  letterSpacing: 2,
+                }}
+              >
+                SCOPE
+              </div>
+              <div
+                style={{
+                  fontSize: 9,
+                  color: "#475569",
+                  marginTop: 4,
+                  letterSpacing: 2,
+                  textTransform: "uppercase",
+                }}
+              >
+                Job Market Intelligence
+              </div>
+            </div>
+
+            {pages.map((p) => (
+              <NavItem
+                key={p.id}
+                icon={p.icon}
+                label={p.label}
+                active={activePage === p.id}
+                onClick={() => {
+                  setActivePage(p.id);
+                  if (isMobile) setSidebarOpen(false);
+                }}
+              />
+            ))}
 
         <div
           style={{
@@ -777,33 +1527,40 @@ export default function TalentScopeDashboard() {
           </div>
         </div>
       </div>
+        </>
+      )}
 
       {/* Main Content */}
       <div
         style={{
           flex: 1,
-          padding: "28px 32px",
+          minWidth: 0,
+          padding: isMobile ? "16px 12px 24px 56px" : isTablet ? "20px 20px" : "28px 32px",
           overflowY: "auto",
+          overflowX: "hidden",
           position: "relative",
           zIndex: 5,
+          WebkitOverflowScrolling: "touch",
         }}
       >
-        {/* Header */}
+        {/* Header — stacks on mobile */}
         <div
           style={{
             display: "flex",
+            flexWrap: "wrap",
             justifyContent: "space-between",
             alignItems: "center",
-            marginBottom: 28,
+            gap: 12,
+            marginBottom: isMobile ? 20 : 28,
             opacity: loaded ? 1 : 0,
             transform: loaded ? "translateY(0)" : "translateY(-20px)",
             transition: "all 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.2s",
           }}
         >
-          <div>
+          <div style={{ minWidth: 0, flex: "1 1 200px" }}>
             <h1
               style={{
-                fontSize: 24,
+                fontSize: isMobile ? 18 : isTablet ? 20 : 24,
                 fontWeight: 600,
                 fontFamily: "'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif",
                 margin: 0,
@@ -815,11 +1572,11 @@ export default function TalentScopeDashboard() {
             <p
               style={{
                 color: "#64748b",
-                fontSize: 12,
-                margin: "6px 0 0",
+                fontSize: isMobile ? 11 : 12,
+                margin: "4px 0 0",
               }}
             >
-              Real-time insights from 1,300,000+ LinkedIn job postings
+              Real-time insights from 1.3M+ LinkedIn job postings
             </p>
           </div>
           <div
@@ -829,45 +1586,42 @@ export default function TalentScopeDashboard() {
               alignItems: "center",
               background: "rgba(15,23,42,0.85)",
               borderRadius: 10,
-              padding: "8px 16px",
+              padding: "6px 12px",
               border: `1px solid ${BORDER_SUBTLE}`,
+              flexShrink: 0,
             }}
           >
             <PulsingDot color={ACCENT} />
-            <span
-              style={{
-                fontSize: 12,
-                color: "#e5e7eb",
-              }}
-            >
+            <span style={{ fontSize: isMobile ? 11 : 12, color: "#e5e7eb" }}>
               LIVE DATA
             </span>
           </div>
         </div>
 
-        {/* Metric Cards */}
+        {/* Metric Cards — 2x2 on tablet/laptop; 1 col on phone; hover reveals scrollable insight panel */}
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(4, 1fr)",
+            gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
+            gridTemplateRows: isMobile ? "auto auto auto auto" : "auto auto",
             gap: 16,
             marginBottom: 24,
           }}
         >
-          <MetricCard label="Total Postings" value="1300000" suffix="+" color={PRIMARY} delay={100} subtext="+12.4% this month" />
-          <MetricCard label="Avg Salary" value="118" prefix="$" suffix="K" color={ACCENT} delay={200} subtext="+5.2% YoY growth" />
-          <MetricCard label="Companies" value="48500" suffix="+" color={MUTED_2} delay={300} subtext="Across 12 industries" />
-          <MetricCard label="Skills Tracked" value="847" color={MUTED_1} delay={400} subtext="Updated weekly" />
+          <TotalPostingsCard delay={100} />
+          <AvgSalaryCard delay={200} />
+          <CompaniesCard delay={300} />
+          <SkillsTrackedCard delay={400} />
         </div>
 
         {/* OVERVIEW PAGE */}
         {activePage === "overview" && (
           <>
-            {/* Charts Row 1 */}
+            {/* Charts Row 1 — responsive */}
             <div
               style={{
                 display: "grid",
-                gridTemplateColumns: "2fr 1fr",
+                gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
                 gap: 16,
                 marginBottom: 16,
               }}
@@ -1027,11 +1781,11 @@ export default function TalentScopeDashboard() {
               </GlowCard>
             </div>
 
-            {/* Charts Row 2 */}
+            {/* Charts Row 2 — responsive */}
             <div
               style={{
                 display: "grid",
-                gridTemplateColumns: "1fr 1fr",
+                gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
                 gap: 16,
                 marginBottom: 16,
               }}
@@ -1151,11 +1905,11 @@ export default function TalentScopeDashboard() {
             {/* Salary Predictor */}
             <SalaryPredictor />
 
-            {/* Top Locations Table */}
+            {/* Top Hiring Locations — animated cards */}
             <GlowCard delay={1000} glowColor={PRIMARY} style={{ marginTop: 16 }}>
               <div
                 style={{
-                  fontSize: 15,
+                  fontSize: 16,
                   fontWeight: 700,
                   color: "#e2e8f0",
                   marginBottom: 4,
@@ -1164,85 +1918,28 @@ export default function TalentScopeDashboard() {
               >
                 Top Hiring Locations
               </div>
-              <div
-                style={{
-                  fontSize: 11,
-                  color: "#64748b",
-                  marginBottom: 16,
-                }}
-              >
-                Job count and average salary by city
+              <div style={{ fontSize: 11, color: "#64748b", marginBottom: 20 }}>
+                Job count and average salary by city — hover for highlight
               </div>
               <div
                 style={{
                   display: "grid",
-                  gridTemplateColumns: "repeat(4, 1fr)",
-                  gap: 12,
+                  gridTemplateColumns: "repeat(auto-fill, minmax(170px, 1fr))",
+                  gap: 14,
                 }}
               >
                 {locationData
                   .slice()
                   .sort((a, b) => b.jobs - a.jobs)
                   .map((loc, i) => (
-                    <div
+                    <LocationCard
                       key={loc.city}
-                      style={{
-                        background: "#020617",
-                        borderRadius: 10,
-                        padding: "14px 16px",
-                        border: `1px solid ${BORDER_SUBTLE}`,
-                        animation: `fadeSlideUp 0.5s ease-out ${1000 + i * 80}ms both`,
-                      }}
-                    >
-                      <div
-                        style={{
-                          display: "flex",
-                          justifyContent: "space-between",
-                          alignItems: "center",
-                          marginBottom: 6,
-                        }}
-                      >
-                        <span
-                          style={{
-                            fontSize: 13,
-                            fontWeight: 600,
-                            color: i === 0 ? PRIMARY : "#e2e8f0",
-                          }}
-                        >
-                          {loc.city}
-                        </span>
-                        <span
-                          style={{
-                            fontSize: 10,
-                            color: "#475569",
-                            background: "rgba(148,163,184,0.18)",
-                            padding: "2px 8px",
-                            borderRadius: 4,
-                          }}
-                        >
-                          #{i + 1}
-                        </span>
-                      </div>
-                      <div
-                        style={{
-                          fontSize: 18,
-                          fontWeight: 800,
-                          color: PRIMARY,
-                          fontFamily: "'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif",
-                        }}
-                      >
-                        {loc.jobs.toLocaleString()}
-                      </div>
-                      <div
-                        style={{
-                          fontSize: 10,
-                          color: "#64748b",
-                          marginTop: 2,
-                        }}
-                      >
-                        Avg: ${loc.avg_salary}K
-                      </div>
-                    </div>
+                      city={loc.city}
+                      jobs={loc.jobs}
+                      avgSalary={loc.avg_salary}
+                      rank={i + 1}
+                      delay={1000 + i * 60}
+                    />
                   ))}
               </div>
             </GlowCard>
@@ -1291,7 +1988,7 @@ export default function TalentScopeDashboard() {
             <div
               style={{
                 display: "grid",
-                gridTemplateColumns: "2fr 1fr",
+                gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
                 gap: 16,
                 marginTop: 16,
               }}
@@ -1363,7 +2060,7 @@ export default function TalentScopeDashboard() {
             <div
               style={{
                 display: "grid",
-                gridTemplateColumns: "2fr 1fr",
+                gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
                 gap: 16,
                 marginBottom: 16,
               }}
@@ -1443,99 +2140,91 @@ export default function TalentScopeDashboard() {
             </div>
 
             <GlowCard delay={650} glowColor={PRIMARY}>
-              <div
-                style={{
-                  fontSize: 15,
-                  fontWeight: 700,
-                  color: "#e2e8f0",
-                  marginBottom: 4,
-                  fontFamily: "'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif",
-                }}
-              >
-                Salary by Location (Ranked)
-              </div>
-              <div
-                style={{
-                  fontSize: 11,
-                  color: "#64748b",
-                  marginBottom: 16,
-                }}
-              >
-                Cities ranked by job count with indicative average salary.
-              </div>
-              <div
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "repeat(4, 1fr)",
-                  gap: 12,
-                }}
-              >
-                {locationData
-                  .slice()
-                  .sort((a, b) => b.jobs - a.jobs)
-                  .map((loc, i) => (
-                    <div
-                      key={loc.city}
-                      style={{
-                        background: "#020617",
-                        borderRadius: 10,
-                        padding: "14px 16px",
-                        border: `1px solid ${BORDER_SUBTLE}`,
-                        animation: `fadeSlideUp 0.5s ease-out ${650 + i * 80}ms both`,
-                      }}
-                    >
-                      <div
-                        style={{
-                          display: "flex",
-                          justifyContent: "space-between",
-                          alignItems: "center",
-                          marginBottom: 6,
-                        }}
-                      >
-                        <span
-                          style={{
-                            fontSize: 13,
-                            fontWeight: 600,
-                            color: i === 0 ? PRIMARY : "#e2e8f0",
-                          }}
-                        >
-                          {loc.city}
-                        </span>
-                        <span
-                          style={{
-                            fontSize: 10,
-                            color: "#475569",
-                            background: "rgba(148,163,184,0.18)",
-                            padding: "2px 8px",
-                            borderRadius: 4,
-                          }}
-                        >
-                          #{i + 1}
-                        </span>
-                      </div>
-                      <div
-                        style={{
-                          fontSize: 18,
-                          fontWeight: 800,
-                          color: PRIMARY,
-                          fontFamily: "'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif",
-                        }}
-                      >
-                        {loc.jobs.toLocaleString()}
-                      </div>
-                      <div
-                        style={{
-                          fontSize: 10,
-                          color: "#64748b",
-                          marginTop: 2,
-                        }}
-                      >
-                        Avg: ${loc.avg_salary}K
-                      </div>
-                    </div>
-                  ))}
+              <div style={{ fontSize: 15, fontWeight: 700, color: "#e2e8f0", marginBottom: 4 }}>Salary by Location (Ranked)</div>
+              <div style={{ fontSize: 11, color: "#64748b", marginBottom: 16 }}>Cities ranked by job count with indicative average salary.</div>
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(170px, 1fr))", gap: 14 }}>
+                {locationData.slice().sort((a, b) => b.jobs - a.jobs).map((loc, i) => (
+                  <LocationCard key={loc.city} city={loc.city} jobs={loc.jobs} avgSalary={loc.avg_salary} rank={i + 1} delay={650 + i * 60} />
+                ))}
               </div>
             </GlowCard>
+          </>
+        )}
+
+        {/* LOCATIONS PAGE */}
+        {activePage === "locations" && (
+          <>
+            <GlowCard delay={400} glowColor={PRIMARY}>
+              <div style={{ fontSize: 16, fontWeight: 700, color: "#e2e8f0", marginBottom: 4 }}>Top Hiring Locations</div>
+              <div style={{ fontSize: 11, color: "#64748b", marginBottom: 20 }}>Job count and average salary by city — hover for highlight</div>
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(170px, 1fr))", gap: 14 }}>
+                {locationData.slice().sort((a, b) => b.jobs - a.jobs).map((loc, i) => (
+                  <LocationCard key={loc.city} city={loc.city} jobs={loc.jobs} avgSalary={loc.avg_salary} rank={i + 1} delay={400 + i * 60} />
+                ))}
+              </div>
+            </GlowCard>
+            <GlowCard delay={600} glowColor={ACCENT} style={{ marginTop: 16 }}>
+              <div style={{ fontSize: 15, fontWeight: 700, color: "#e2e8f0", marginBottom: 8 }}>Salary by Location</div>
+              <div style={{ fontSize: 11, color: "#64748b", marginBottom: 12 }}>Average salary ($K) by metro — higher pay in SF, NY, Seattle</div>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: "8px 12px" }}>
+                {locationData.slice().sort((a, b) => b.avg_salary - a.avg_salary).map((loc, i) => (
+                  <span
+                    key={loc.city}
+                    style={{
+                      background: "rgba(34,197,94,0.15)",
+                      border: `1px solid ${ACCENT}44`,
+                      borderRadius: 8,
+                      padding: "6px 12px",
+                      fontSize: 12,
+                      color: "#e2e8f0",
+                      animation: `locationCardIn 0.4s ease-out ${600 + i * 50}ms both`,
+                    }}
+                  >
+                    {loc.city}: <strong style={{ color: ACCENT }}>${loc.avg_salary}K</strong>
+                  </span>
+                ))}
+              </div>
+            </GlowCard>
+          </>
+        )}
+
+        {/* ROLES PAGE */}
+        {activePage === "roles" && (
+          <>
+            <GlowCard delay={400} glowColor={MUTED_2}>
+              <div style={{ fontSize: 16, fontWeight: 700, color: "#e2e8f0", marginBottom: 8 }}>Role Distribution</div>
+              <div style={{ fontSize: 11, color: "#64748b", marginBottom: 16 }}>Share of job postings by role type</div>
+              <ResponsiveContainer width="100%" height={220}>
+                <PieChart>
+                  <Pie data={jobDistribution} cx="50%" cy="50%" innerRadius={50} outerRadius={90} dataKey="value" stroke="none">
+                    {jobDistribution.map((entry) => (
+                      <Cell key={entry.name} fill={entry.color} />
+                    ))}
+                  </Pie>
+                  <Tooltip content={<CustomTooltip />} />
+                </PieChart>
+              </ResponsiveContainer>
+            </GlowCard>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: 16, marginTop: 16 }}>
+              <GlowCard delay={500} glowColor={PRIMARY}>
+                <div style={{ fontSize: 14, fontWeight: 600, color: "#e2e8f0", marginBottom: 12 }}>Top Roles by Postings</div>
+                {jobDistribution.map((d, i) => (
+                  <div key={d.name} style={{ display: "flex", justifyContent: "space-between", padding: "8px 0", borderBottom: "1px solid rgba(30,41,59,0.6)", fontSize: 13, color: "#e2e8f0", animation: `fadeSlideUp 0.4s ease-out ${500 + i * 80}ms both` }}>
+                    <span>{d.name}</span>
+                    <span style={{ fontWeight: 600, color: d.color }}>{d.value}%</span>
+                  </div>
+                ))}
+              </GlowCard>
+              <GlowCard delay={550} glowColor={ACCENT}>
+                <div style={{ fontSize: 14, fontWeight: 600, color: "#e2e8f0", marginBottom: 12 }}>Salary by Role</div>
+                {avgSalaryByRole.slice(0, 6).map((r, i) => (
+                  <div key={r.role} style={{ display: "flex", justifyContent: "space-between", padding: "8px 0", borderBottom: "1px solid rgba(30,41,59,0.6)", fontSize: 13, color: "#e2e8f0", animation: `fadeSlideUp 0.4s ease-out ${550 + i * 80}ms both` }}>
+                    <span>{r.role}</span>
+                    <span style={{ fontWeight: 600, color: ACCENT }}>${r.salary}K</span>
+                  </div>
+                ))}
+              </GlowCard>
+            </div>
           </>
         )}
 
@@ -1566,6 +2255,28 @@ export default function TalentScopeDashboard() {
                 ensemble and will show real feature importance scores. For now, treat it as an interactive prototype:
                 change the role, experience level and location to get an instant feel for how compensation moves.
               </div>
+            </GlowCard>
+          </>
+        )}
+
+        {/* ABOUT PAGE */}
+        {activePage === "about" && (
+          <>
+            <GlowCard delay={400} glowColor={PRIMARY}>
+              <div style={{ fontSize: 18, fontWeight: 700, color: "#e2e8f0", marginBottom: 8 }}>TalentScope</div>
+              <div style={{ fontSize: 13, color: "#94a3b8", marginBottom: 16, lineHeight: 1.7 }}>
+                Job Market Intelligence Dashboard — Real-time insights from 1.3M+ LinkedIn job postings.
+              </div>
+              <div style={{ fontSize: 12, color: "#64748b", lineHeight: 1.8 }}>
+                <p style={{ margin: "0 0 12px" }}>Built with React, Vite, Recharts, Flask, and Python ML.</p>
+                <p style={{ margin: "0 0 12px" }}>Features: Market Overview, Skills Intel, Salary Insights, Locations, Roles, ML Salary Predictor, Data Explorer.</p>
+                <p style={{ margin: 0 }}>Hover over the top 4 metric cards to explore detailed insights. Use the scroll wheel inside each popover to browse all data.</p>
+              </div>
+            </GlowCard>
+            <GlowCard delay={500} glowColor={ACCENT} style={{ marginTop: 16 }}>
+              <div style={{ fontSize: 14, fontWeight: 600, color: "#e2e8f0", marginBottom: 8 }}>Built by</div>
+              <div style={{ fontSize: 16, fontWeight: 700, color: ACCENT }}>Rutvij Reddy Vakati</div>
+              <div style={{ fontSize: 12, color: "#64748b", marginTop: 4 }}>MS Data Analytics Engineering, George Mason University</div>
             </GlowCard>
           </>
         )}
