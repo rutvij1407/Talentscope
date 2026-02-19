@@ -400,6 +400,8 @@ function SkillsTrackedCard({ delay }) {
         transition: "transform 0.25s ease, box-shadow 0.25s ease",
         transform: hover ? "scale(1.02)" : "scale(1)",
         zIndex: hover ? 40 : 1,
+        willChange: "transform",
+        cursor: "pointer",
       }}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
@@ -505,6 +507,8 @@ function TotalPostingsCard({ delay }) {
         transition: "transform 0.25s ease, box-shadow 0.25s ease",
         transform: hover ? "scale(1.02)" : "scale(1)",
         zIndex: hover ? 40 : 1,
+        willChange: "transform",
+        cursor: "pointer",
       }}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
@@ -596,6 +600,8 @@ function AvgSalaryCard({ delay }) {
         transition: "transform 0.25s ease, box-shadow 0.25s ease",
         transform: hover ? "scale(1.02)" : "scale(1)",
         zIndex: hover ? 40 : 1,
+        willChange: "transform",
+        cursor: "pointer",
       }}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
@@ -687,6 +693,8 @@ function CompaniesCard({ delay }) {
         transition: "transform 0.25s ease, box-shadow 0.25s ease",
         transform: hover ? "scale(1.02)" : "scale(1)",
         zIndex: hover ? 40 : 1,
+        willChange: "transform",
+        cursor: "pointer",
       }}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
@@ -1487,22 +1495,25 @@ export default function TalentScopeDashboard() {
               </div>
             </div>
 
-            {pages.map((p) => (
-              <NavItem
-                key={p.id}
-                icon={p.icon}
-                label={p.label}
-                active={activePage === p.id}
-                onClick={() => {
-                  setActivePage(p.id);
-                  if (isMobile) setSidebarOpen(false);
-                }}
-              />
-            ))}
+            <div style={{ flex: 1, minHeight: 0, overflowY: "auto", overflowX: "hidden" }}>
+              {pages.map((p) => (
+                <NavItem
+                  key={p.id}
+                  icon={p.icon}
+                  label={p.label}
+                  active={activePage === p.id}
+                  onClick={() => {
+                    setActivePage(p.id);
+                    if (isMobile) setSidebarOpen(false);
+                  }}
+                />
+              ))}
+            </div>
 
         <div
           style={{
             marginTop: "auto",
+            flexShrink: 0,
             padding: "16px",
             borderTop: `1px solid ${BORDER_SUBTLE}`,
           }}
@@ -2333,6 +2344,8 @@ export default function TalentScopeDashboard() {
           }}
         >
           Built by Rutvij Reddy Vakati | MS Data Analytics Engineering, George Mason University
+          <br />
+          <span style={{ opacity: 0.7 }}>Locations · Roles · About · Hover cards enabled</span>
         </div>
       </div>
     </div>
