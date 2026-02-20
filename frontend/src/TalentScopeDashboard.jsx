@@ -17,6 +17,7 @@ import {
   AreaChart,
   Area,
 } from "recharts";
+import StateMap from "./StateMap.jsx";
 
 // Professional, muted analytics palette
 const PRIMARY = "#3b82f6"; // blue-500
@@ -2267,8 +2268,13 @@ export default function TalentScopeDashboard() {
         {/* LOCATIONS PAGE */}
         {activePage === "locations" && (
           <>
+            <GlowCard delay={200} glowColor={PRIMARY}>
+              <div style={{ fontSize: 16, fontWeight: 700, color: "#e2e8f0", marginBottom: 4 }}>Data roles by state</div>
+              <div style={{ fontSize: 11, color: "#64748b", marginBottom: 12 }}>Hover a state for avg salary, range, and job count — same theme map (Mapbox)</div>
+              <StateMap accentColor={PRIMARY} />
+            </GlowCard>
             <GlowCard delay={400} glowColor={PRIMARY}>
-              <div style={{ fontSize: 16, fontWeight: 700, color: "#e2e8f0", marginBottom: 4 }}>Top Hiring Locations</div>
+              <div style={{ fontSize: 16, fontWeight: 700, color: "#e2e8f0", marginBottom: 4 }}>Top Hiring Locations (metros)</div>
               <div style={{ fontSize: 11, color: "#64748b", marginBottom: 20 }}>Job count and average salary by city — hover for highlight</div>
               <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(170px, 1fr))", gap: 14 }}>
                 {locationData.slice().sort((a, b) => b.jobs - a.jobs).map((loc, i) => (
