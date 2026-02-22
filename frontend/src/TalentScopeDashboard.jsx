@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, lazy, Suspense } from "react";
 import {
   BarChart,
   Bar,
@@ -17,7 +17,9 @@ import {
   AreaChart,
   Area,
 } from "recharts";
-import StateMap from "./StateMap.jsx";
+
+const StateMap = lazy(() => import("./StateMap.jsx"));
+import { stateDataByName } from "./StateMap.jsx";
 
 // Professional, muted analytics palette
 const PRIMARY = "#3b82f6"; // blue-500
@@ -731,6 +733,76 @@ function ActiveCardContent({ activeCard, setActiveCard }) {
     );
   }
   return null;
+}
+
+// Top hiring states for overview — same data as map; hover shows avg, jobs, range
+const topHiringStatesList = Object.entries(stateDataByName)
+  .map(([name, d]) => ({ name, ...d }))
+  .sort((a, b) => b.jobs - a.jobs);
+
+function TopHiringStatesCard() {
+  const [hoveredState, setHoveredState] = useState(null);
+  return (
+    <GlowCard delay={650} glowColor={PRIMARY}>
+      <div style={{ fontSize: 15, fontWeight: 700, color: "#e2e8f0", marginBottom: 4, fontFamily: "'Inter', system-ui, sans-serif" }}>
+        Top hiring states
+      </div>
+      <div style={{ fontSize: 11, color: "#64748b", marginBottom: 12 }}>
+        By job count — hover for avg salary and range (same as map)
+      </div>
+      <div style={{ position: "relative", display: "flex", flexWrap: "wrap", gap: "8px 10px" }}>
+        {topHiringStatesList.map(({ name, jobs, avgSalary, minSalary, maxSalary }, i) => (
+          <span
+            key={name}
+            onMouseEnter={(e) => setHoveredState({ name, jobs, avgSalary, minSalary, maxSalary, x: e.clientX, y: e.clientY })}
+            onMouseLeave={() => setHoveredState(null)}
+            style={{
+              background: hoveredState?.name === name ? "rgba(59,130,246,0.2)" : "rgba(30,41,59,0.6)",
+              border: `1px solid ${hoveredState?.name === name ? PRIMARY : BORDER_SUBTLE}`,
+              borderRadius: 8,
+              padding: "8px 14px",
+              fontSize: 13,
+              color: "#e2e8f0",
+              cursor: "pointer",
+              transition: "background 0.15s, border-color 0.15s",
+            }}
+          >
+            {name}
+            <span style={{ marginLeft: 8, color: "#64748b", fontWeight: 600 }}>{jobs.toLocaleString()} jobs</span>
+          </span>
+        ))}
+      </div>
+      {hoveredState && (
+        <div
+          style={{
+            position: "fixed",
+            left: hoveredState.x + 14,
+            top: hoveredState.y + 14,
+            pointerEvents: "none",
+            zIndex: 1000,
+            background: "rgba(15,23,42,0.97)",
+            border: `1px solid ${PRIMARY}`,
+            borderRadius: 14,
+            padding: "14px 18px",
+            minWidth: 200,
+            boxShadow: "0 4px 16px rgba(0,0,0,0.2)",
+            animation: "hoverPreviewIn 0.15s ease-out",
+          }}
+        >
+          <div style={{ fontSize: 14, fontWeight: 700, color: "#e2e8f0", marginBottom: 10 }}>{hoveredState.name}</div>
+          <div style={{ fontSize: 20, fontWeight: 800, color: PRIMARY, fontFamily: "'Inter', sans-serif", marginBottom: 8 }}>
+            {hoveredState.jobs != null ? hoveredState.jobs.toLocaleString() : "—"} jobs
+          </div>
+          <div style={{ fontSize: 12, color: "#94a3b8", marginBottom: 4 }}>
+            Avg salary: <strong style={{ color: ACCENT }}>${hoveredState.avgSalary}K</strong>
+          </div>
+          <div style={{ fontSize: 11, color: "#64748b" }}>
+            Range: ${hoveredState.minSalary}K – ${hoveredState.maxSalary}K
+          </div>
+        </div>
+      )}
+    </GlowCard>
+  );
 }
 
 function MetricCardsSection({ isMobile }) {
@@ -1895,6 +1967,11 @@ export default function TalentScopeDashboard() {
               </GlowCard>
             </div>
 
+            {/* Top hiring states — same data as map; hover for avg salary & range */}
+            <div style={{ marginBottom: 16 }}>
+              <TopHiringStatesCard />
+            </div>
+
             {/* Charts Row 2 — responsive */}
             <div
               style={{
@@ -2269,12 +2346,14 @@ export default function TalentScopeDashboard() {
         {activePage === "locations" && (
           <>
             <GlowCard delay={200} glowColor={PRIMARY}>
-              <div style={{ fontSize: 16, fontWeight: 700, color: "#e2e8f0", marginBottom: 4 }}>Data roles by state</div>
-              <div style={{ fontSize: 11, color: "#64748b", marginBottom: 12 }}>Hover a state for avg salary, range, and job count — same theme map (Mapbox)</div>
-              <StateMap accentColor={PRIMARY} />
+              <div style={{ fontSize: 16, fontWeight: 700, color: "#e2e8f0", marginBottom: 4 }}>Top Hiring Locations</div>
+              <div style={{ fontSize: 11, color: "#64748b", marginBottom: 12 }}>State map — name in the center of each state; hover to see job count, avg salary, and range</div>
+              <Suspense fallback={<div style={{ height: 420, borderRadius: 14, background: "rgba(15,23,42,0.6)", border: "1px solid #1e293b", display: "flex", alignItems: "center", justifyContent: "center", color: "#94a3b8", fontSize: 14 }}>Loading map…</div>}>
+                <StateMap accentColor={PRIMARY} />
+              </Suspense>
             </GlowCard>
             <GlowCard delay={400} glowColor={PRIMARY}>
-              <div style={{ fontSize: 16, fontWeight: 700, color: "#e2e8f0", marginBottom: 4 }}>Top Hiring Locations (metros)</div>
+              <div style={{ fontSize: 16, fontWeight: 700, color: "#e2e8f0", marginBottom: 4 }}>Top hiring by metro (cities)</div>
               <div style={{ fontSize: 11, color: "#64748b", marginBottom: 20 }}>Job count and average salary by city — hover for highlight</div>
               <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(170px, 1fr))", gap: 14 }}>
                 {locationData.slice().sort((a, b) => b.jobs - a.jobs).map((loc, i) => (

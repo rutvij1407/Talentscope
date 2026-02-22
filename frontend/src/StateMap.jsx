@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, memo } from "react";
 
 const US_STATES_GEOJSON_URL = "https://raw.githubusercontent.com/PublicaMundi/MappingAPI/master/data/geojson/us-states.json";
 
@@ -93,12 +93,19 @@ function buildLabelGeoJSON(geojson) {
   return { type: "FeatureCollection", features };
 }
 
-export default function StateMap({ accentColor = PRIMARY }) {
+function StateMap({ accentColor = PRIMARY }) {
   const containerRef = useRef(null);
   const mapRef = useRef(null);
+  const geojsonRef = useRef(null);
   const [tooltip, setTooltip] = useState(null);
   const [loaded, setLoaded] = useState(false);
+  const [error, setError] = useState(null);
   const token = typeof import.meta !== "undefined" && import.meta.env && import.meta.env.VITE_MAPBOX_ACCESS_TOKEN;
+  const tooltipRafRef = useRef(null);
+
+  useEffect(() => {
+    if (token) fetch(US_STATES_GEOJSON_URL).then((r) => r.json()).then((data) => { geojsonRef.current = data; }).catch(() => {});
+  }, [token]);
 
   useEffect(() => {
     if (!token || !containerRef.current) return;
@@ -107,29 +114,42 @@ export default function StateMap({ accentColor = PRIMARY }) {
     import("mapbox-gl/dist/mapbox-gl.css");
     import("mapbox-gl").then((mapboxgl) => {
       if (cancelled) return;
-      const map = new mapboxgl.default.Map({
-      container: containerRef.current,
-      style: "mapbox://styles/mapbox/dark-v11",
-      center: [-98, 39],
-      zoom: 3,
-      attributionControl: false,
-    });
+      const mapbox = mapboxgl.default;
+      mapbox.accessToken = token;
+      const map = new mapbox.Map({
+        container: containerRef.current,
+        style: "mapbox://styles/mapbox/dark-v11",
+        center: [-98, 39],
+        zoom: 3,
+        attributionControl: false,
+      });
 
-      map.addControl(new mapboxgl.default.NavigationControl(), "bottom-right");
+      map.addControl(new mapbox.NavigationControl(), "bottom-right");
+      map.on("error", (e) => {
+        if (!cancelled) setError(e.error?.message || "Map failed to load");
+      });
 
     map.on("load", () => {
-      fetch(US_STATES_GEOJSON_URL)
-        .then((r) => r.json())
-        .then((geojson) => {
+      const useGeoJSON = (geojson) => {
           if (!map.getSource("states")) {
             map.addSource("states", { type: "geojson", data: geojson });
+            geojsonRef.current = null;
             map.addLayer({
               id: "states-fill",
               type: "fill",
               source: "states",
               paint: {
-                "fill-color": "rgba(30, 41, 59, 0.6)",
-                "fill-outline-color": BORDER_SUBTLE,
+                "fill-color": "rgba(30, 41, 59, 0.5)",
+                "fill-outline-color": "transparent",
+              },
+            });
+            map.addLayer({
+              id: "states-outline",
+              type: "line",
+              source: "states",
+              paint: {
+                "line-color": "#475569",
+                "line-width": 1.25,
               },
             });
             map.addLayer({
@@ -140,14 +160,20 @@ export default function StateMap({ accentColor = PRIMARY }) {
                 "fill-color": [
                   "case",
                   ["boolean", ["feature-state", "hover"], false],
-                  `${accentColor}44`,
+                  accentColor,
                   "rgba(0,0,0,0)",
+                ],
+                "fill-opacity": [
+                  "case",
+                  ["boolean", ["feature-state", "hover"], false],
+                  0.27,
+                  0,
                 ],
                 "fill-outline-color": [
                   "case",
                   ["boolean", ["feature-state", "hover"], false],
                   accentColor,
-                  BORDER_SUBTLE,
+                  "transparent",
                 ],
               },
             });
@@ -171,36 +197,63 @@ export default function StateMap({ accentColor = PRIMARY }) {
               },
             });
 
+            const nameToId = {};
+            geojson.features.forEach((f) => {
+              const id = f.id ?? f.properties?.id;
+              if (f.properties?.name != null && id != null) nameToId[f.properties.name] = id;
+            });
             let hoveredId = null;
-            map.on("mousemove", "states-fill", (e) => {
-              if (e.features.length > 0) {
-                const f = e.features[0];
-                const name = f.properties?.name;
+            const showTooltip = (name, point) => {
+              if (tooltipRafRef.current) cancelAnimationFrame(tooltipRafRef.current);
+              tooltipRafRef.current = requestAnimationFrame(() => {
+                tooltipRafRef.current = null;
                 const data = stateDataByName[name];
-                if (hoveredId !== null) map.setFeatureState({ source: "states", id: hoveredId }, { hover: false });
-                hoveredId = f.id;
-                map.setFeatureState({ source: "states", id: hoveredId }, { hover: true });
-                map.getCanvas().style.cursor = "pointer";
                 setTooltip({
                   name: name || "Unknown",
                   ...data,
-                  x: e.point.x,
-                  y: e.point.y,
+                  x: point.x,
+                  y: point.y,
                 });
-              }
-            });
-            map.on("mouseleave", "states-fill", () => {
+              });
+            };
+            const clearHover = () => {
               if (hoveredId !== null) {
                 map.setFeatureState({ source: "states", id: hoveredId }, { hover: false });
                 hoveredId = null;
               }
               map.getCanvas().style.cursor = "";
               setTooltip(null);
+            };
+            map.on("mousemove", (e) => {
+              const features = map.queryRenderedFeatures(e.point);
+              const fillF = features.find((f) => f.layer.id === "states-fill");
+              const labelF = features.find((f) => f.layer.id === "state-names");
+              const name = fillF?.properties?.name ?? labelF?.properties?.name;
+              if (!name) {
+                clearHover();
+                return;
+              }
+              map.getCanvas().style.cursor = "pointer";
+              const id = fillF?.id ?? nameToId[name];
+              if (id != null) {
+                if (hoveredId !== null && hoveredId !== id) map.setFeatureState({ source: "states", id: hoveredId }, { hover: false });
+                hoveredId = id;
+                map.setFeatureState({ source: "states", id: hoveredId }, { hover: true });
+              }
+              showTooltip(name, e.point);
             });
+            map.on("mouseleave", clearHover);
           }
           setLoaded(true);
-        })
-        .catch(() => setLoaded(true));
+        };
+      if (geojsonRef.current) {
+        useGeoJSON(geojsonRef.current);
+      } else {
+        fetch(US_STATES_GEOJSON_URL).then((r) => r.json()).then(useGeoJSON).catch((err) => {
+          if (!cancelled) setError(err?.message || "Could not load map data");
+          setLoaded(true);
+        });
+      }
     });
 
       mapRef.current = map;
@@ -208,6 +261,7 @@ export default function StateMap({ accentColor = PRIMARY }) {
 
     return () => {
       cancelled = true;
+      if (tooltipRafRef.current) cancelAnimationFrame(tooltipRafRef.current);
       if (mapRef.current) {
         mapRef.current.remove();
         mapRef.current = null;
@@ -240,7 +294,27 @@ export default function StateMap({ accentColor = PRIMARY }) {
   return (
     <div style={{ position: "relative", height: 420, borderRadius: 14, overflow: "hidden", border: `1px solid ${BORDER_SUBTLE}`, boxShadow: "0 2px 8px rgba(0,0,0,0.12)" }}>
       <div ref={containerRef} style={{ width: "100%", height: "100%" }} />
-      {!loaded && (
+      {error && (
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            background: "rgba(15,23,42,0.95)",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            color: "#94a3b8",
+            fontSize: 14,
+            padding: 24,
+            textAlign: "center",
+          }}
+        >
+          <span style={{ color: "#f87171", marginBottom: 8 }}>Map failed to load</span>
+          <span style={{ fontSize: 12, color: "#64748b" }}>{error}</span>
+        </div>
+      )}
+      {!loaded && !error && (
         <div
           style={{
             position: "absolute",
@@ -285,3 +359,5 @@ export default function StateMap({ accentColor = PRIMARY }) {
     </div>
   );
 }
+
+export default memo(StateMap);
