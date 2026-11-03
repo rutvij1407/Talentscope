@@ -4,6 +4,10 @@ An interactive dashboard built on 206,292 US data job postings from 2023. It sho
 
 Live dashboard: https://talentscope-chi.vercel.app
 
+![Market overview](docs/screenshots/market_overview.png)
+
+![Locations map shaded by job count](docs/screenshots/locations_map.png)
+
 **The problem**
 
 Job seekers in data ask the same questions: which skills should I learn, what should I expect to be paid, and where are the jobs? The answers are scattered across job boards. TalentScope computes them from one large dataset and puts them in one place.
