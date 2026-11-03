@@ -6,7 +6,7 @@ Live dashboard: https://talentscope-chi.vercel.app
 
 ![Market overview](docs/screenshots/market_overview.png)
 
-![Locations map shaded by job count](docs/screenshots/locations_map.png)
+![Locations map with postings and salary views, role filter and city dots](docs/screenshots/locations_map.png)
 
 **The problem**
 
