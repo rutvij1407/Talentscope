@@ -486,357 +486,765 @@
    "avgSalary": 108.4,
    "minSalary": 70.0,
    "maxSalary": 152.7,
-   "salaryPostings": 105
+   "salaryPostings": 105,
+   "byRole": {
+    "Data Analyst": 485,
+    "Data Scientist": 968,
+    "Data Engineer": 275,
+    "ML Engineer": 10,
+    "Business Analyst": 70,
+    "Software Engineer": 12
+   }
   },
   "Alaska": {
    "jobs": 20,
    "avgSalary": null,
    "minSalary": null,
    "maxSalary": null,
-   "salaryPostings": 1
+   "salaryPostings": 1,
+   "byRole": {
+    "Data Analyst": 0,
+    "Data Scientist": 0,
+    "Data Engineer": 20,
+    "ML Engineer": 0,
+    "Business Analyst": 0,
+    "Software Engineer": 0
+   }
   },
   "Arizona": {
    "jobs": 1135,
    "avgSalary": 117.5,
    "minSalary": 80.8,
    "maxSalary": 165.0,
-   "salaryPostings": 81
+   "salaryPostings": 81,
+   "byRole": {
+    "Data Analyst": 53,
+    "Data Scientist": 561,
+    "Data Engineer": 506,
+    "ML Engineer": 3,
+    "Business Analyst": 2,
+    "Software Engineer": 10
+   }
   },
   "Arkansas": {
    "jobs": 724,
    "avgSalary": 125.0,
    "minSalary": 90.0,
    "maxSalary": 188.2,
-   "salaryPostings": 32
+   "salaryPostings": 32,
+   "byRole": {
+    "Data Analyst": 30,
+    "Data Scientist": 533,
+    "Data Engineer": 149,
+    "ML Engineer": 2,
+    "Business Analyst": 2,
+    "Software Engineer": 7
+   }
   },
   "California": {
    "jobs": 28607,
    "avgSalary": 142.5,
    "minSalary": 82.5,
    "maxSalary": 218.6,
-   "salaryPostings": 2754
+   "salaryPostings": 2754,
+   "byRole": {
+    "Data Analyst": 11882,
+    "Data Scientist": 11208,
+    "Data Engineer": 3848,
+    "ML Engineer": 223,
+    "Business Analyst": 1056,
+    "Software Engineer": 347
+   }
   },
   "Colorado": {
    "jobs": 1359,
    "avgSalary": 122.6,
    "minSalary": 90.1,
    "maxSalary": 170.0,
-   "salaryPostings": 155
+   "salaryPostings": 155,
+   "byRole": {
+    "Data Analyst": 36,
+    "Data Scientist": 727,
+    "Data Engineer": 575,
+    "ML Engineer": 10,
+    "Business Analyst": 2,
+    "Software Engineer": 8
+   }
   },
   "Connecticut": {
    "jobs": 1554,
    "avgSalary": 125.0,
    "minSalary": 77.2,
    "maxSalary": 175.0,
-   "salaryPostings": 152
+   "salaryPostings": 152,
+   "byRole": {
+    "Data Analyst": 707,
+    "Data Scientist": 365,
+    "Data Engineer": 423,
+    "ML Engineer": 4,
+    "Business Analyst": 38,
+    "Software Engineer": 7
+   }
   },
   "Delaware": {
    "jobs": 636,
    "avgSalary": 120.8,
    "minSalary": 75.0,
    "maxSalary": 171.5,
-   "salaryPostings": 28
+   "salaryPostings": 28,
+   "byRole": {
+    "Data Analyst": 283,
+    "Data Scientist": 145,
+    "Data Engineer": 185,
+    "ML Engineer": 1,
+    "Business Analyst": 16,
+    "Software Engineer": 5
+   }
   },
   "District of Columbia": {
    "jobs": 4696,
    "avgSalary": 119.3,
    "minSalary": 75.0,
    "maxSalary": 167.0,
-   "salaryPostings": 364
+   "salaryPostings": 364,
+   "byRole": {
+    "Data Analyst": 1857,
+    "Data Scientist": 1971,
+    "Data Engineer": 769,
+    "ML Engineer": 7,
+    "Business Analyst": 57,
+    "Software Engineer": 30
+   }
   },
   "Florida": {
    "jobs": 15400,
    "avgSalary": 95.6,
    "minSalary": 57.7,
    "maxSalary": 145.0,
-   "salaryPostings": 979
+   "salaryPostings": 979,
+   "byRole": {
+    "Data Analyst": 8512,
+    "Data Scientist": 3679,
+    "Data Engineer": 1525,
+    "ML Engineer": 73,
+    "Business Analyst": 1363,
+    "Software Engineer": 207
+   }
   },
   "Georgia": {
    "jobs": 10856,
    "avgSalary": 111.2,
    "minSalary": 70.0,
    "maxSalary": 171.0,
-   "salaryPostings": 624
+   "salaryPostings": 624,
+   "byRole": {
+    "Data Analyst": 5412,
+    "Data Scientist": 3241,
+    "Data Engineer": 1386,
+    "ML Engineer": 54,
+    "Business Analyst": 622,
+    "Software Engineer": 115
+   }
   },
   "Hawaii": {
    "jobs": 67,
    "avgSalary": null,
    "minSalary": null,
    "maxSalary": null,
-   "salaryPostings": 4
+   "salaryPostings": 4,
+   "byRole": {
+    "Data Analyst": 0,
+    "Data Scientist": 0,
+    "Data Engineer": 66,
+    "ML Engineer": 0,
+    "Business Analyst": 0,
+    "Software Engineer": 0
+   }
   },
   "Idaho": {
    "jobs": 403,
    "avgSalary": null,
    "minSalary": null,
    "maxSalary": null,
-   "salaryPostings": 8
+   "salaryPostings": 8,
+   "byRole": {
+    "Data Analyst": 14,
+    "Data Scientist": 226,
+    "Data Engineer": 141,
+    "ML Engineer": 10,
+    "Business Analyst": 6,
+    "Software Engineer": 2
+   }
   },
   "Illinois": {
    "jobs": 11171,
    "avgSalary": 104.9,
    "minSalary": 65.0,
    "maxSalary": 157.5,
-   "salaryPostings": 637
+   "salaryPostings": 637,
+   "byRole": {
+    "Data Analyst": 5947,
+    "Data Scientist": 2768,
+    "Data Engineer": 1747,
+    "ML Engineer": 25,
+    "Business Analyst": 594,
+    "Software Engineer": 69
+   }
   },
   "Indiana": {
    "jobs": 2303,
    "avgSalary": 90.0,
    "minSalary": 57.2,
    "maxSalary": 121.1,
-   "salaryPostings": 100
+   "salaryPostings": 100,
+   "byRole": {
+    "Data Analyst": 1410,
+    "Data Scientist": 483,
+    "Data Engineer": 265,
+    "ML Engineer": 2,
+    "Business Analyst": 116,
+    "Software Engineer": 19
+   }
   },
   "Iowa": {
    "jobs": 1230,
    "avgSalary": 90.0,
    "minSalary": 60.0,
    "maxSalary": 130.4,
-   "salaryPostings": 68
+   "salaryPostings": 68,
+   "byRole": {
+    "Data Analyst": 703,
+    "Data Scientist": 290,
+    "Data Engineer": 174,
+    "ML Engineer": 0,
+    "Business Analyst": 41,
+    "Software Engineer": 19
+   }
   },
   "Kansas": {
    "jobs": 371,
    "avgSalary": 117.8,
    "minSalary": 67.4,
    "maxSalary": 169.0,
-   "salaryPostings": 15
+   "salaryPostings": 15,
+   "byRole": {
+    "Data Analyst": 22,
+    "Data Scientist": 241,
+    "Data Engineer": 102,
+    "ML Engineer": 1,
+    "Business Analyst": 0,
+    "Software Engineer": 4
+   }
   },
   "Kentucky": {
    "jobs": 433,
    "avgSalary": 100.0,
    "minSalary": 74.2,
    "maxSalary": 162.9,
-   "salaryPostings": 27
+   "salaryPostings": 27,
+   "byRole": {
+    "Data Analyst": 31,
+    "Data Scientist": 267,
+    "Data Engineer": 122,
+    "ML Engineer": 0,
+    "Business Analyst": 5,
+    "Software Engineer": 4
+   }
   },
   "Louisiana": {
    "jobs": 361,
    "avgSalary": 110.0,
    "minSalary": 55.7,
    "maxSalary": 140.7,
-   "salaryPostings": 13
+   "salaryPostings": 13,
+   "byRole": {
+    "Data Analyst": 23,
+    "Data Scientist": 223,
+    "Data Engineer": 108,
+    "ML Engineer": 2,
+    "Business Analyst": 0,
+    "Software Engineer": 4
+   }
   },
   "Maine": {
    "jobs": 127,
    "avgSalary": null,
    "minSalary": null,
    "maxSalary": null,
-   "salaryPostings": 9
+   "salaryPostings": 9,
+   "byRole": {
+    "Data Analyst": 7,
+    "Data Scientist": 53,
+    "Data Engineer": 64,
+    "ML Engineer": 1,
+    "Business Analyst": 1,
+    "Software Engineer": 1
+   }
   },
   "Maryland": {
    "jobs": 5589,
    "avgSalary": 115.0,
    "minSalary": 75.0,
    "maxSalary": 172.6,
-   "salaryPostings": 400
+   "salaryPostings": 400,
+   "byRole": {
+    "Data Analyst": 1887,
+    "Data Scientist": 2696,
+    "Data Engineer": 889,
+    "ML Engineer": 8,
+    "Business Analyst": 73,
+    "Software Engineer": 29
+   }
   },
   "Massachusetts": {
    "jobs": 5665,
    "avgSalary": 116.9,
    "minSalary": 74.8,
    "maxSalary": 179.0,
-   "salaryPostings": 380
+   "salaryPostings": 380,
+   "byRole": {
+    "Data Analyst": 2475,
+    "Data Scientist": 1750,
+    "Data Engineer": 1251,
+    "ML Engineer": 18,
+    "Business Analyst": 130,
+    "Software Engineer": 37
+   }
   },
   "Michigan": {
    "jobs": 1489,
    "avgSalary": 100.0,
    "minSalary": 82.7,
    "maxSalary": 162.5,
-   "salaryPostings": 78
+   "salaryPostings": 78,
+   "byRole": {
+    "Data Analyst": 201,
+    "Data Scientist": 631,
+    "Data Engineer": 619,
+    "ML Engineer": 6,
+    "Business Analyst": 27,
+    "Software Engineer": 4
+   }
   },
   "Minnesota": {
    "jobs": 1398,
    "avgSalary": 117.5,
    "minSalary": 81.3,
    "maxSalary": 162.5,
-   "salaryPostings": 101
+   "salaryPostings": 101,
+   "byRole": {
+    "Data Analyst": 49,
+    "Data Scientist": 721,
+    "Data Engineer": 619,
+    "ML Engineer": 2,
+    "Business Analyst": 1,
+    "Software Engineer": 4
+   }
   },
   "Mississippi": {
    "jobs": 274,
    "avgSalary": 115.0,
    "minSalary": 69.4,
    "maxSalary": 165.1,
-   "salaryPostings": 18
+   "salaryPostings": 18,
+   "byRole": {
+    "Data Analyst": 12,
+    "Data Scientist": 215,
+    "Data Engineer": 41,
+    "ML Engineer": 3,
+    "Business Analyst": 0,
+    "Software Engineer": 3
+   }
   },
   "Missouri": {
    "jobs": 3941,
    "avgSalary": 100.0,
    "minSalary": 56.4,
    "maxSalary": 150.0,
-   "salaryPostings": 176
+   "salaryPostings": 176,
+   "byRole": {
+    "Data Analyst": 1986,
+    "Data Scientist": 1172,
+    "Data Engineer": 576,
+    "ML Engineer": 9,
+    "Business Analyst": 152,
+    "Software Engineer": 42
+   }
   },
   "Montana": {
    "jobs": 10,
    "avgSalary": null,
    "minSalary": null,
    "maxSalary": null,
-   "salaryPostings": 1
+   "salaryPostings": 1,
+   "byRole": {
+    "Data Analyst": 1,
+    "Data Scientist": 0,
+    "Data Engineer": 9,
+    "ML Engineer": 0,
+    "Business Analyst": 0,
+    "Software Engineer": 0
+   }
   },
   "Nebraska": {
    "jobs": 199,
    "avgSalary": 125.0,
    "minSalary": 109.2,
    "maxSalary": 147.2,
-   "salaryPostings": 13
+   "salaryPostings": 13,
+   "byRole": {
+    "Data Analyst": 9,
+    "Data Scientist": 98,
+    "Data Engineer": 92,
+    "ML Engineer": 0,
+    "Business Analyst": 0,
+    "Software Engineer": 0
+   }
   },
   "Nevada": {
    "jobs": 866,
    "avgSalary": 90.0,
    "minSalary": 65.0,
    "maxSalary": 158.0,
-   "salaryPostings": 57
+   "salaryPostings": 57,
+   "byRole": {
+    "Data Analyst": 424,
+    "Data Scientist": 233,
+    "Data Engineer": 134,
+    "ML Engineer": 6,
+    "Business Analyst": 59,
+    "Software Engineer": 7
+   }
   },
   "New Hampshire": {
    "jobs": 357,
    "avgSalary": 130.0,
    "minSalary": 71.5,
    "maxSalary": 173.5,
-   "salaryPostings": 21
+   "salaryPostings": 21,
+   "byRole": {
+    "Data Analyst": 198,
+    "Data Scientist": 43,
+    "Data Engineer": 103,
+    "ML Engineer": 1,
+    "Business Analyst": 3,
+    "Software Engineer": 5
+   }
   },
   "New Jersey": {
    "jobs": 5319,
    "avgSalary": 115.0,
    "minSalary": 65.0,
    "maxSalary": 161.0,
-   "salaryPostings": 319
+   "salaryPostings": 319,
+   "byRole": {
+    "Data Analyst": 2459,
+    "Data Scientist": 1302,
+    "Data Engineer": 1419,
+    "ML Engineer": 15,
+    "Business Analyst": 99,
+    "Software Engineer": 15
+   }
   },
   "New Mexico": {
    "jobs": 185,
    "avgSalary": 102.9,
    "minSalary": 74.6,
    "maxSalary": 143.6,
-   "salaryPostings": 13
+   "salaryPostings": 13,
+   "byRole": {
+    "Data Analyst": 8,
+    "Data Scientist": 116,
+    "Data Engineer": 56,
+    "ML Engineer": 1,
+    "Business Analyst": 1,
+    "Software Engineer": 3
+   }
   },
   "New York": {
    "jobs": 9917,
    "avgSalary": 118.5,
    "minSalary": 71.7,
    "maxSalary": 200.0,
-   "salaryPostings": 1269
+   "salaryPostings": 1269,
+   "byRole": {
+    "Data Analyst": 4737,
+    "Data Scientist": 2906,
+    "Data Engineer": 1960,
+    "ML Engineer": 35,
+    "Business Analyst": 214,
+    "Software Engineer": 58
+   }
   },
   "North Carolina": {
    "jobs": 6482,
    "avgSalary": 115.0,
    "minSalary": 80.2,
    "maxSalary": 160.7,
-   "salaryPostings": 333
+   "salaryPostings": 333,
+   "byRole": {
+    "Data Analyst": 2017,
+    "Data Scientist": 2594,
+    "Data Engineer": 1544,
+    "ML Engineer": 35,
+    "Business Analyst": 237,
+    "Software Engineer": 44
+   }
   },
   "North Dakota": {
    "jobs": 28,
    "avgSalary": null,
    "minSalary": null,
    "maxSalary": null,
-   "salaryPostings": 0
+   "salaryPostings": 0,
+   "byRole": {
+    "Data Analyst": 3,
+    "Data Scientist": 10,
+    "Data Engineer": 15,
+    "ML Engineer": 0,
+    "Business Analyst": 0,
+    "Software Engineer": 0
+   }
   },
   "Ohio": {
    "jobs": 2341,
    "avgSalary": 119.3,
    "minSalary": 90.0,
    "maxSalary": 164.0,
-   "salaryPostings": 155
+   "salaryPostings": 155,
+   "byRole": {
+    "Data Analyst": 81,
+    "Data Scientist": 1425,
+    "Data Engineer": 805,
+    "ML Engineer": 4,
+    "Business Analyst": 6,
+    "Software Engineer": 17
+   }
   },
   "Oklahoma": {
    "jobs": 369,
    "avgSalary": 96.1,
    "minSalary": 77.6,
    "maxSalary": 117.3,
-   "salaryPostings": 14
+   "salaryPostings": 14,
+   "byRole": {
+    "Data Analyst": 44,
+    "Data Scientist": 211,
+    "Data Engineer": 101,
+    "ML Engineer": 3,
+    "Business Analyst": 4,
+    "Software Engineer": 5
+   }
   },
   "Oregon": {
    "jobs": 1375,
    "avgSalary": 132.5,
    "minSalary": 90.0,
    "maxSalary": 172.4,
-   "salaryPostings": 33
+   "salaryPostings": 33,
+   "byRole": {
+    "Data Analyst": 32,
+    "Data Scientist": 780,
+    "Data Engineer": 535,
+    "ML Engineer": 17,
+    "Business Analyst": 1,
+    "Software Engineer": 8
+   }
   },
   "Pennsylvania": {
    "jobs": 4301,
    "avgSalary": 110.0,
    "minSalary": 59.2,
    "maxSalary": 173.5,
-   "salaryPostings": 270
+   "salaryPostings": 270,
+   "byRole": {
+    "Data Analyst": 1675,
+    "Data Scientist": 1438,
+    "Data Engineer": 1098,
+    "ML Engineer": 16,
+    "Business Analyst": 57,
+    "Software Engineer": 12
+   }
   },
   "Rhode Island": {
    "jobs": 649,
    "avgSalary": 115.0,
    "minSalary": 77.9,
    "maxSalary": 170.3,
-   "salaryPostings": 52
+   "salaryPostings": 52,
+   "byRole": {
+    "Data Analyst": 256,
+    "Data Scientist": 156,
+    "Data Engineer": 226,
+    "ML Engineer": 1,
+    "Business Analyst": 6,
+    "Software Engineer": 2
+   }
   },
   "South Carolina": {
    "jobs": 2334,
    "avgSalary": 85.0,
    "minSalary": 47.5,
    "maxSalary": 133.4,
-   "salaryPostings": 101
+   "salaryPostings": 101,
+   "byRole": {
+    "Data Analyst": 1290,
+    "Data Scientist": 669,
+    "Data Engineer": 188,
+    "ML Engineer": 8,
+    "Business Analyst": 138,
+    "Software Engineer": 26
+   }
   },
   "South Dakota": {
    "jobs": 41,
    "avgSalary": null,
    "minSalary": null,
    "maxSalary": null,
-   "salaryPostings": 4
+   "salaryPostings": 4,
+   "byRole": {
+    "Data Analyst": 0,
+    "Data Scientist": 28,
+    "Data Engineer": 12,
+    "ML Engineer": 0,
+    "Business Analyst": 0,
+    "Software Engineer": 1
+   }
   },
   "Tennessee": {
    "jobs": 1096,
    "avgSalary": 124.5,
    "minSalary": 78.4,
    "maxSalary": 173.7,
-   "salaryPostings": 60
+   "salaryPostings": 60,
+   "byRole": {
+    "Data Analyst": 105,
+    "Data Scientist": 516,
+    "Data Engineer": 442,
+    "ML Engineer": 4,
+    "Business Analyst": 20,
+    "Software Engineer": 4
+   }
   },
   "Texas": {
    "jobs": 20277,
    "avgSalary": 111.2,
    "minSalary": 65.0,
    "maxSalary": 165.5,
-   "salaryPostings": 1043
+   "salaryPostings": 1043,
+   "byRole": {
+    "Data Analyst": 10302,
+    "Data Scientist": 4127,
+    "Data Engineer": 4369,
+    "ML Engineer": 76,
+    "Business Analyst": 1110,
+    "Software Engineer": 231
+   }
   },
   "Utah": {
    "jobs": 804,
    "avgSalary": 115.0,
    "minSalary": 79.0,
    "maxSalary": 160.1,
-   "salaryPostings": 79
+   "salaryPostings": 79,
+   "byRole": {
+    "Data Analyst": 28,
+    "Data Scientist": 540,
+    "Data Engineer": 221,
+    "ML Engineer": 7,
+    "Business Analyst": 2,
+    "Software Engineer": 6
+   }
   },
   "Vermont": {
    "jobs": 115,
    "avgSalary": null,
    "minSalary": null,
    "maxSalary": null,
-   "salaryPostings": 4
+   "salaryPostings": 4,
+   "byRole": {
+    "Data Analyst": 16,
+    "Data Scientist": 64,
+    "Data Engineer": 33,
+    "ML Engineer": 1,
+    "Business Analyst": 1,
+    "Software Engineer": 0
+   }
   },
   "Virginia": {
    "jobs": 10601,
    "avgSalary": 120.0,
    "minSalary": 85.0,
    "maxSalary": 174.8,
-   "salaryPostings": 818
+   "salaryPostings": 818,
+   "byRole": {
+    "Data Analyst": 2328,
+    "Data Scientist": 5747,
+    "Data Engineer": 2360,
+    "ML Engineer": 23,
+    "Business Analyst": 74,
+    "Software Engineer": 60
+   }
   },
   "Washington": {
    "jobs": 913,
    "avgSalary": 155.0,
    "minSalary": 115.0,
    "maxSalary": 221.5,
-   "salaryPostings": 93
+   "salaryPostings": 93,
+   "byRole": {
+    "Data Analyst": 2,
+    "Data Scientist": 15,
+    "Data Engineer": 860,
+    "ML Engineer": 1,
+    "Business Analyst": 0,
+    "Software Engineer": 30
+   }
   },
   "West Virginia": {
    "jobs": 190,
    "avgSalary": 136.9,
    "minSalary": 90.4,
    "maxSalary": 165.2,
-   "salaryPostings": 13
+   "salaryPostings": 13,
+   "byRole": {
+    "Data Analyst": 8,
+    "Data Scientist": 141,
+    "Data Engineer": 38,
+    "ML Engineer": 1,
+    "Business Analyst": 1,
+    "Software Engineer": 0
+   }
   },
   "Wisconsin": {
    "jobs": 1895,
    "avgSalary": 100.0,
    "minSalary": 70.1,
    "maxSalary": 150.0,
-   "salaryPostings": 97
+   "salaryPostings": 97,
+   "byRole": {
+    "Data Analyst": 1142,
+    "Data Scientist": 288,
+    "Data Engineer": 310,
+    "ML Engineer": 2,
+    "Business Analyst": 123,
+    "Software Engineer": 20
+   }
   },
   "Wyoming": {
    "jobs": 21,
    "avgSalary": null,
    "minSalary": null,
    "maxSalary": null,
-   "salaryPostings": 2
+   "salaryPostings": 2,
+   "byRole": {
+    "Data Analyst": 0,
+    "Data Scientist": 2,
+    "Data Engineer": 16,
+    "ML Engineer": 0,
+    "Business Analyst": 0,
+    "Software Engineer": 3
+   }
   }
  },
  "predictor": {
@@ -1026,5 +1434,861 @@
    }
   },
   "note": "Median salary of postings with a listed salary, adjusted for seniority and city. A lookup, not a trained model."
+ },
+ "cityPoints": [
+  {
+   "city": "New York",
+   "state": "NY",
+   "lat": 40.71,
+   "lon": -74.01,
+   "jobs": 7891,
+   "medianSalary": 125.0
+  },
+  {
+   "city": "Atlanta",
+   "state": "GA",
+   "lat": 33.75,
+   "lon": -84.39,
+   "jobs": 6994,
+   "medianSalary": 115.0
+  },
+  {
+   "city": "Chicago",
+   "state": "IL",
+   "lat": 41.88,
+   "lon": -87.63,
+   "jobs": 5368,
+   "medianSalary": 110.0
+  },
+  {
+   "city": "Washington",
+   "state": "DC",
+   "lat": 38.91,
+   "lon": -77.04,
+   "jobs": 4671,
+   "medianSalary": 119.3
+  },
+  {
+   "city": "San Francisco",
+   "state": "CA",
+   "lat": 37.77,
+   "lon": -122.42,
+   "jobs": 4504,
+   "medianSalary": 150.0
+  },
+  {
+   "city": "Dallas",
+   "state": "TX",
+   "lat": 32.78,
+   "lon": -96.8,
+   "jobs": 4346,
+   "medianSalary": 105.0
+  },
+  {
+   "city": "Austin",
+   "state": "TX",
+   "lat": 30.27,
+   "lon": -97.74,
+   "jobs": 4147,
+   "medianSalary": 117.2
+  },
+  {
+   "city": "Charlotte",
+   "state": "NC",
+   "lat": 35.23,
+   "lon": -80.84,
+   "jobs": 3630,
+   "medianSalary": 115.0
+  },
+  {
+   "city": "Tampa",
+   "state": "FL",
+   "lat": 27.95,
+   "lon": -82.46,
+   "jobs": 3171,
+   "medianSalary": 110.1
+  },
+  {
+   "city": "Los Angeles",
+   "state": "CA",
+   "lat": 34.05,
+   "lon": -118.24,
+   "jobs": 3130,
+   "medianSalary": 133.0
+  },
+  {
+   "city": "Boston",
+   "state": "MA",
+   "lat": 42.36,
+   "lon": -71.06,
+   "jobs": 2798,
+   "medianSalary": 125.0
+  },
+  {
+   "city": "Irving",
+   "state": "TX",
+   "lat": 32.81,
+   "lon": -96.95,
+   "jobs": 1917,
+   "medianSalary": 115.0
+  },
+  {
+   "city": "Miami",
+   "state": "FL",
+   "lat": 25.76,
+   "lon": -80.19,
+   "jobs": 1748,
+   "medianSalary": 90.0
+  },
+  {
+   "city": "St. Louis",
+   "state": "MO",
+   "lat": 38.63,
+   "lon": -90.2,
+   "jobs": 1657,
+   "medianSalary": 100.7
+  },
+  {
+   "city": "Arlington",
+   "state": "VA",
+   "lat": 38.88,
+   "lon": -77.1,
+   "jobs": 1623,
+   "medianSalary": 119.0
+  },
+  {
+   "city": "San Jose",
+   "state": "CA",
+   "lat": 37.34,
+   "lon": -121.89,
+   "jobs": 1597,
+   "medianSalary": 167.5
+  },
+  {
+   "city": "San Antonio",
+   "state": "TX",
+   "lat": 29.42,
+   "lon": -98.49,
+   "jobs": 1533,
+   "medianSalary": 90.0
+  },
+  {
+   "city": "McLean",
+   "state": "VA",
+   "lat": 38.93,
+   "lon": -77.18,
+   "jobs": 1519,
+   "medianSalary": 127.5
+  },
+  {
+   "city": "Orlando",
+   "state": "FL",
+   "lat": 28.54,
+   "lon": -81.38,
+   "jobs": 1501,
+   "medianSalary": 92.5
+  },
+  {
+   "city": "Plano",
+   "state": "TX",
+   "lat": 33.02,
+   "lon": -96.7,
+   "jobs": 1430,
+   "medianSalary": 119.2
+  },
+  {
+   "city": "Jacksonville",
+   "state": "FL",
+   "lat": 30.33,
+   "lon": -81.66,
+   "jobs": 1398,
+   "medianSalary": 110.0
+  },
+  {
+   "city": "Philadelphia",
+   "state": "PA",
+   "lat": 39.95,
+   "lon": -75.17,
+   "jobs": 1339,
+   "medianSalary": 102.0
+  },
+  {
+   "city": "Houston",
+   "state": "TX",
+   "lat": 29.76,
+   "lon": -95.37,
+   "jobs": 1273,
+   "medianSalary": 123.1
+  },
+  {
+   "city": "Indianapolis",
+   "state": "IN",
+   "lat": 39.77,
+   "lon": -86.16,
+   "jobs": 1234,
+   "medianSalary": 90.0
+  },
+  {
+   "city": "Sunnyvale",
+   "state": "CA",
+   "lat": 37.37,
+   "lon": -122.04,
+   "jobs": 1098,
+   "medianSalary": 168.0
+  },
+  {
+   "city": "Reston",
+   "state": "VA",
+   "lat": 38.96,
+   "lon": -77.36,
+   "jobs": 1044,
+   "medianSalary": 122.3
+  },
+  {
+   "city": "Mountain View",
+   "state": "CA",
+   "lat": 37.39,
+   "lon": -122.08,
+   "jobs": 1034,
+   "medianSalary": 196.8
+  },
+  {
+   "city": "Fort Worth",
+   "state": "TX",
+   "lat": 32.76,
+   "lon": -97.33,
+   "jobs": 951,
+   "medianSalary": 90.0
+  },
+  {
+   "city": "San Diego",
+   "state": "CA",
+   "lat": 32.72,
+   "lon": -117.16,
+   "jobs": 909,
+   "medianSalary": 137.0
+  },
+  {
+   "city": "Jersey City",
+   "state": "NJ",
+   "lat": 40.72,
+   "lon": -74.04,
+   "jobs": 909,
+   "medianSalary": 117.5
+  },
+  {
+   "city": "Alpharetta",
+   "state": "GA",
+   "lat": 34.08,
+   "lon": -84.29,
+   "jobs": 898,
+   "medianSalary": 110.0
+  },
+  {
+   "city": "Baltimore",
+   "state": "MD",
+   "lat": 39.29,
+   "lon": -76.61,
+   "jobs": 877,
+   "medianSalary": 81.7
+  },
+  {
+   "city": "Palo Alto",
+   "state": "CA",
+   "lat": 37.44,
+   "lon": -122.14,
+   "jobs": 857,
+   "medianSalary": 153.2
+  },
+  {
+   "city": "Columbia",
+   "state": "SC",
+   "lat": 34.0,
+   "lon": -81.03,
+   "jobs": 850,
+   "medianSalary": 76.8
+  },
+  {
+   "city": "Chantilly",
+   "state": "VA",
+   "lat": 38.89,
+   "lon": -77.43,
+   "jobs": 835,
+   "medianSalary": 125.0
+  },
+  {
+   "city": "Irvine",
+   "state": "CA",
+   "lat": 33.68,
+   "lon": -117.83,
+   "jobs": 825,
+   "medianSalary": 111.2
+  },
+  {
+   "city": "Herndon",
+   "state": "VA",
+   "lat": 38.97,
+   "lon": -77.39,
+   "jobs": 758,
+   "medianSalary": 125.0
+  },
+  {
+   "city": "Santa Clara",
+   "state": "CA",
+   "lat": 37.35,
+   "lon": -121.96,
+   "jobs": 748,
+   "medianSalary": 150.0
+  },
+  {
+   "city": "Fremont",
+   "state": "CA",
+   "lat": 37.55,
+   "lon": -121.99,
+   "jobs": 701,
+   "medianSalary": 150.0
+  },
+  {
+   "city": "Cupertino",
+   "state": "CA",
+   "lat": 37.32,
+   "lon": -122.03,
+   "jobs": 676,
+   "medianSalary": 173.0
+  },
+  {
+   "city": "Huntsville",
+   "state": "AL",
+   "lat": 34.73,
+   "lon": -86.59,
+   "jobs": 674,
+   "medianSalary": 115.0
+  },
+  {
+   "city": "Raleigh",
+   "state": "NC",
+   "lat": 35.78,
+   "lon": -78.64,
+   "jobs": 668,
+   "medianSalary": 124.5
+  },
+  {
+   "city": "Oakland",
+   "state": "CA",
+   "lat": 37.8,
+   "lon": -122.27,
+   "jobs": 655,
+   "medianSalary": 125.0
+  },
+  {
+   "city": "Denver",
+   "state": "CO",
+   "lat": 39.74,
+   "lon": -104.99,
+   "jobs": 553,
+   "medianSalary": 135.9
+  },
+  {
+   "city": "Seattle",
+   "state": "WA",
+   "lat": 47.61,
+   "lon": -122.33,
+   "jobs": 539,
+   "medianSalary": 162.5
+  }
+ ],
+ "roleSkills": {
+  "Data Analyst": [
+   {
+    "skill": "SQL",
+    "share": 62.3
+   },
+   {
+    "skill": "Excel",
+    "share": 46.5
+   },
+   {
+    "skill": "Tableau",
+    "share": 35.4
+   },
+   {
+    "skill": "Python",
+    "share": 33.4
+   },
+   {
+    "skill": "SAS",
+    "share": 24.0
+   },
+   {
+    "skill": "R",
+    "share": 21.3
+   },
+   {
+    "skill": "Power BI",
+    "share": 20.5
+   },
+   {
+    "skill": "Word",
+    "share": 12.7
+   },
+   {
+    "skill": "Powerpoint",
+    "share": 12.4
+   },
+   {
+    "skill": "Oracle",
+    "share": 9.1
+   },
+   {
+    "skill": "Sql Server",
+    "share": 7.3
+   },
+   {
+    "skill": "Flow",
+    "share": 6.4
+   },
+   {
+    "skill": "AWS",
+    "share": 6.3
+   },
+   {
+    "skill": "Snowflake",
+    "share": 5.8
+   },
+   {
+    "skill": "Sap",
+    "share": 5.7
+   },
+   {
+    "skill": "Go",
+    "share": 5.7
+   },
+   {
+    "skill": "Azure",
+    "share": 5.3
+   },
+   {
+    "skill": "Outlook",
+    "share": 4.1
+   },
+   {
+    "skill": "Sharepoint",
+    "share": 4.0
+   },
+   {
+    "skill": "Looker",
+    "share": 4.0
+   }
+  ],
+  "Data Scientist": [
+   {
+    "skill": "Python",
+    "share": 82.5
+   },
+   {
+    "skill": "SQL",
+    "share": 59.2
+   },
+   {
+    "skill": "R",
+    "share": 50.2
+   },
+   {
+    "skill": "SAS",
+    "share": 27.7
+   },
+   {
+    "skill": "Tableau",
+    "share": 26.4
+   },
+   {
+    "skill": "AWS",
+    "share": 20.6
+   },
+   {
+    "skill": "Spark",
+    "share": 19.9
+   },
+   {
+    "skill": "TensorFlow",
+    "share": 14.1
+   },
+   {
+    "skill": "Java",
+    "share": 13.7
+   },
+   {
+    "skill": "Azure",
+    "share": 13.5
+   },
+   {
+    "skill": "Excel",
+    "share": 12.6
+   },
+   {
+    "skill": "Hadoop",
+    "share": 12.2
+   },
+   {
+    "skill": "PyTorch",
+    "share": 11.2
+   },
+   {
+    "skill": "Power BI",
+    "share": 10.6
+   },
+   {
+    "skill": "Pandas",
+    "share": 9.6
+   },
+   {
+    "skill": "Scala",
+    "share": 9.3
+   },
+   {
+    "skill": "Git",
+    "share": 8.4
+   },
+   {
+    "skill": "Scikit-learn",
+    "share": 8.0
+   },
+   {
+    "skill": "C++",
+    "share": 7.2
+   },
+   {
+    "skill": "Numpy",
+    "share": 6.8
+   }
+  ],
+  "Data Engineer": [
+   {
+    "skill": "SQL",
+    "share": 72.4
+   },
+   {
+    "skill": "Python",
+    "share": 69.7
+   },
+   {
+    "skill": "AWS",
+    "share": 47.0
+   },
+   {
+    "skill": "Spark",
+    "share": 35.8
+   },
+   {
+    "skill": "Azure",
+    "share": 35.0
+   },
+   {
+    "skill": "Snowflake",
+    "share": 26.9
+   },
+   {
+    "skill": "Java",
+    "share": 26.6
+   },
+   {
+    "skill": "Kafka",
+    "share": 20.8
+   },
+   {
+    "skill": "Scala",
+    "share": 20.4
+   },
+   {
+    "skill": "Hadoop",
+    "share": 20.3
+   },
+   {
+    "skill": "Redshift",
+    "share": 18.4
+   },
+   {
+    "skill": "NoSQL",
+    "share": 18.1
+   },
+   {
+    "skill": "Databricks",
+    "share": 17.4
+   },
+   {
+    "skill": "Airflow",
+    "share": 15.4
+   },
+   {
+    "skill": "Tableau",
+    "share": 14.8
+   },
+   {
+    "skill": "Sql Server",
+    "share": 12.9
+   },
+   {
+    "skill": "Oracle",
+    "share": 12.7
+   },
+   {
+    "skill": "Git",
+    "share": 11.0
+   },
+   {
+    "skill": "GCP",
+    "share": 10.8
+   },
+   {
+    "skill": "Shell",
+    "share": 10.5
+   }
+  ],
+  "ML Engineer": [
+   {
+    "skill": "Python",
+    "share": 78.7
+   },
+   {
+    "skill": "SQL",
+    "share": 36.8
+   },
+   {
+    "skill": "AWS",
+    "share": 34.6
+   },
+   {
+    "skill": "TensorFlow",
+    "share": 33.1
+   },
+   {
+    "skill": "PyTorch",
+    "share": 31.3
+   },
+   {
+    "skill": "Spark",
+    "share": 26.2
+   },
+   {
+    "skill": "Java",
+    "share": 26.2
+   },
+   {
+    "skill": "Azure",
+    "share": 20.2
+   },
+   {
+    "skill": "R",
+    "share": 19.2
+   },
+   {
+    "skill": "Scikit-learn",
+    "share": 16.1
+   },
+   {
+    "skill": "Docker",
+    "share": 15.2
+   },
+   {
+    "skill": "Kubernetes",
+    "share": 14.7
+   },
+   {
+    "skill": "Hadoop",
+    "share": 13.4
+   },
+   {
+    "skill": "GCP",
+    "share": 13.1
+   },
+   {
+    "skill": "Pandas",
+    "share": 12.5
+   },
+   {
+    "skill": "Scala",
+    "share": 12.0
+   },
+   {
+    "skill": "C++",
+    "share": 11.0
+   },
+   {
+    "skill": "Numpy",
+    "share": 10.8
+   },
+   {
+    "skill": "Git",
+    "share": 10.3
+   },
+   {
+    "skill": "Keras",
+    "share": 10.3
+   }
+  ],
+  "Business Analyst": [
+   {
+    "skill": "SQL",
+    "share": 57.7
+   },
+   {
+    "skill": "Excel",
+    "share": 50.6
+   },
+   {
+    "skill": "Tableau",
+    "share": 35.8
+   },
+   {
+    "skill": "Power BI",
+    "share": 25.2
+   },
+   {
+    "skill": "Python",
+    "share": 22.8
+   },
+   {
+    "skill": "SAS",
+    "share": 17.4
+   },
+   {
+    "skill": "Powerpoint",
+    "share": 16.9
+   },
+   {
+    "skill": "R",
+    "share": 15.0
+   },
+   {
+    "skill": "Word",
+    "share": 14.4
+   },
+   {
+    "skill": "Oracle",
+    "share": 8.0
+   },
+   {
+    "skill": "Sap",
+    "share": 8.0
+   },
+   {
+    "skill": "Flow",
+    "share": 7.8
+   },
+   {
+    "skill": "Sql Server",
+    "share": 7.2
+   },
+   {
+    "skill": "Azure",
+    "share": 5.9
+   },
+   {
+    "skill": "Snowflake",
+    "share": 5.6
+   },
+   {
+    "skill": "Go",
+    "share": 5.3
+   },
+   {
+    "skill": "Jira",
+    "share": 5.1
+   },
+   {
+    "skill": "Visio",
+    "share": 5.0
+   },
+   {
+    "skill": "Outlook",
+    "share": 4.9
+   },
+   {
+    "skill": "Sharepoint",
+    "share": 4.5
+   }
+  ],
+  "Software Engineer": [
+   {
+    "skill": "SQL",
+    "share": 47.7
+   },
+   {
+    "skill": "Python",
+    "share": 45.8
+   },
+   {
+    "skill": "Java",
+    "share": 24.4
+   },
+   {
+    "skill": "Tableau",
+    "share": 21.8
+   },
+   {
+    "skill": "AWS",
+    "share": 21.0
+   },
+   {
+    "skill": "Excel",
+    "share": 18.4
+   },
+   {
+    "skill": "Spark",
+    "share": 15.0
+   },
+   {
+    "skill": "Azure",
+    "share": 14.7
+   },
+   {
+    "skill": "SAS",
+    "share": 14.7
+   },
+   {
+    "skill": "Oracle",
+    "share": 12.9
+   },
+   {
+    "skill": "Javascript",
+    "share": 12.7
+   },
+   {
+    "skill": "C++",
+    "share": 12.4
+   },
+   {
+    "skill": "Docker",
+    "share": 10.3
+   },
+   {
+    "skill": "Snowflake",
+    "share": 9.7
+   },
+   {
+    "skill": "Go",
+    "share": 9.5
+   },
+   {
+    "skill": "Hadoop",
+    "share": 9.0
+   },
+   {
+    "skill": "Kubernetes",
+    "share": 8.7
+   },
+   {
+    "skill": "Power BI",
+    "share": 8.5
+   },
+   {
+    "skill": "Kafka",
+    "share": 8.4
+   },
+   {
+    "skill": "R",
+    "share": 8.3
+   }
+  ]
  }
 }

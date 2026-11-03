@@ -204,6 +204,45 @@ for raw_name, shown in city_names.items():
 out["predictor"] = {"roles": base, "seniorityFactor": sen_factor, "locations": loc_factor,
                     "note": "Median salary of postings with a listed salary, adjusted for seniority and city. A lookup, not a trained model."}
 
+# Map layers: postings per state per role, and the biggest hiring cities as points
+CITY_COORDS = {
+    ("New York", "NY"): (40.71, -74.01), ("Atlanta", "GA"): (33.75, -84.39), ("Chicago", "IL"): (41.88, -87.63),
+    ("Washington", "DC"): (38.91, -77.04), ("San Francisco", "CA"): (37.77, -122.42), ("Dallas", "TX"): (32.78, -96.80),
+    ("Austin", "TX"): (30.27, -97.74), ("Charlotte", "NC"): (35.23, -80.84), ("Tampa", "FL"): (27.95, -82.46),
+    ("Los Angeles", "CA"): (34.05, -118.24), ("Boston", "MA"): (42.36, -71.06), ("Irving", "TX"): (32.81, -96.95),
+    ("Miami", "FL"): (25.76, -80.19), ("St. Louis", "MO"): (38.63, -90.20), ("Arlington", "VA"): (38.88, -77.10),
+    ("San Jose", "CA"): (37.34, -121.89), ("San Antonio", "TX"): (29.42, -98.49), ("McLean", "VA"): (38.93, -77.18),
+    ("Orlando", "FL"): (28.54, -81.38), ("Plano", "TX"): (33.02, -96.70), ("Jacksonville", "FL"): (30.33, -81.66),
+    ("Philadelphia", "PA"): (39.95, -75.17), ("Houston", "TX"): (29.76, -95.37), ("Indianapolis", "IN"): (39.77, -86.16),
+    ("Sunnyvale", "CA"): (37.37, -122.04), ("Reston", "VA"): (38.96, -77.36), ("Mountain View", "CA"): (37.39, -122.08),
+    ("Fort Worth", "TX"): (32.76, -97.33), ("San Diego", "CA"): (32.72, -117.16), ("Jersey City", "NJ"): (40.72, -74.04),
+    ("Alpharetta", "GA"): (34.08, -84.29), ("Baltimore", "MD"): (39.29, -76.61), ("Palo Alto", "CA"): (37.44, -122.14),
+    ("Columbia", "SC"): (34.00, -81.03), ("Chantilly", "VA"): (38.89, -77.43), ("Irvine", "CA"): (33.68, -117.83),
+    ("Herndon", "VA"): (38.97, -77.39), ("Santa Clara", "CA"): (37.35, -121.96), ("Fremont", "CA"): (37.55, -121.99),
+    ("Cupertino", "CA"): (37.32, -122.03), ("Huntsville", "AL"): (34.73, -86.59), ("Raleigh", "NC"): (35.78, -78.64),
+    ("Oakland", "CA"): (37.80, -122.27), ("Seattle", "WA"): (47.61, -122.33), ("Denver", "CO"): (39.74, -104.99),
+}
+by_role = us_state.groupby(["state", "role"]).size()
+for name in out["stateData"]:
+    out["stateData"][name]["byRole"] = {label.get(r, r): int(by_role.get((name, r), 0)) for r in roles_order}
+cities = []
+cc = df[~df["remote"] & df["state_abbr"].notna()].groupby(["city", "state_abbr"]).size()
+for (c, st_), (lat, lon) in CITY_COORDS.items():
+    n = int(cc.get((c, st_), 0))
+    s = sal[(sal["city"] == c) & (sal["state_abbr"] == st_)]["salary_k"]
+    cities.append({"city": c, "state": st_, "lat": lat, "lon": lon, "jobs": n, "medianSalary": med(s) if len(s) >= 15 else None})
+out["cityPoints"] = sorted(cities, key=lambda x: -x["jobs"])
+
+# Skill checklist per role, used by the resume matcher on the Students page
+role_skills = {}
+for r in roles_order:
+    d = skill_rows[skill_rows["role"] == r]
+    if len(d) < 200:
+        continue
+    cnt = d["skills"].explode().value_counts().head(20)
+    role_skills[label.get(r, r)] = [{"skill": nice(k), "share": round(100.0 * v / len(d), 1)} for k, v in cnt.items()]
+out["roleSkills"] = role_skills
+
 OUT.parent.mkdir(parents=True, exist_ok=True)
 OUT.write_text(json.dumps(out, indent=1))
 print("wrote", OUT, OUT.stat().st_size, "bytes")

@@ -20,6 +20,7 @@ import {
 
 const StateMap = lazy(() => import("./StateMap.jsx"));
 import { stateDataByName } from "./StateMap.jsx";
+const StudentsPage = lazy(() => import("./StudentsPage.jsx"));
 import data from "./data/talentscope.json";
 
 // Professional, muted analytics palette
@@ -1328,6 +1329,7 @@ export default function TalentScopeDashboard() {
     { id: "locations", icon: "📍", label: "Locations" },
     { id: "roles", icon: "👤", label: "Roles" },
     { id: "predict", icon: "△", label: "Salary Estimator" },
+    { id: "students", icon: "✦", label: "For Students" },
     { id: "explore", icon: "☰", label: "Data and Method" },
     { id: "about", icon: "ℹ", label: "About" },
   ];
@@ -1616,7 +1618,7 @@ export default function TalentScopeDashboard() {
             transition: "all 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.2s",
           }}
         >
-          <div style={{ minWidth: 0, flex: "1 1 200px" }}>
+          <div style={{ minWidth: 0, flex: "1 1 200px", paddingLeft: isMobile ? 52 : 0 }}>
             <h1
               style={{
                 fontSize: isMobile ? 18 : isTablet ? 20 : 24,
@@ -2207,9 +2209,9 @@ export default function TalentScopeDashboard() {
           <>
             <GlowCard delay={200} glowColor={PRIMARY}>
               <div style={{ fontSize: 16, fontWeight: 700, color: "#e2e8f0", marginBottom: 4 }}>Top Hiring Locations</div>
-              <div style={{ fontSize: 11, color: "#64748b", marginBottom: 12 }}>State map shaded by job count (darker means fewer). Hover a state to see its job count and salary.</div>
+              <div style={{ fontSize: 11, color: "#64748b", marginBottom: 12 }}>Switch between postings and median salary, filter by role, and click a state for details. Dots mark the biggest hiring cities.</div>
               <Suspense fallback={<div style={{ height: 420, borderRadius: 14, background: "rgba(15,23,42,0.6)", border: "1px solid #1e293b", display: "flex", alignItems: "center", justifyContent: "center", color: "#94a3b8", fontSize: 14 }}>Loading map…</div>}>
-                <StateMap accentColor={PRIMARY} />
+                <StateMap />
               </Suspense>
             </GlowCard>
             <GlowCard delay={400} glowColor={PRIMARY}>
@@ -2319,6 +2321,13 @@ export default function TalentScopeDashboard() {
           </>
         )}
 
+        {/* STUDENTS PAGE */}
+        {activePage === "students" && (
+          <Suspense fallback={<div style={{ color: "#94a3b8", fontSize: 14 }}>Loading…</div>}>
+            <StudentsPage />
+          </Suspense>
+        )}
+
         {/* ABOUT PAGE */}
         {activePage === "about" && (
           <>
@@ -2329,7 +2338,7 @@ export default function TalentScopeDashboard() {
               </div>
               <div style={{ fontSize: 12, color: "#64748b", lineHeight: 1.8 }}>
                 <p style={{ margin: "0 0 12px" }}>Built with React, Vite, Recharts and MapLibre. The data was prepared with Python and pandas, and everything runs in the browser.</p>
-                <p style={{ margin: "0 0 12px" }}>Features: Market Overview, Skills Intel, Salary Insights, Locations, Roles, Salary Estimator, Data and Method.</p>
+                <p style={{ margin: "0 0 12px" }}>Features: Market Overview, Skills Intel, Salary Insights, Locations, Roles, Salary Estimator, For Students, Data and Method.</p>
                 <p style={{ margin: 0 }}>Hover over the top 4 metric cards to explore detailed insights. Salary figures use only the postings that list a salary.</p>
               </div>
             </GlowCard>
