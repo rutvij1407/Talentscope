@@ -20,6 +20,7 @@ import {
 
 const StateMap = lazy(() => import("./StateMap.jsx"));
 import { stateDataByName } from "./StateMap.jsx";
+import data from "./data/talentscope.json";
 
 // Professional, muted analytics palette
 const PRIMARY = "#3b82f6"; // blue-500
@@ -86,114 +87,21 @@ const skillMeta = {
   },
 };
 
-const skillsData = [
-  { skill: "Python", demand: 78, salary: 125 },
-  { skill: "SQL", demand: 72, salary: 115 },
-  { skill: "Tableau", demand: 58, salary: 108 },
-  { skill: "R", demand: 42, salary: 112 },
-  { skill: "Power BI", demand: 51, salary: 105 },
-  { skill: "Spark", demand: 38, salary: 135 },
-  { skill: "AWS", demand: 45, salary: 140 },
-  { skill: "TensorFlow", demand: 32, salary: 145 },
-  { skill: "Excel", demand: 65, salary: 95 },
-  { skill: "Java", demand: 35, salary: 130 },
-];
-
-// Sample of skills we "track" (847 total) — shown in Skills Tracked hover list
-const skillsTrackedSample = [
-  "Python", "SQL", "R", "Excel", "Tableau", "Power BI", "Spark", "AWS", "TensorFlow", "Java",
-  "Machine Learning", "Statistics", "ETL", "Data Modeling", "A/B Testing", "Git", "Docker", "Kafka",
-  "Snowflake", "dbt", "Airflow", "Pandas", "Scikit-learn", "PyTorch", "NoSQL", "MongoDB", "Redshift",
-  "BigQuery", "Looker", "SAS", "SPSS", "Jupyter", "Databricks", "Azure", "GCP", "CI/CD", "API design",
-];
-
-// Companies ranked by hiring volume (top to low) — for Companies card hover
-const companiesRanked = [
-  { rank: 1, name: "Amazon", jobs: 12400 },
-  { rank: 2, name: "Google", jobs: 9820 },
-  { rank: 3, name: "Microsoft", jobs: 8750 },
-  { rank: 4, name: "Meta", jobs: 6120 },
-  { rank: 5, name: "Apple", jobs: 5890 },
-  { rank: 6, name: "JPMorgan Chase", jobs: 4520 },
-  { rank: 7, name: "Deloitte", jobs: 4180 },
-  { rank: 8, name: "Accenture", jobs: 3950 },
-  { rank: 9, name: "IBM", jobs: 3620 },
-  { rank: 10, name: "Netflix", jobs: 2180 },
-  { rank: 11, name: "Salesforce", jobs: 1950 },
-  { rank: 12, name: "Adobe", jobs: 1720 },
-  { rank: 13, name: "Uber", jobs: 1580 },
-  { rank: 14, name: "Spotify", jobs: 920 },
-  { rank: 15, name: "Stripe", jobs: 780 },
-];
-
-// Monthly posting trend — for Total Postings card hover
-const totalPostingsByMonth = [
-  { month: "Mar", postings: 1120000 },
-  { month: "Apr", postings: 1150000 },
-  { month: "May", postings: 1190000 },
-  { month: "Jun", postings: 1220000 },
-  { month: "Jul", postings: 1260000 },
-  { month: "Aug", postings: 1300000 },
-];
-
-// Avg salary by role — for Avg Salary card hover
-const avgSalaryByRole = [
-  { role: "Data Analyst", salary: 85 },
-  { role: "Data Scientist", salary: 115 },
-  { role: "Data Engineer", salary: 125 },
-  { role: "ML Engineer", salary: 140 },
-  { role: "Business Analyst", salary: 82 },
-  { role: "BI Analyst", salary: 90 },
-];
-
-const salaryTrend = [
-  { month: "Jan", analyst: 85, scientist: 115, engineer: 125 },
-  { month: "Feb", analyst: 87, scientist: 118, engineer: 128 },
-  { month: "Mar", analyst: 86, scientist: 120, engineer: 132 },
-  { month: "Apr", analyst: 90, scientist: 122, engineer: 130 },
-  { month: "May", analyst: 92, scientist: 125, engineer: 135 },
-  { month: "Jun", analyst: 91, scientist: 128, engineer: 138 },
-  { month: "Jul", analyst: 95, scientist: 130, engineer: 140 },
-  { month: "Aug", analyst: 93, scientist: 132, engineer: 142 },
-];
-
-const jobDistribution = [
-  { name: "Data Analyst", value: 35, color: PRIMARY },
-  { name: "Data Scientist", value: 28, color: MUTED_2 },
-  { name: "Data Engineer", value: 22, color: ACCENT },
-  { name: "ML Engineer", value: 15, color: MUTED_1 },
-];
-
-const locationData = [
-  { city: "San Francisco", jobs: 4200, avg_salary: 155 },
-  { city: "New York", jobs: 3800, avg_salary: 145 },
-  { city: "Seattle", jobs: 2900, avg_salary: 150 },
-  { city: "Austin", jobs: 2100, avg_salary: 128 },
-  { city: "Chicago", jobs: 1800, avg_salary: 120 },
-  { city: "Boston", jobs: 1600, avg_salary: 138 },
-  { city: "Denver", jobs: 1200, avg_salary: 118 },
-  { city: "Remote", jobs: 5500, avg_salary: 132 },
-];
-
-const radarData = [
-  { subject: "Python", A: 92, B: 78 },
-  { subject: "SQL", A: 88, B: 85 },
-  { subject: "ML", A: 75, B: 45 },
-  { subject: "Stats", A: 82, B: 70 },
-  { subject: "Viz", A: 70, B: 90 },
-  { subject: "Cloud", A: 65, B: 40 },
-];
-
-const postingVolume = [
-  { week: "W1", postings: 2400 },
-  { week: "W2", postings: 2800 },
-  { week: "W3", postings: 3100 },
-  { week: "W4", postings: 2900 },
-  { week: "W5", postings: 3500 },
-  { week: "W6", postings: 3800 },
-  { week: "W7", postings: 4200 },
-  { week: "W8", postings: 4600 },
-];
+// All figures below come from src/data/talentscope.json, computed from 2023 US job postings
+// by scripts/build_data.py. There is no backend and no API key.
+const skillsData = data.skillsData.map((s) => ({ skill: s.skill, demand: s.demand, salary: s.salary ?? 0 }));
+const skillsTrackedSample = data.skillsTrackedSample;
+const companiesRanked = data.companiesRanked;
+const totalPostingsByMonth = data.totalPostingsByMonth;
+const avgSalaryByRole = data.avgSalaryByRole;
+const salaryTrend = data.salaryTrend;
+const jobDistribution = data.jobDistribution.map((d, i) => ({
+  ...d,
+  color: [PRIMARY, MUTED_2, ACCENT, MUTED_1, "#64748b"][i % 5],
+}));
+const locationData = data.locationData;
+const radarData = data.radarData;
+const postingVolume = data.postingVolume;
 
 function AnimatedCounter({ target, duration = 2000, prefix = "", suffix = "" }) {
   const [count, setCount] = useState(0);
@@ -419,7 +327,7 @@ function SkillsTrackedCard({ id, activeCard, setActiveCard, delay }) {
         }}
       >
         <div style={{ fontSize: 10, color: "#64748b", textTransform: "uppercase", letterSpacing: 1, marginBottom: 4 }}>Skills Tracked</div>
-        <div style={{ fontSize: 18, fontWeight: 700, color: accentColor }}><AnimatedCounter target={847} suffix="" /></div>
+        <div style={{ fontSize: 18, fontWeight: 700, color: accentColor }}><AnimatedCounter target={data.meta.distinctSkills} suffix="" /></div>
       </div>
     );
   }
@@ -445,7 +353,7 @@ function SkillsTrackedCard({ id, activeCard, setActiveCard, delay }) {
       <GlowCard delay={delay} glowColor={MUTED_1}>
         <div style={{ fontSize: 12, color: "#64748b", textTransform: "uppercase", letterSpacing: 1.5, marginBottom: 8 }}>Skills Tracked</div>
         <div style={{ fontSize: "clamp(1.25rem, 4vw, 2.25rem)", fontWeight: 700, color: MUTED_1, fontFamily: "'Inter', system-ui, sans-serif", marginBottom: 4 }}>
-          <AnimatedCounter target={847} suffix="" />
+          <AnimatedCounter target={data.meta.distinctSkills} suffix="" />
         </div>
         <div style={{ fontSize: 12, color: "#22c55e", display: "flex", alignItems: "center", gap: 4 }}>
           <PulsingDot color="#22c55e" />
@@ -510,7 +418,7 @@ function TotalPostingsCard({ id, activeCard, setActiveCard, delay }) {
         }}
       >
         <div style={{ fontSize: 10, color: "#64748b", textTransform: "uppercase", letterSpacing: 1, marginBottom: 4 }}>Total Postings</div>
-        <div style={{ fontSize: 18, fontWeight: 700, color: accentColor }}><AnimatedCounter target={1} prefix="" suffix=".3M+" /></div>
+        <div style={{ fontSize: 18, fontWeight: 700, color: accentColor }}><AnimatedCounter target={Math.round(data.meta.postingsUS / 1000)} prefix="" suffix="K" /></div>
       </div>
     );
   }
@@ -520,7 +428,7 @@ function TotalPostingsCard({ id, activeCard, setActiveCard, delay }) {
     <div style={{ position: "relative", minWidth: 0, transition: "transform 0.25s ease", willChange: "transform", cursor: "pointer", zIndex: hover ? 20 : 1 }} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)} onClick={() => setActiveCard(id)} role="button" tabIndex={0} onKeyDown={(e) => e.key === "Enter" && setActiveCard(id)}>
       <GlowCard delay={delay} glowColor={PRIMARY}>
         <div style={{ fontSize: 12, color: "#64748b", textTransform: "uppercase", letterSpacing: 1.5, marginBottom: 8 }}>Total Postings</div>
-        <div style={{ fontSize: "clamp(1.25rem, 4vw, 2.25rem)", fontWeight: 700, color: PRIMARY, fontFamily: "'Inter', system-ui, sans-serif", marginBottom: 4, minWidth: 0, overflow: "hidden" }}><AnimatedCounter target={1} prefix="" suffix=".3M+" /></div>
+        <div style={{ fontSize: "clamp(1.25rem, 4vw, 2.25rem)", fontWeight: 700, color: PRIMARY, fontFamily: "'Inter', system-ui, sans-serif", marginBottom: 4, minWidth: 0, overflow: "hidden" }}><AnimatedCounter target={Math.round(data.meta.postingsUS / 1000)} prefix="" suffix="K" /></div>
         <div style={{ fontSize: 12, color: "#22c55e", display: "flex", alignItems: "center", gap: 4 }}><PulsingDot color="#22c55e" /> Click to open</div>
       </GlowCard>
       {hover && (
@@ -565,8 +473,8 @@ function AvgSalaryCard({ id, activeCard, setActiveCard, delay }) {
           boxShadow: hover && !isSelected ? `0 0 0 1px ${accentColor}40` : "none",
         }}
       >
-        <div style={{ fontSize: 10, color: "#64748b", textTransform: "uppercase", letterSpacing: 1, marginBottom: 4 }}>Avg Salary</div>
-        <div style={{ fontSize: 18, fontWeight: 700, color: accentColor }}><AnimatedCounter target={118} prefix="$" suffix="K" /></div>
+        <div style={{ fontSize: 10, color: "#64748b", textTransform: "uppercase", letterSpacing: 1, marginBottom: 4 }}>Median Salary</div>
+        <div style={{ fontSize: 18, fontWeight: 700, color: accentColor }}><AnimatedCounter target={Math.round(data.meta.medianSalaryK)} prefix="$" suffix="K" /></div>
       </div>
     );
   }
@@ -575,8 +483,8 @@ function AvgSalaryCard({ id, activeCard, setActiveCard, delay }) {
   return (
     <div style={{ position: "relative", minWidth: 0, transition: "transform 0.25s ease", willChange: "transform", cursor: "pointer", zIndex: hover ? 20 : 1 }} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)} onClick={() => setActiveCard(id)} role="button" tabIndex={0} onKeyDown={(e) => e.key === "Enter" && setActiveCard(id)}>
       <GlowCard delay={delay} glowColor={ACCENT}>
-        <div style={{ fontSize: 12, color: "#64748b", textTransform: "uppercase", letterSpacing: 1.5, marginBottom: 8 }}>Avg Salary</div>
-        <div style={{ fontSize: "clamp(1.25rem, 4vw, 2.25rem)", fontWeight: 700, color: ACCENT, fontFamily: "'Inter', system-ui, sans-serif", marginBottom: 4, minWidth: 0, overflow: "hidden" }}><AnimatedCounter target={118} prefix="$" suffix="K" /></div>
+        <div style={{ fontSize: 12, color: "#64748b", textTransform: "uppercase", letterSpacing: 1.5, marginBottom: 8 }}>Median Salary</div>
+        <div style={{ fontSize: "clamp(1.25rem, 4vw, 2.25rem)", fontWeight: 700, color: ACCENT, fontFamily: "'Inter', system-ui, sans-serif", marginBottom: 4, minWidth: 0, overflow: "hidden" }}><AnimatedCounter target={Math.round(data.meta.medianSalaryK)} prefix="$" suffix="K" /></div>
         <div style={{ fontSize: 12, color: "#22c55e", display: "flex", alignItems: "center", gap: 4 }}><PulsingDot color="#22c55e" /> Click to open</div>
       </GlowCard>
       {hover && (
@@ -622,7 +530,7 @@ function CompaniesCard({ id, activeCard, setActiveCard, delay }) {
         }}
       >
         <div style={{ fontSize: 10, color: "#64748b", textTransform: "uppercase", letterSpacing: 1, marginBottom: 4 }}>Companies</div>
-        <div style={{ fontSize: 18, fontWeight: 700, color: accentColor }}><AnimatedCounter target={48500} suffix="+" /></div>
+        <div style={{ fontSize: 18, fontWeight: 700, color: accentColor }}><AnimatedCounter target={data.meta.distinctCompanies} suffix="" /></div>
       </div>
     );
   }
@@ -632,7 +540,7 @@ function CompaniesCard({ id, activeCard, setActiveCard, delay }) {
     <div style={{ position: "relative", minWidth: 0, transition: "transform 0.25s ease", willChange: "transform", cursor: "pointer", zIndex: hover ? 20 : 1 }} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)} onClick={() => setActiveCard(id)} role="button" tabIndex={0} onKeyDown={(e) => e.key === "Enter" && setActiveCard(id)}>
       <GlowCard delay={delay} glowColor={MUTED_2}>
         <div style={{ fontSize: 12, color: "#64748b", textTransform: "uppercase", letterSpacing: 1.5, marginBottom: 8 }}>Companies</div>
-        <div style={{ fontSize: "clamp(1.25rem, 4vw, 2.25rem)", fontWeight: 700, color: MUTED_2, fontFamily: "'Inter', system-ui, sans-serif", marginBottom: 4, minWidth: 0, overflow: "hidden" }}><AnimatedCounter target={48500} suffix="+" /></div>
+        <div style={{ fontSize: "clamp(1.25rem, 4vw, 2.25rem)", fontWeight: 700, color: MUTED_2, fontFamily: "'Inter', system-ui, sans-serif", marginBottom: 4, minWidth: 0, overflow: "hidden" }}><AnimatedCounter target={data.meta.distinctCompanies} suffix="" /></div>
         <div style={{ fontSize: 12, color: "#22c55e", display: "flex", alignItems: "center", gap: 4 }}><PulsingDot color="#22c55e" /> Click to open</div>
       </GlowCard>
       {hover && (
@@ -664,7 +572,7 @@ function ActiveCardContent({ activeCard, setActiveCard }) {
     return (
       <div style={{ ...panelStyle, borderColor: PRIMARY }} onClick={(e) => e.stopPropagation()}>
         <div style={headerStyle}>
-          <div><h2 style={{ margin: 0, fontSize: 20, fontWeight: 700, color: PRIMARY }}>Total Postings</h2><p style={{ margin: "6px 0 0", fontSize: 12, color: "#64748b" }}>Monthly trend (last 6 months)</p></div>
+          <div><h2 style={{ margin: 0, fontSize: 20, fontWeight: 700, color: PRIMARY }}>Total Postings</h2><p style={{ margin: "6px 0 0", fontSize: 12, color: "#64748b" }}>Postings by month, 2023</p></div>
           {closeBtn}
         </div>
         <div className="metric-popover-scroll" style={bodyStyle}>
@@ -682,7 +590,7 @@ function ActiveCardContent({ activeCard, setActiveCard }) {
     return (
       <div style={{ ...panelStyle, borderColor: ACCENT }} onClick={(e) => e.stopPropagation()}>
         <div style={headerStyle}>
-          <div><h2 style={{ margin: 0, fontSize: 20, fontWeight: 700, color: ACCENT }}>Average salary by role</h2><p style={{ margin: "6px 0 0", fontSize: 12, color: "#64748b" }}>Base mid-level salary ($K)</p></div>
+          <div><h2 style={{ margin: 0, fontSize: 20, fontWeight: 700, color: ACCENT }}>Median salary by role</h2><p style={{ margin: "6px 0 0", fontSize: 12, color: "#64748b" }}>Median listed salary ($K), all seniority levels</p></div>
           {closeBtn}
         </div>
         <div className="metric-popover-scroll" style={bodyStyle}>
@@ -719,7 +627,7 @@ function ActiveCardContent({ activeCard, setActiveCard }) {
     return (
       <div style={{ ...panelStyle, borderColor: MUTED_1 }} onClick={(e) => e.stopPropagation()}>
         <div style={headerStyle}>
-          <div><h2 style={{ margin: 0, fontSize: 20, fontWeight: 700, color: MUTED_1 }}>Skills tracked (847)</h2><p style={{ margin: "6px 0 0", fontSize: 12, color: "#64748b" }}>Sample of skills we track across job postings</p></div>
+          <div><h2 style={{ margin: 0, fontSize: 20, fontWeight: 700, color: MUTED_1 }}>Skills tracked ({data.meta.distinctSkills})</h2><p style={{ margin: "6px 0 0", fontSize: 12, color: "#64748b" }}>Most common skills in the postings</p></div>
           {closeBtn}
         </div>
         <div className="metric-popover-scroll" style={bodyStyle}>
@@ -748,7 +656,7 @@ function TopHiringStatesCard() {
         Top hiring states
       </div>
       <div style={{ fontSize: 11, color: "#64748b", marginBottom: 12 }}>
-        By job count — hover for avg salary and range (same as map)
+        By job count. Hover for median salary and typical range.
       </div>
       <div style={{ position: "relative", display: "flex", flexWrap: "wrap", gap: "8px 10px" }}>
         {topHiringStatesList.map(({ name, jobs, avgSalary, minSalary, maxSalary }, i) => (
@@ -794,10 +702,10 @@ function TopHiringStatesCard() {
             {hoveredState.jobs != null ? hoveredState.jobs.toLocaleString() : "—"} jobs
           </div>
           <div style={{ fontSize: 12, color: "#94a3b8", marginBottom: 4 }}>
-            Avg salary: <strong style={{ color: ACCENT }}>${hoveredState.avgSalary}K</strong>
+            Median salary: <strong style={{ color: ACCENT }}>{hoveredState.avgSalary != null ? `$${hoveredState.avgSalary}K` : "not enough data"}</strong>
           </div>
           <div style={{ fontSize: 11, color: "#64748b" }}>
-            Range: ${hoveredState.minSalary}K – ${hoveredState.maxSalary}K
+            {hoveredState.avgSalary != null ? `Typical range: $${hoveredState.minSalary}K to $${hoveredState.maxSalary}K` : ""}
           </div>
         </div>
       )}
@@ -990,85 +898,37 @@ function CustomTooltip({ active, payload, label }) {
   );
 }
 
-// All job roles supported by the predictor (base salary in $K, mid-level)
-const PREDICTOR_ROLES = [
-  { label: "Data Analyst", base: 85 },
-  { label: "Business Analyst", base: 82 },
-  { label: "Financial Analyst", base: 88 },
-  { label: "Product Analyst", base: 95 },
-  { label: "Marketing Analyst", base: 78 },
-  { label: "Data Scientist", base: 115 },
-  { label: "Research Scientist", base: 130 },
-  { label: "Applied Scientist", base: 125 },
-  { label: "Analytics Engineer", base: 105 },
-  { label: "Data Engineer", base: 125 },
-  { label: "ML Engineer", base: 140 },
-  { label: "BI Analyst", base: 90 },
-  { label: "BI Developer", base: 98 },
-  { label: "Data Architect", base: 145 },
-  { label: "Software Engineer", base: 120 },
-  { label: "Backend Engineer", base: 118 },
-  { label: "DevOps Engineer", base: 115 },
-  { label: "Solutions Architect", base: 135 },
-  { label: "Statistician", base: 95 },
-  { label: "Quantitative Analyst", base: 110 },
-  { label: "Machine Learning Engineer", base: 142 },
-  { label: "AI Engineer", base: 138 },
-  { label: "ETL Developer", base: 102 },
-  { label: "Database Administrator", base: 100 },
-];
-
-const PREDICTOR_LOCATIONS = [
-  "Remote",
-  "San Francisco",
-  "New York",
-  "Seattle",
-  "Austin",
-  "Boston",
-  "Chicago",
-  "Denver",
-  "Los Angeles",
-  "Washington DC",
-  "Atlanta",
-  "Miami",
-  "Dallas",
-  "Philadelphia",
-];
+// Roles and cities available in the estimator come from the data (see data.predictor).
+const PREDICTOR = data.predictor;
+const PREDICTOR_ROLES = Object.keys(PREDICTOR.roles).map((label) => ({ label }));
+const PREDICTOR_LOCATIONS = Object.keys(PREDICTOR.locations);
 
 function SalaryPredictor() {
   const [role, setRole] = useState("Data Analyst");
   const [exp, setExp] = useState("Mid");
-  const [loc, setLoc] = useState("Remote");
+  const [loc, setLoc] = useState(PREDICTOR_LOCATIONS[0]);
   const [predicted, setPredicted] = useState(null);
+  const [detail, setDetail] = useState(null);
   const [animating, setAnimating] = useState(false);
 
   const predict = () => {
     setAnimating(true);
     setPredicted(null);
-    const roleEntry = PREDICTOR_ROLES.find((r) => r.label === role);
-    const base = roleEntry ? roleEntry.base : 95;
     setTimeout(() => {
-      const expMult = { Junior: 0.75, Mid: 1, Senior: 1.35 };
-      const locMult = {
-        "San Francisco": 1.3,
-        "New York": 1.25,
-        Seattle: 1.2,
-        Remote: 1.05,
-        Austin: 1.0,
-        Boston: 1.15,
-        Chicago: 1.0,
-        Denver: 1.0,
-        "Los Angeles": 1.15,
-        "Washington DC": 1.2,
-        Atlanta: 0.95,
-        Miami: 0.95,
-        Dallas: 1.0,
-        Philadelphia: 1.05,
-      };
-      const val = Math.round(base * expMult[exp] * (locMult[loc] || 1));
-      setPredicted(val);
+      // Lookup: median salary for the role and seniority, adjusted for the city.
+      const r = PREDICTOR.roles[role];
+      const s = r.bySeniority[exp];
+      const base = s.median ?? r.median * PREDICTOR.seniorityFactor[exp];
+      const factor = PREDICTOR.locations[loc]?.factor ?? 1;
+      const mid = Math.round(base * factor);
+      setDetail({
+        lo: Math.round(mid * (r.p25 / r.median)),
+        hi: Math.round(mid * (r.p75 / r.median)),
+        n: s.n || r.n,
+      });
+      setPredicted(mid);
       setAnimating(false);
-    }, 1200);
+    }, 400);
   };
 
   const selectStyle = {
@@ -1097,7 +957,7 @@ function SalaryPredictor() {
           fontFamily: "'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif",
         }}
       >
-        ML Salary Predictor
+        Salary Estimator
       </div>
       <div
         style={{
@@ -1106,7 +966,7 @@ function SalaryPredictor() {
           marginBottom: 20,
         }}
       >
-        Random Forest + Gradient Boosting ensemble model
+        Median salary lookup from 2023 US postings that list a salary
       </div>
       <div
         style={{
@@ -1196,10 +1056,10 @@ function SalaryPredictor() {
             e.currentTarget.style.background = PRIMARY;
           }}
         >
-          {animating ? "⟳ COMPUTING..." : "PREDICT"}
+          {animating ? "⟳ LOOKING UP..." : "ESTIMATE"}
         </button>
       </div>
-      {predicted && (
+      {predicted && detail && (
         <div
           style={{
             marginTop: 20,
@@ -1219,7 +1079,7 @@ function SalaryPredictor() {
               color: "#94a3b8",
             }}
           >
-            Predicted Salary
+            Estimated Salary
           </div>
           <div
             style={{
@@ -1238,7 +1098,7 @@ function SalaryPredictor() {
               marginLeft: "auto",
             }}
           >
-            Range: ${predicted - 12}K ~ ${predicted + 18}K | Confidence: 87%
+            Typical range: ${detail?.lo}K to ${detail?.hi}K, based on {detail?.n?.toLocaleString()} postings with a listed salary
           </div>
         </div>
       )}
@@ -1426,7 +1286,7 @@ function LocationCard({ city, jobs, avgSalary, rank, delay }) {
         {jobs.toLocaleString()}
       </div>
       <div style={{ fontSize: 11, color: "#64748b", marginTop: 4 }}>
-        Avg salary: <strong style={{ color: ACCENT }}>${avgSalary}K</strong>
+        Median salary: <strong style={{ color: ACCENT }}>{avgSalary != null ? `$${avgSalary}K` : "n/a"}</strong>
       </div>
     </div>
   );
@@ -1467,8 +1327,8 @@ export default function TalentScopeDashboard() {
     { id: "salary", icon: "◉", label: "Salary Insights" },
     { id: "locations", icon: "📍", label: "Locations" },
     { id: "roles", icon: "👤", label: "Roles" },
-    { id: "predict", icon: "△", label: "ML Predictor" },
-    { id: "explore", icon: "☰", label: "Data Explorer" },
+    { id: "predict", icon: "△", label: "Salary Estimator" },
+    { id: "explore", icon: "☰", label: "Data and Method" },
     { id: "about", icon: "ℹ", label: "About" },
   ];
 
@@ -1713,7 +1573,7 @@ export default function TalentScopeDashboard() {
               lineHeight: 1.6,
             }}
           >
-            <PulsingDot color={ACCENT} /> 1.3M+ Jobs Analyzed
+            <PulsingDot color={ACCENT} /> {data.meta.postingsUS.toLocaleString()} US postings analyzed
             <br />
             <span
               style={{
@@ -1721,7 +1581,7 @@ export default function TalentScopeDashboard() {
                 marginLeft: 16,
               }}
             >
-              Last updated: Live
+              Data: 2023 snapshot
             </span>
           </div>
         </div>
@@ -1775,7 +1635,7 @@ export default function TalentScopeDashboard() {
                 margin: "4px 0 0",
               }}
             >
-              Real-time insights from 1.3M+ LinkedIn job postings
+              Insights from {data.meta.postingsUS.toLocaleString()} US data job postings from 2023
             </p>
           </div>
           <div
@@ -1792,7 +1652,7 @@ export default function TalentScopeDashboard() {
           >
             <PulsingDot color={ACCENT} />
             <span style={{ fontSize: isMobile ? 11 : 12, color: "#e5e7eb" }}>
-              LIVE DATA
+              2023 DATA
             </span>
           </div>
         </div>
@@ -1839,7 +1699,7 @@ export default function TalentScopeDashboard() {
                         marginTop: 2,
                       }}
                     >
-                      Monthly average (in $K)
+                      Monthly median (in $K)
                     </div>
                   </div>
                   <div
@@ -2110,7 +1970,7 @@ export default function TalentScopeDashboard() {
                 Top Hiring Locations
               </div>
               <div style={{ fontSize: 11, color: "#64748b", marginBottom: 20 }}>
-                Job count and average salary by city — hover for highlight
+                Job count and median salary by city. Hover for highlight.
               </div>
               <div
                 style={{
@@ -2332,7 +2192,7 @@ export default function TalentScopeDashboard() {
 
             <GlowCard delay={650} glowColor={PRIMARY}>
               <div style={{ fontSize: 15, fontWeight: 700, color: "#e2e8f0", marginBottom: 4 }}>Salary by Location (Ranked)</div>
-              <div style={{ fontSize: 11, color: "#64748b", marginBottom: 16 }}>Cities ranked by job count with indicative average salary.</div>
+              <div style={{ fontSize: 11, color: "#64748b", marginBottom: 16 }}>Cities ranked by job count, with the median listed salary.</div>
               <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(170px, 1fr))", gap: 14 }}>
                 {locationData.slice().sort((a, b) => b.jobs - a.jobs).map((loc, i) => (
                   <LocationCard key={loc.city} city={loc.city} jobs={loc.jobs} avgSalary={loc.avg_salary} rank={i + 1} delay={650 + i * 60} />
@@ -2347,14 +2207,14 @@ export default function TalentScopeDashboard() {
           <>
             <GlowCard delay={200} glowColor={PRIMARY}>
               <div style={{ fontSize: 16, fontWeight: 700, color: "#e2e8f0", marginBottom: 4 }}>Top Hiring Locations</div>
-              <div style={{ fontSize: 11, color: "#64748b", marginBottom: 12 }}>State map — name in the center of each state; hover to see job count, avg salary, and range</div>
+              <div style={{ fontSize: 11, color: "#64748b", marginBottom: 12 }}>State map shaded by job count (darker means fewer). Hover a state to see its job count and salary.</div>
               <Suspense fallback={<div style={{ height: 420, borderRadius: 14, background: "rgba(15,23,42,0.6)", border: "1px solid #1e293b", display: "flex", alignItems: "center", justifyContent: "center", color: "#94a3b8", fontSize: 14 }}>Loading map…</div>}>
                 <StateMap accentColor={PRIMARY} />
               </Suspense>
             </GlowCard>
             <GlowCard delay={400} glowColor={PRIMARY}>
               <div style={{ fontSize: 16, fontWeight: 700, color: "#e2e8f0", marginBottom: 4 }}>Top hiring by metro (cities)</div>
-              <div style={{ fontSize: 11, color: "#64748b", marginBottom: 20 }}>Job count and average salary by city — hover for highlight</div>
+              <div style={{ fontSize: 11, color: "#64748b", marginBottom: 20 }}>Job count and median salary by city. Hover for highlight.</div>
               <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(170px, 1fr))", gap: 14 }}>
                 {locationData.slice().sort((a, b) => b.jobs - a.jobs).map((loc, i) => (
                   <LocationCard key={loc.city} city={loc.city} jobs={loc.jobs} avgSalary={loc.avg_salary} rank={i + 1} delay={400 + i * 60} />
@@ -2363,7 +2223,7 @@ export default function TalentScopeDashboard() {
             </GlowCard>
             <GlowCard delay={600} glowColor={ACCENT} style={{ marginTop: 16 }}>
               <div style={{ fontSize: 15, fontWeight: 700, color: "#e2e8f0", marginBottom: 8 }}>Salary by Location</div>
-              <div style={{ fontSize: 11, color: "#64748b", marginBottom: 12 }}>Average salary ($K) by metro — higher pay in SF, NY, Seattle</div>
+              <div style={{ fontSize: 11, color: "#64748b", marginBottom: 12 }}>Median salary ($K) by metro. San Francisco pays the most in this data.</div>
               <div style={{ display: "flex", flexWrap: "wrap", gap: "8px 12px" }}>
                 {locationData.slice().sort((a, b) => b.avg_salary - a.avg_salary).map((loc, i) => (
                   <span
@@ -2440,7 +2300,7 @@ export default function TalentScopeDashboard() {
                   fontFamily: "'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif",
                 }}
               >
-                How the Model Thinks
+                How this estimate works
               </div>
               <div
                 style={{
@@ -2449,9 +2309,11 @@ export default function TalentScopeDashboard() {
                   lineHeight: 1.7,
                 }}
               >
-                In the full ML pipeline, this page will be powered by a trained Random Forest / Gradient Boosting
-                ensemble and will show real feature importance scores. For now, treat it as an interactive prototype:
-                change the role, experience level and location to get an instant feel for how compensation moves.
+                This is a lookup, not a trained model. It takes the median salary of 2023 US postings that list a salary
+                for the chosen role and seniority, then adjusts it by how much that city pays above or below the norm. The
+                typical range is the middle half of postings for the role. Seniority is read from the job title. Cities
+                with few salaried postings are left out, and ML Engineer and Software Engineer have few postings, so
+                treat their estimates as rough.
               </div>
             </GlowCard>
           </>
@@ -2463,12 +2325,12 @@ export default function TalentScopeDashboard() {
             <GlowCard delay={400} glowColor={PRIMARY}>
               <div style={{ fontSize: 18, fontWeight: 700, color: "#e2e8f0", marginBottom: 8 }}>TalentScope</div>
               <div style={{ fontSize: 13, color: "#94a3b8", marginBottom: 16, lineHeight: 1.7 }}>
-                Job Market Intelligence Dashboard — Real-time insights from 1.3M+ LinkedIn job postings.
+                Job Market Intelligence Dashboard: insights from {data.meta.postingsUS.toLocaleString()} US data job postings from 2023.
               </div>
               <div style={{ fontSize: 12, color: "#64748b", lineHeight: 1.8 }}>
-                <p style={{ margin: "0 0 12px" }}>Built with React, Vite, Recharts, Flask, and Python ML.</p>
-                <p style={{ margin: "0 0 12px" }}>Features: Market Overview, Skills Intel, Salary Insights, Locations, Roles, ML Salary Predictor, Data Explorer.</p>
-                <p style={{ margin: 0 }}>Hover over the top 4 metric cards to explore detailed insights. Use the scroll wheel inside each popover to browse all data.</p>
+                <p style={{ margin: "0 0 12px" }}>Built with React, Vite, Recharts and MapLibre. The data was prepared with Python and pandas, and everything runs in the browser.</p>
+                <p style={{ margin: "0 0 12px" }}>Features: Market Overview, Skills Intel, Salary Insights, Locations, Roles, Salary Estimator, Data and Method.</p>
+                <p style={{ margin: 0 }}>Hover over the top 4 metric cards to explore detailed insights. Salary figures use only the postings that list a salary.</p>
               </div>
             </GlowCard>
             <GlowCard delay={500} glowColor={ACCENT} style={{ marginTop: 16 }}>
@@ -2491,32 +2353,31 @@ export default function TalentScopeDashboard() {
                 fontFamily: "'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif",
               }}
             >
-              Custom Data Explorer (Prototype)
+              Data and Method
             </div>
-            <div
-              style={{
-                fontSize: 12,
-                color: "#9ca3af",
-                marginBottom: 16,
-                lineHeight: 1.7,
-              }}
-            >
-              This page will allow uploading your own job posting CSV and reusing the same analytics pipeline
-              (overview, skills, salary) on private datasets. For now, it serves as a design placeholder and a talking
-              point in interviews about how you would generalize the platform beyond LinkedIn data.
-            </div>
-            <div
-              style={{
-                borderRadius: 12,
-                border: `1px dashed ${BORDER_SUBTLE}`,
-                padding: "32px",
-                textAlign: "center",
-                background: "#020617",
-                color: "#64748b",
-                fontSize: 13,
-              }}
-            >
-              Drag & drop area – Upload a CSV file of job postings here in the full implementation.
+            <div style={{ fontSize: 12, color: "#9ca3af", lineHeight: 1.8 }}>
+              <p style={{ margin: "0 0 12px" }}>
+                Source: the public lukebarousse/data_jobs dataset on Hugging Face (Apache 2.0), which collects data job
+                postings from 2023. It has {data.meta.postingsAllCountries.toLocaleString()} postings worldwide. This
+                dashboard uses the {data.meta.postingsUS.toLocaleString()} in the United States.
+              </p>
+              <p style={{ margin: "0 0 12px" }}>
+                Skills: {data.meta.postingsWithSkills.toLocaleString()} postings list skills, covering{" "}
+                {data.meta.distinctSkills} distinct skills. Demand is the share of those postings that mention a skill.
+              </p>
+              <p style={{ margin: "0 0 12px" }}>
+                Salaries: only {data.meta.postingsWithSalary.toLocaleString()} postings list a yearly salary, so every
+                salary figure comes from that smaller group. The overall median is ${data.meta.medianSalaryK}K. States
+                with fewer than 10 salaried postings show no salary.
+              </p>
+              <p style={{ margin: "0 0 12px" }}>
+                Limits: this is one year of data from one collection, so it shows 2023 and not today. Postings are not
+                hires, and a company can post the same job many times.
+              </p>
+              <p style={{ margin: 0 }}>
+                Everything is precomputed by scripts/build_data.py into one small JSON file, so the site needs no backend
+                or API keys.
+              </p>
             </div>
           </GlowCard>
         )}
@@ -2532,7 +2393,7 @@ export default function TalentScopeDashboard() {
         >
           Built by Rutvij Reddy Vakati | MS Data Analytics Engineering, George Mason University
           <br />
-          <span style={{ opacity: 0.7 }}>Locations · Roles · About · Hover cards enabled</span>
+          <span style={{ opacity: 0.7 }}>Data: 2023 US data job postings (Hugging Face, Apache 2.0)</span>
         </div>
       </div>
     </div>

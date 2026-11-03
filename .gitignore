@@ -5,3 +5,7 @@ frontend/.env
 .env.local
 backend/__pycache__
 backend/venv
+
+data_jobs.csv
+*.csv
+__pycache__/

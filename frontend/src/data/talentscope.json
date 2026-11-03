@@ -1,0 +1,1030 @@
+{
+ "meta": {
+  "source": "lukebarousse/data_jobs (Hugging Face, Apache 2.0)",
+  "scope": "United States data job postings, 2023",
+  "postingsUS": 206292,
+  "postingsAllCountries": 785741,
+  "postingsWithSkills": 182167,
+  "postingsWithSalary": 15766,
+  "distinctSkills": 241,
+  "distinctCompanies": 35298,
+  "medianSalaryK": 119.2,
+  "dateFrom": "2023-01-01",
+  "dateTo": "2023-12-31"
+ },
+ "skillsData": [
+  {
+   "skill": "Python",
+   "demand": 58.8,
+   "salary": 128.0,
+   "postings": 107176
+  },
+  {
+   "skill": "SQL",
+   "demand": 63.2,
+   "salary": 120.0,
+   "postings": 115048
+  },
+  {
+   "skill": "Tableau",
+   "demand": 27.2,
+   "salary": 114.0,
+   "postings": 49596
+  },
+  {
+   "skill": "R",
+   "demand": 28.1,
+   "salary": 122.2,
+   "postings": 51253
+  },
+  {
+   "skill": "Power BI",
+   "demand": 14.6,
+   "salary": 102.5,
+   "postings": 26559
+  },
+  {
+   "skill": "Spark",
+   "demand": 16.6,
+   "salary": 142.5,
+   "postings": 30178
+  },
+  {
+   "skill": "AWS",
+   "demand": 20.9,
+   "salary": 136.4,
+   "postings": 38150
+  },
+  {
+   "skill": "TensorFlow",
+   "demand": 5.6,
+   "salary": 150.0,
+   "postings": 10214
+  },
+  {
+   "skill": "Excel",
+   "demand": 24.9,
+   "salary": 92.5,
+   "postings": 45398
+  },
+  {
+   "skill": "Java",
+   "demand": 12.5,
+   "salary": 137.5,
+   "postings": 22860
+  }
+ ],
+ "skillsTrackedSample": [
+  "SQL",
+  "Python",
+  "R",
+  "Tableau",
+  "Excel",
+  "AWS",
+  "SAS",
+  "Spark",
+  "Azure",
+  "Power BI",
+  "Java",
+  "Snowflake",
+  "Hadoop",
+  "Scala",
+  "Oracle",
+  "Word",
+  "Databricks",
+  "Sql Server",
+  "Powerpoint",
+  "NoSQL",
+  "Go",
+  "Git",
+  "Kafka",
+  "Redshift",
+  "Flow",
+  "TensorFlow",
+  "GCP",
+  "Airflow",
+  "Pandas",
+  "PyTorch",
+  "Pyspark",
+  "Docker",
+  "MongoDB",
+  "C++",
+  "Javascript",
+  "MySQL",
+  "Jira"
+ ],
+ "companiesRanked": [
+  {
+   "rank": 1,
+   "name": "Booz Allen Hamilton",
+   "jobs": 2522
+  },
+  {
+   "rank": 2,
+   "name": "Dice",
+   "jobs": 2481
+  },
+  {
+   "rank": 3,
+   "name": "Insight Global",
+   "jobs": 1929
+  },
+  {
+   "rank": 4,
+   "name": "Capital One",
+   "jobs": 1627
+  },
+  {
+   "rank": 5,
+   "name": "Guidehouse",
+   "jobs": 1547
+  },
+  {
+   "rank": 6,
+   "name": "Robert Half",
+   "jobs": 1525
+  },
+  {
+   "rank": 7,
+   "name": "Walmart",
+   "jobs": 1413
+  },
+  {
+   "rank": 8,
+   "name": "UnitedHealth Group",
+   "jobs": 1396
+  },
+  {
+   "rank": 9,
+   "name": "SynergisticIT",
+   "jobs": 1328
+  },
+  {
+   "rank": 10,
+   "name": "Jobot",
+   "jobs": 977
+  },
+  {
+   "rank": 11,
+   "name": "Citi",
+   "jobs": 973
+  },
+  {
+   "rank": 12,
+   "name": "Upwork",
+   "jobs": 947
+  },
+  {
+   "rank": 13,
+   "name": "Deloitte",
+   "jobs": 927
+  },
+  {
+   "rank": 14,
+   "name": "Leidos",
+   "jobs": 904
+  },
+  {
+   "rank": 15,
+   "name": "Get It Recruit - Information Technology",
+   "jobs": 898
+  }
+ ],
+ "totalPostingsByMonth": [
+  {
+   "month": "Jan",
+   "postings": 22670
+  },
+  {
+   "month": "Feb",
+   "postings": 18020
+  },
+  {
+   "month": "Mar",
+   "postings": 17904
+  },
+  {
+   "month": "Apr",
+   "postings": 17282
+  },
+  {
+   "month": "May",
+   "postings": 15283
+  },
+  {
+   "month": "Jun",
+   "postings": 16694
+  },
+  {
+   "month": "Jul",
+   "postings": 16210
+  },
+  {
+   "month": "Aug",
+   "postings": 21029
+  },
+  {
+   "month": "Sep",
+   "postings": 16313
+  },
+  {
+   "month": "Oct",
+   "postings": 16998
+  },
+  {
+   "month": "Nov",
+   "postings": 14736
+  },
+  {
+   "month": "Dec",
+   "postings": 13153
+  }
+ ],
+ "avgSalaryByRole": [
+  {
+   "role": "ML Engineer",
+   "salary": 150.0,
+   "n": 128
+  },
+  {
+   "role": "Data Scientist",
+   "salary": 136.0,
+   "n": 5794
+  },
+  {
+   "role": "Data Engineer",
+   "salary": 135.0,
+   "n": 3973
+  },
+  {
+   "role": "Software Engineer",
+   "salary": 130.0,
+   "n": 157
+  },
+  {
+   "role": "Data Analyst",
+   "salary": 92.5,
+   "n": 5263
+  },
+  {
+   "role": "Business Analyst",
+   "salary": 90.0,
+   "n": 431
+  }
+ ],
+ "salaryTrend": [
+  {
+   "month": "Jan",
+   "analyst": 92.0,
+   "scientist": 140.0,
+   "engineer": 140.0
+  },
+  {
+   "month": "Feb",
+   "analyst": 90.1,
+   "scientist": 135.0,
+   "engineer": 130.6
+  },
+  {
+   "month": "Mar",
+   "analyst": 95.0,
+   "scientist": 130.0,
+   "engineer": 135.7
+  },
+  {
+   "month": "Apr",
+   "analyst": 95.0,
+   "scientist": 128.1,
+   "engineer": 137.5
+  },
+  {
+   "month": "May",
+   "analyst": 92.5,
+   "scientist": 133.2,
+   "engineer": 136.0
+  },
+  {
+   "month": "Jun",
+   "analyst": 95.0,
+   "scientist": 143.0,
+   "engineer": 130.0
+  },
+  {
+   "month": "Jul",
+   "analyst": 100.0,
+   "scientist": 140.0,
+   "engineer": 130.0
+  },
+  {
+   "month": "Aug",
+   "analyst": 96.5,
+   "scientist": 145.0,
+   "engineer": 125.0
+  },
+  {
+   "month": "Sep",
+   "analyst": 90.0,
+   "scientist": 140.0,
+   "engineer": 132.7
+  },
+  {
+   "month": "Oct",
+   "analyst": 85.0,
+   "scientist": 135.3,
+   "engineer": 135.0
+  },
+  {
+   "month": "Nov",
+   "analyst": 85.0,
+   "scientist": 133.9,
+   "engineer": 135.0
+  },
+  {
+   "month": "Dec",
+   "analyst": 84.0,
+   "scientist": 130.8,
+   "engineer": 140.0
+  }
+ ],
+ "jobDistribution": [
+  {
+   "name": "Data Analyst",
+   "value": 38.6
+  },
+  {
+   "name": "Data Scientist",
+   "value": 34.8
+  },
+  {
+   "name": "Data Engineer",
+   "value": 21.5
+  },
+  {
+   "name": "Business Analyst",
+   "value": 3.6
+  },
+  {
+   "name": "Other roles",
+   "value": 1.5
+  }
+ ],
+ "locationData": [
+  {
+   "city": "New York",
+   "jobs": 7891,
+   "avg_salary": 125.0
+  },
+  {
+   "city": "Atlanta",
+   "jobs": 6994,
+   "avg_salary": 115.0
+  },
+  {
+   "city": "Chicago",
+   "jobs": 5368,
+   "avg_salary": 110.0
+  },
+  {
+   "city": "Washington DC",
+   "jobs": 4671,
+   "avg_salary": 119.3
+  },
+  {
+   "city": "San Francisco",
+   "jobs": 4504,
+   "avg_salary": 150.0
+  },
+  {
+   "city": "Dallas",
+   "jobs": 4346,
+   "avg_salary": 105.0
+  },
+  {
+   "city": "Austin",
+   "jobs": 4147,
+   "avg_salary": 117.2
+  },
+  {
+   "city": "Remote",
+   "jobs": 23021,
+   "avg_salary": 127.5
+  }
+ ],
+ "radarData": [
+  {
+   "subject": "Python",
+   "A": 82.5,
+   "B": 33.4
+  },
+  {
+   "subject": "SQL",
+   "A": 59.2,
+   "B": 62.3
+  },
+  {
+   "subject": "ML",
+   "A": 19.1,
+   "B": 0.7
+  },
+  {
+   "subject": "Stats",
+   "A": 53.9,
+   "B": 27.9
+  },
+  {
+   "subject": "Viz",
+   "A": 30.8,
+   "B": 45.5
+  },
+  {
+   "subject": "Cloud",
+   "A": 27.1,
+   "B": 10.8
+  }
+ ],
+ "radarLegend": {
+  "A": "Data Scientist",
+  "B": "Data Analyst"
+ },
+ "postingVolume": [
+  {
+   "week": "W45",
+   "postings": 3301
+  },
+  {
+   "week": "W46",
+   "postings": 3487
+  },
+  {
+   "week": "W47",
+   "postings": 3491
+  },
+  {
+   "week": "W48",
+   "postings": 3226
+  },
+  {
+   "week": "W49",
+   "postings": 3386
+  },
+  {
+   "week": "W50",
+   "postings": 4010
+  },
+  {
+   "week": "W51",
+   "postings": 2827
+  },
+  {
+   "week": "W52",
+   "postings": 2869
+  }
+ ],
+ "stateData": {
+  "Alabama": {
+   "jobs": 1822,
+   "avgSalary": 108.4,
+   "minSalary": 70.0,
+   "maxSalary": 152.7,
+   "salaryPostings": 105
+  },
+  "Alaska": {
+   "jobs": 20,
+   "avgSalary": null,
+   "minSalary": null,
+   "maxSalary": null,
+   "salaryPostings": 1
+  },
+  "Arizona": {
+   "jobs": 1135,
+   "avgSalary": 117.5,
+   "minSalary": 80.8,
+   "maxSalary": 165.0,
+   "salaryPostings": 81
+  },
+  "Arkansas": {
+   "jobs": 724,
+   "avgSalary": 125.0,
+   "minSalary": 90.0,
+   "maxSalary": 188.2,
+   "salaryPostings": 32
+  },
+  "California": {
+   "jobs": 28607,
+   "avgSalary": 142.5,
+   "minSalary": 82.5,
+   "maxSalary": 218.6,
+   "salaryPostings": 2754
+  },
+  "Colorado": {
+   "jobs": 1359,
+   "avgSalary": 122.6,
+   "minSalary": 90.1,
+   "maxSalary": 170.0,
+   "salaryPostings": 155
+  },
+  "Connecticut": {
+   "jobs": 1554,
+   "avgSalary": 125.0,
+   "minSalary": 77.2,
+   "maxSalary": 175.0,
+   "salaryPostings": 152
+  },
+  "Delaware": {
+   "jobs": 636,
+   "avgSalary": 120.8,
+   "minSalary": 75.0,
+   "maxSalary": 171.5,
+   "salaryPostings": 28
+  },
+  "District of Columbia": {
+   "jobs": 4696,
+   "avgSalary": 119.3,
+   "minSalary": 75.0,
+   "maxSalary": 167.0,
+   "salaryPostings": 364
+  },
+  "Florida": {
+   "jobs": 15400,
+   "avgSalary": 95.6,
+   "minSalary": 57.7,
+   "maxSalary": 145.0,
+   "salaryPostings": 979
+  },
+  "Georgia": {
+   "jobs": 10856,
+   "avgSalary": 111.2,
+   "minSalary": 70.0,
+   "maxSalary": 171.0,
+   "salaryPostings": 624
+  },
+  "Hawaii": {
+   "jobs": 67,
+   "avgSalary": null,
+   "minSalary": null,
+   "maxSalary": null,
+   "salaryPostings": 4
+  },
+  "Idaho": {
+   "jobs": 403,
+   "avgSalary": null,
+   "minSalary": null,
+   "maxSalary": null,
+   "salaryPostings": 8
+  },
+  "Illinois": {
+   "jobs": 11171,
+   "avgSalary": 104.9,
+   "minSalary": 65.0,
+   "maxSalary": 157.5,
+   "salaryPostings": 637
+  },
+  "Indiana": {
+   "jobs": 2303,
+   "avgSalary": 90.0,
+   "minSalary": 57.2,
+   "maxSalary": 121.1,
+   "salaryPostings": 100
+  },
+  "Iowa": {
+   "jobs": 1230,
+   "avgSalary": 90.0,
+   "minSalary": 60.0,
+   "maxSalary": 130.4,
+   "salaryPostings": 68
+  },
+  "Kansas": {
+   "jobs": 371,
+   "avgSalary": 117.8,
+   "minSalary": 67.4,
+   "maxSalary": 169.0,
+   "salaryPostings": 15
+  },
+  "Kentucky": {
+   "jobs": 433,
+   "avgSalary": 100.0,
+   "minSalary": 74.2,
+   "maxSalary": 162.9,
+   "salaryPostings": 27
+  },
+  "Louisiana": {
+   "jobs": 361,
+   "avgSalary": 110.0,
+   "minSalary": 55.7,
+   "maxSalary": 140.7,
+   "salaryPostings": 13
+  },
+  "Maine": {
+   "jobs": 127,
+   "avgSalary": null,
+   "minSalary": null,
+   "maxSalary": null,
+   "salaryPostings": 9
+  },
+  "Maryland": {
+   "jobs": 5589,
+   "avgSalary": 115.0,
+   "minSalary": 75.0,
+   "maxSalary": 172.6,
+   "salaryPostings": 400
+  },
+  "Massachusetts": {
+   "jobs": 5665,
+   "avgSalary": 116.9,
+   "minSalary": 74.8,
+   "maxSalary": 179.0,
+   "salaryPostings": 380
+  },
+  "Michigan": {
+   "jobs": 1489,
+   "avgSalary": 100.0,
+   "minSalary": 82.7,
+   "maxSalary": 162.5,
+   "salaryPostings": 78
+  },
+  "Minnesota": {
+   "jobs": 1398,
+   "avgSalary": 117.5,
+   "minSalary": 81.3,
+   "maxSalary": 162.5,
+   "salaryPostings": 101
+  },
+  "Mississippi": {
+   "jobs": 274,
+   "avgSalary": 115.0,
+   "minSalary": 69.4,
+   "maxSalary": 165.1,
+   "salaryPostings": 18
+  },
+  "Missouri": {
+   "jobs": 3941,
+   "avgSalary": 100.0,
+   "minSalary": 56.4,
+   "maxSalary": 150.0,
+   "salaryPostings": 176
+  },
+  "Montana": {
+   "jobs": 10,
+   "avgSalary": null,
+   "minSalary": null,
+   "maxSalary": null,
+   "salaryPostings": 1
+  },
+  "Nebraska": {
+   "jobs": 199,
+   "avgSalary": 125.0,
+   "minSalary": 109.2,
+   "maxSalary": 147.2,
+   "salaryPostings": 13
+  },
+  "Nevada": {
+   "jobs": 866,
+   "avgSalary": 90.0,
+   "minSalary": 65.0,
+   "maxSalary": 158.0,
+   "salaryPostings": 57
+  },
+  "New Hampshire": {
+   "jobs": 357,
+   "avgSalary": 130.0,
+   "minSalary": 71.5,
+   "maxSalary": 173.5,
+   "salaryPostings": 21
+  },
+  "New Jersey": {
+   "jobs": 5319,
+   "avgSalary": 115.0,
+   "minSalary": 65.0,
+   "maxSalary": 161.0,
+   "salaryPostings": 319
+  },
+  "New Mexico": {
+   "jobs": 185,
+   "avgSalary": 102.9,
+   "minSalary": 74.6,
+   "maxSalary": 143.6,
+   "salaryPostings": 13
+  },
+  "New York": {
+   "jobs": 9917,
+   "avgSalary": 118.5,
+   "minSalary": 71.7,
+   "maxSalary": 200.0,
+   "salaryPostings": 1269
+  },
+  "North Carolina": {
+   "jobs": 6482,
+   "avgSalary": 115.0,
+   "minSalary": 80.2,
+   "maxSalary": 160.7,
+   "salaryPostings": 333
+  },
+  "North Dakota": {
+   "jobs": 28,
+   "avgSalary": null,
+   "minSalary": null,
+   "maxSalary": null,
+   "salaryPostings": 0
+  },
+  "Ohio": {
+   "jobs": 2341,
+   "avgSalary": 119.3,
+   "minSalary": 90.0,
+   "maxSalary": 164.0,
+   "salaryPostings": 155
+  },
+  "Oklahoma": {
+   "jobs": 369,
+   "avgSalary": 96.1,
+   "minSalary": 77.6,
+   "maxSalary": 117.3,
+   "salaryPostings": 14
+  },
+  "Oregon": {
+   "jobs": 1375,
+   "avgSalary": 132.5,
+   "minSalary": 90.0,
+   "maxSalary": 172.4,
+   "salaryPostings": 33
+  },
+  "Pennsylvania": {
+   "jobs": 4301,
+   "avgSalary": 110.0,
+   "minSalary": 59.2,
+   "maxSalary": 173.5,
+   "salaryPostings": 270
+  },
+  "Rhode Island": {
+   "jobs": 649,
+   "avgSalary": 115.0,
+   "minSalary": 77.9,
+   "maxSalary": 170.3,
+   "salaryPostings": 52
+  },
+  "South Carolina": {
+   "jobs": 2334,
+   "avgSalary": 85.0,
+   "minSalary": 47.5,
+   "maxSalary": 133.4,
+   "salaryPostings": 101
+  },
+  "South Dakota": {
+   "jobs": 41,
+   "avgSalary": null,
+   "minSalary": null,
+   "maxSalary": null,
+   "salaryPostings": 4
+  },
+  "Tennessee": {
+   "jobs": 1096,
+   "avgSalary": 124.5,
+   "minSalary": 78.4,
+   "maxSalary": 173.7,
+   "salaryPostings": 60
+  },
+  "Texas": {
+   "jobs": 20277,
+   "avgSalary": 111.2,
+   "minSalary": 65.0,
+   "maxSalary": 165.5,
+   "salaryPostings": 1043
+  },
+  "Utah": {
+   "jobs": 804,
+   "avgSalary": 115.0,
+   "minSalary": 79.0,
+   "maxSalary": 160.1,
+   "salaryPostings": 79
+  },
+  "Vermont": {
+   "jobs": 115,
+   "avgSalary": null,
+   "minSalary": null,
+   "maxSalary": null,
+   "salaryPostings": 4
+  },
+  "Virginia": {
+   "jobs": 10601,
+   "avgSalary": 120.0,
+   "minSalary": 85.0,
+   "maxSalary": 174.8,
+   "salaryPostings": 818
+  },
+  "Washington": {
+   "jobs": 913,
+   "avgSalary": 155.0,
+   "minSalary": 115.0,
+   "maxSalary": 221.5,
+   "salaryPostings": 93
+  },
+  "West Virginia": {
+   "jobs": 190,
+   "avgSalary": 136.9,
+   "minSalary": 90.4,
+   "maxSalary": 165.2,
+   "salaryPostings": 13
+  },
+  "Wisconsin": {
+   "jobs": 1895,
+   "avgSalary": 100.0,
+   "minSalary": 70.1,
+   "maxSalary": 150.0,
+   "salaryPostings": 97
+  },
+  "Wyoming": {
+   "jobs": 21,
+   "avgSalary": null,
+   "minSalary": null,
+   "maxSalary": null,
+   "salaryPostings": 2
+  }
+ },
+ "predictor": {
+  "roles": {
+   "Data Analyst": {
+    "median": 92.5,
+    "p25": 75.0,
+    "p75": 115.0,
+    "n": 5263,
+    "bySeniority": {
+     "Junior": {
+      "median": 65.0,
+      "n": 180
+     },
+     "Mid": {
+      "median": 87.5,
+      "n": 3573
+     },
+     "Senior": {
+      "median": 115.0,
+      "n": 1510
+     }
+    }
+   },
+   "Data Scientist": {
+    "median": 136.0,
+    "p25": 110.0,
+    "p75": 170.0,
+    "n": 5794,
+    "bySeniority": {
+     "Junior": {
+      "median": 93.7,
+      "n": 206
+     },
+     "Mid": {
+      "median": 123.4,
+      "n": 3051
+     },
+     "Senior": {
+      "median": 158.5,
+      "n": 2537
+     }
+    }
+   },
+   "Data Engineer": {
+    "median": 135.0,
+    "p25": 112.5,
+    "p75": 158.0,
+    "n": 3973,
+    "bySeniority": {
+     "Junior": {
+      "median": 90.0,
+      "n": 82
+     },
+     "Mid": {
+      "median": 122.3,
+      "n": 2109
+     },
+     "Senior": {
+      "median": 150.0,
+      "n": 1782
+     }
+    }
+   },
+   "ML Engineer": {
+    "median": 150.0,
+    "p25": 100.8,
+    "p75": 195.0,
+    "n": 128,
+    "bySeniority": {
+     "Junior": {
+      "median": null,
+      "n": 1
+     },
+     "Mid": {
+      "median": 137.7,
+      "n": 68
+     },
+     "Senior": {
+      "median": 166.0,
+      "n": 59
+     }
+    }
+   },
+   "Business Analyst": {
+    "median": 90.0,
+    "p25": 75.0,
+    "p75": 110.0,
+    "n": 431,
+    "bySeniority": {
+     "Junior": {
+      "median": 62.5,
+      "n": 21
+     },
+     "Mid": {
+      "median": 85.0,
+      "n": 315
+     },
+     "Senior": {
+      "median": 112.5,
+      "n": 95
+     }
+    }
+   },
+   "Software Engineer": {
+    "median": 130.0,
+    "p25": 99.2,
+    "p75": 173.0,
+    "n": 157,
+    "bySeniority": {
+     "Junior": {
+      "median": null,
+      "n": 3
+     },
+     "Mid": {
+      "median": 120.0,
+      "n": 101
+     },
+     "Senior": {
+      "median": 155.0,
+      "n": 53
+     }
+    }
+   }
+  },
+  "seniorityFactor": {
+   "Junior": 0.692,
+   "Mid": 0.921,
+   "Senior": 1.179
+  },
+  "locations": {
+   "Remote": {
+    "factor": 1.013,
+    "n": 2617
+   },
+   "San Francisco": {
+    "factor": 1.197,
+    "n": 488
+   },
+   "New York": {
+    "factor": 1.065,
+    "n": 1035
+   },
+   "Seattle": {
+    "factor": 1.275,
+    "n": 61
+   },
+   "Austin": {
+    "factor": 0.983,
+    "n": 253
+   },
+   "Boston": {
+    "factor": 1.0,
+    "n": 208
+   },
+   "Chicago": {
+    "factor": 0.971,
+    "n": 351
+   },
+   "Denver": {
+    "factor": 1.002,
+    "n": 69
+   },
+   "Los Angeles": {
+    "factor": 1.136,
+    "n": 297
+   },
+   "Washington DC": {
+    "factor": 1.022,
+    "n": 371
+   },
+   "Atlanta": {
+    "factor": 1.0,
+    "n": 429
+   },
+   "Miami": {
+    "factor": 0.914,
+    "n": 113
+   },
+   "Dallas": {
+    "factor": 0.997,
+    "n": 200
+   },
+   "Philadelphia": {
+    "factor": 0.914,
+    "n": 76
+   }
+  },
+  "note": "Median salary of postings with a listed salary, adjusted for seniority and city. A lookup, not a trained model."
+ }
+}
