@@ -8,6 +8,14 @@ Live dashboard: https://talentscope-chi.vercel.app
 
 ![Locations map with postings and salary views, role filter and city dots](docs/screenshots/locations_map.png)
 
+**What is in it**
+
+* Market Overview, Skills Intel, Salary Insights and Roles pages.
+* Locations: a state map you can switch between postings and median salary, filter by role and click for a state's detail, with 45 city hotspots.
+* Salary Estimator.
+* For Students: paste your resume text and see how it lines up with the skills real postings ask for. It runs in the browser and stores nothing.
+* Data and Method: sources, sample sizes and limits.
+
 **The problem**
 
 Job seekers in data ask the same questions: which skills should I learn, what should I expect to be paid, and where are the jobs? The answers are scattered across job boards. TalentScope computes them from one large dataset and puts them in one place.
